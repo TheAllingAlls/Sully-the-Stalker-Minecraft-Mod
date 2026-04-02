@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "sulstalk",
+	"version": "${version}",
+	"name": "Sully the Stalker (Horror)",
+	"description": "A weird and creepy entity that roams en masse, stalking and defiling whatever it feels.",
+	"authors": [
+		"TheAllingAlls"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "MIT",
+	"icon": "assets/sulstalk/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.allingalls.ExampleMod"
+		],
+		"client": [
+			"com.allingalls.ExampleModClient"
+		]
+	},
+	"mixins": [
+		"sulstalk.mixins.json",
+		{
+			"config": "sulstalk.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.18.2",
+		"minecraft": "1.21.*",
+		"java": ">=21"
+	}
+}
