@@ -1,4 +1,4 @@
-package com.example;
+package com.sulstalk;
 
 import net.fabricmc.api.ClientModInitializer;
 
