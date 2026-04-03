@@ -1,1 +1,1 @@
-execute run function sustalk:time/setup
+execute run function sulstalk:time/setup
