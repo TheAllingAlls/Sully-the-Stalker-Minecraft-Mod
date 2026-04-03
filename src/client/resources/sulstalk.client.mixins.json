@@ -3,7 +3,7 @@
 	"package": "com.sulstalk.mixin.client",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
-		"ExampleClientMixin"
+		"TestMixinClient"
 	],
 	"injectors": {
 		"defaultRequire": 1

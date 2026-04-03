@@ -1,0 +1,1 @@
+execute as @e[limit=1] run say "Hello world!"

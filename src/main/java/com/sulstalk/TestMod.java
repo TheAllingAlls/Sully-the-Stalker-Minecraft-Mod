@@ -5,7 +5,7 @@ import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ExampleMod implements ModInitializer {
+public class TestMod implements ModInitializer {
 	public static final String MOD_ID = "sulstalk";
 
 	// This logger is used to write text to the console and the log file.
@@ -13,8 +13,8 @@ public class ExampleMod implements ModInitializer {
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-	public static String Hello = "Hello Fabric world!";
-	public int LoopAmount = 5;
+	public static String Hello = "Sully the Stalker is here.";
+	public int LoopAmount = 1;
 
 	@Override
 	public void onInitialize() {
