@@ -1,1 +1,2 @@
 function sulstalk:hello_world/speak
+execute run function sulstalk:getworldspawn
