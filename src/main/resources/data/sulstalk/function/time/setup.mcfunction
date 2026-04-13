@@ -1,2 +1,0 @@
-execute positioned 0 0 0 unless entity @e[tag=sulstalk_time_storage,limit=1,sort=nearest] at @r run function sulstalk:time/entity/spawn
-execute positioned 0 0 0 as @e[tag=sulstalk_time_storage,limit=1,sort=nearest] at @r run function sulstalk:time/entity/control
