@@ -2,7 +2,6 @@
     "replace":false,
     "values":[
         "minecraft:turtle_egg",
-        "minecraft:sniffer_egg",
-        "minecraft:cake"
+        "minecraft:sniffer_egg"
     ]
 }

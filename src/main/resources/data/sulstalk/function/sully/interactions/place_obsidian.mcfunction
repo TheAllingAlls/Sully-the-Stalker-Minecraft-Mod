@@ -1,0 +1,1 @@
+execute if block ~ ~ ~ #sulstalk:can_convert_to_obsidian run setblock ~ ~ ~ obsidian destroy

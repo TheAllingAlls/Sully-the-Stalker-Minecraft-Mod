@@ -27,6 +27,14 @@ execute unless score @s sulstalk_following_entity_id matches -999999999..9999999
 
 execute positioned ~ ~-2.1 ~ unless score @s sulstalk_is_in_block matches 2 unless block ~ ~ ~ #sulstalk:can_pass_through run scoreboard players set @s sulstalk_is_in_block 1
 execute positioned ~ ~0.5 ~ if score @s sulstalk_is_in_block matches 1 unless block ~ ~ ~ #sulstalk:can_pass_through run scoreboard players set @s sulstalk_is_in_block 2
+execute positioned ^0.5 ^ ^ positioned ~ ~0.1 ~ if score @s sulstalk_is_in_block matches 2 unless block ~ ~ ~ #sulstalk:can_pass_through run setblock ~ ~ ~ air destroy
+execute positioned ^-0.5 ^ ^ positioned ~ ~0.1 ~ if score @s sulstalk_is_in_block matches 2 unless block ~ ~ ~ #sulstalk:can_pass_through run setblock ~ ~ ~ air destroy
+execute positioned ^0.5 ^ ^ positioned ~ ~0.5 ~ if score @s sulstalk_is_in_block matches 2 unless block ~ ~ ~ #sulstalk:can_pass_through run setblock ~ ~ ~ air destroy
+execute positioned ^-0.5 ^ ^ positioned ~ ~0.5 ~ if score @s sulstalk_is_in_block matches 2 unless block ~ ~ ~ #sulstalk:can_pass_through run setblock ~ ~ ~ air destroy
+execute positioned ^0.5 ^ ^ positioned ~ ~0.75 ~ if score @s sulstalk_is_in_block matches 2 unless block ~ ~ ~ #sulstalk:can_pass_through run setblock ~ ~ ~ air destroy
+execute positioned ^-0.5 ^ ^ positioned ~ ~0.75 ~ if score @s sulstalk_is_in_block matches 2 unless block ~ ~ ~ #sulstalk:can_pass_through run setblock ~ ~ ~ air destroy
+execute positioned ^0.5 ^ ^ positioned ~ ~1 ~ if score @s sulstalk_is_in_block matches 2 unless block ~ ~ ~ #sulstalk:can_pass_through run setblock ~ ~ ~ air destroy
+execute positioned ^-0.5 ^ ^ positioned ~ ~1 ~ if score @s sulstalk_is_in_block matches 2 unless block ~ ~ ~ #sulstalk:can_pass_through run setblock ~ ~ ~ air destroy
 execute positioned ~ ~-2.5 ~ unless score @s sulstalk_is_in_block matches -2 if block ~ ~ ~ #sulstalk:can_pass_through run scoreboard players set @s sulstalk_is_in_block -1
 execute positioned ~ ~0.5 ~ if score @s sulstalk_is_in_block matches -1 if block ~ ~ ~ #sulstalk:can_pass_through run scoreboard players set @s sulstalk_is_in_block -1
 execute positioned ~ ~-3.5 ~ if score @s sulstalk_is_in_block matches -1 if block ~ ~ ~ #sulstalk:can_pass_through run scoreboard players set @s sulstalk_is_in_block -2
@@ -35,6 +43,7 @@ execute positioned ~ ~-2 ~ positioned ^ ^ ^1.5 unless block ~ ~ ~ #sulstalk:can_
 execute positioned ~ ~-2 ~ positioned ^ ^ ^1.5 if block ~ ~ ~ #sulstalk:can_pass_through positioned ^ ^ ^1.5 if block ~ ~ ~ #sulstalk:can_pass_through run scoreboard players set @s sulstalk_will_be_in_block 0
 execute if score @s sulstalk_is_following_entity matches 1 run scoreboard players set @s sulstalk_is_in_block 0
 execute if score @s sulstalk_is_following_entity matches 1 run scoreboard players set @s sulstalk_will_be_in_block 0
+execute if score @s sulstalk_underwater matches ..2 run scoreboard players set @s sulstalk_is_in_block -1
 
 execute if score @s sulstalk_is_in_block matches 1 at @s run tp ~0.0 ~0.05 ~0.0
 execute if score @s sulstalk_is_in_block matches 2 at @s run tp ~0.0 ~0.5 ~0.0
@@ -65,13 +74,13 @@ execute if score @s sulstalk_should_rotate matches 0..49 store result score @s s
 execute if score @s sulstalk_should_rotate matches -200..-50 store result score @s sulstalk_should_rotate run random value 0..200
 execute if score @s sulstalk_should_rotate matches -49..0 store result score @s sulstalk_should_rotate run random value -200..0
 execute if score @s sulstalk_should_rotate matches 50..200 store result score @s sulstalk_should_rotate run random value 0..200
-execute if score @s sulstalk_can_rotate_up matches 0 run rotate @s ~0.0 0.0
 execute if score @s sulstalk_should_rotate matches -1 run rotate @s ~-1 ~0.0
 execute if score @s sulstalk_should_rotate matches -2 run rotate @s ~-5 ~0.0
 execute if score @s sulstalk_should_rotate matches -200 run rotate @s ~-45 ~0.0
 execute if score @s sulstalk_should_rotate matches 1 run rotate @s ~1 ~0.0
 execute if score @s sulstalk_should_rotate matches 2 run rotate @s ~5 ~0.0
 execute if score @s sulstalk_should_rotate matches 200 run rotate @s ~45 ~0.0
+execute if score @s sulstalk_can_rotate_up matches 0 run rotate @s ~0.0 0.0
 
 #execute store result entity @s Pos[0] double 0.0001 run scoreboard players get @s sulstalk_position_x
 #execute store result entity @s Pos[1] double 0.0001 run scoreboard players get @s sulstalk_position_y
