@@ -3,4 +3,7 @@ function sulstalk:sully/interactions/create_pure_light
 function sulstalk:sully/interactions/destroy
 function sulstalk:sully/interactions/silence_jukebox
 function sulstalk:sully/interactions/place_obsidian
-function sulstalk:sully/interactions/trail
+function sulstalk:sully/interactions/drop_fire_charge
+#function sulstalk:sully/interactions/trail
+#function sulstalk:sully/interactions/trail2
+function sulstalk:sully/interactions/trail3

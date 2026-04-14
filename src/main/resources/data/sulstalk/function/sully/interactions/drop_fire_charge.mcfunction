@@ -1,0 +1,2 @@
+execute if block ~ ~ ~ #sulstalk:can_convert_to_fire_charge positioned ~ ~1 ~ run summon item ~ ~ ~ {Item:{count:1,id:"minecraft:fire_charge"}}
+execute if block ~ ~ ~ #sulstalk:can_convert_to_fire_charge run setblock ~ ~ ~ air destroy
