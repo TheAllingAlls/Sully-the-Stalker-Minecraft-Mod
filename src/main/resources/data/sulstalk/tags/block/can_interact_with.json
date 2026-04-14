@@ -1,0 +1,11 @@
+{
+    "replace":false,
+    "values":[
+        "#sulstalk:can_pass_through",
+        "#sulstalk:can_destroy",
+        "#sulstalk:can_destroy_music",
+        "#sulstalk:can_convert_to_obsidian",
+        "#sulstalk:can_be_trapped_under",
+        "#sulstalk:can_replace_with_light"
+    ]
+}
