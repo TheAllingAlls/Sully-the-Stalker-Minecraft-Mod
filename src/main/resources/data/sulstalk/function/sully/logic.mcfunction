@@ -77,7 +77,7 @@ execute if score @s sulstalk_should_rotate matches 200 run rotate @s ~45 ~0.0
 #execute store result entity @s Pos[1] double 0.0001 run scoreboard players get @s sulstalk_position_y
 #execute store result entity @s Pos[2] double 0.0001 run scoreboard players get @s sulstalk_position_z
 
-function sulstalk:sully/interactions
+execute positioned ~ ~-2 ~ run function sulstalk:sully/interactions
 
 ##Teleport duration is in ticks per second (20tps -> 1sec)
 data modify entity @s teleport_duration set value 5
