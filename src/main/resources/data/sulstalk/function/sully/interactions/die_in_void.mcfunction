@@ -1,0 +1,1 @@
+execute positioned as @s positioned ~ -130 ~ if entity @s[distance=..5]

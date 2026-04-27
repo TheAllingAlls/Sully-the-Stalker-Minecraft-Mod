@@ -1,3 +1,4 @@
+function sulstalk:sully/interactions/die_in_void
 function sulstalk:sully/interactions/water
 function sulstalk:sully/interactions/create_pure_light
 function sulstalk:sully/interactions/destroy

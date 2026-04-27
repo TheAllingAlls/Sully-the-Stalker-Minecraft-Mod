@@ -8,6 +8,7 @@
         "#sulstalk:can_be_trapped_under",
         "#sulstalk:can_replace_with_light",
         "#minecraft:stairs",
-        "#minecraft:slabs"
+        "#minecraft:slabs",
+        "minecraft:bedrock"
     ]
 }

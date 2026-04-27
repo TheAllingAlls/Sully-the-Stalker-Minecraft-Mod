@@ -3,6 +3,7 @@ scoreboard objectives add sulstalk_underwater_rotate trigger ""
 execute unless score @s sulstalk_underwater matches 0.. run scoreboard players set @s sulstalk_underwater 0
 execute unless score @s sulstalk_underwater_rotate matches -1..1 run scoreboard players set @s sulstalk_underwater_rotate 0
 
+execute positioned as @s unless block ~ ~ ~ #sulstalk:can_be_trapped_under positioned ~ ~1 ~ unless block ~ ~ ~ #sulstalk:can_be_trapped_under positioned ~ ~-2 ~ unless block ~ ~ ~ #sulstalk:can_be_trapped_under run scoreboard players set @s sulstalk_underwater 0
 execute unless score @s sulstalk_underwater matches 1.. positioned as @s if block ~ ~ ~ #sulstalk:can_be_trapped_under run scoreboard players set @s sulstalk_underwater 3
 execute if score @s sulstalk_underwater matches 1.. positioned as @s positioned ~ ~1 ~ if block ~ ~ ~ air run scoreboard players set @s sulstalk_underwater 2
 execute if score @s sulstalk_underwater matches 2.. positioned as @s positioned ~ ~2 ~ if block ~ ~ ~ air run scoreboard players set @s sulstalk_underwater 1

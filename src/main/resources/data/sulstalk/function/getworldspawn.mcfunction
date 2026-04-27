@@ -1,1 +1,1 @@
-execute unless entity @e[tag=sulstalk_worldspawn_holder] positioned as @r run summon area_effect_cloud ~ ~ ~ {Radius:0.0f,Tags:["sulstalk_worldspawn_holder"]}
+execute unless entity @e[tag=sulstalk_worldspawn_holder] positioned as @r run summon marker ~ ~ ~ {Tags:["sulstalk_worldspawn_holder"]}
