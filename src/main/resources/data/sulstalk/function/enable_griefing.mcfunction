@@ -1,0 +1,1 @@
+execute as @e[tag=sulstalk_storage] if score @s sulstalk_disable_griefing matches 1 run scoreboard players set @s sulstalk_disable_griefing 0

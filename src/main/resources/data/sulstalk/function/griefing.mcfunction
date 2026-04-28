@@ -1,1 +1,2 @@
-execute if 
+execute as @e[tag=sulstalk_storage] unless score @s sulstalk_disable_griefing matches 1 positioned as @s if entity @e[type=item,nbt={Item:{id:"minecraft:black_concrete_powder",count:64}},distance=..5] run function sulstalk:disable_griefing
+#execute as @e[tag=sulstalk_storage] if score @s sulstalk_disable_griefing matches 1 positioned as @s if entity @e[type=item,nbt={Item:{id:"minecraft:black_concrete",count:64}},distance=..5] run function sulstalk:enable_griefing
