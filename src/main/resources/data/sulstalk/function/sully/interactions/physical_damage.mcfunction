@@ -1,1 +1,0 @@
-execute positioned as @s unless entity @e[tag=hitbox,distance=..1]

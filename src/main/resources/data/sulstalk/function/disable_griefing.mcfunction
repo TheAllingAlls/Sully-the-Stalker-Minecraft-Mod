@@ -1,2 +1,2 @@
-execute as @a run tellraw @s "\n\n\n\nEnough blocks have been defiled and transformed and what is assumed a plea has been made. \n\nThe world shall be defiled no more. Only the blocks it turns dark, however.\n"
+execute as @e[tag=sulstalk_storage] if score @s sulstalk_disable_griefing matches 1 as @a run tellraw @s "\n\n\n\nEnough blocks have been defiled and transformed and what is assumed a plea has been made. \n\nThe world shall be turned dark no more.\n"
 execute as @e[tag=sulstalk_storage] if score @s sulstalk_disable_griefing matches 0 run scoreboard players set @s sulstalk_disable_griefing 1

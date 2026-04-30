@@ -1,4 +1,4 @@
-function sulstalk:sully/interactions/physical_damage
+function sulstalk:sully/interactions/physical/setup
 function sulstalk:sully/interactions/die_in_void
 function sulstalk:sully/interactions/water
 function sulstalk:sully/interactions/create_pure_light

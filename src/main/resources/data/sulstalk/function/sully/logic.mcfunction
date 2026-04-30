@@ -1,9 +1,6 @@
 #scoreboard objectives add sulstalk_position_x trigger ""
 #scoreboard objectives add sulstalk_position_y trigger ""
 #scoreboard objectives add sulstalk_position_z trigger ""
-scoreboard objectives add sulstalk_health trigger ""
-scoreboard objectives add sulstalk_damaged trigger ""
-scoreboard objectives add sulstalk_should_die trigger ""
 scoreboard objectives add sulstalk_is_in_block trigger ""
 scoreboard objectives add sulstalk_should_move trigger ""
 scoreboard objectives add sulstalk_travel_timer trigger ""
@@ -15,10 +12,6 @@ scoreboard objectives add sulstalk_following_entity_id trigger ""
 #execute unless score @s sulstalk_position_x matches -999999999..999999999 run scoreboard players set @s sulstalk_position_x 0
 #execute unless score @s sulstalk_position_y matches -999999999..999999999 run scoreboard players set @s sulstalk_position_y 0
 #execute unless score @s sulstalk_position_z matches -999999999..999999999 run scoreboard players set @s sulstalk_position_z 0
-##Unless I feel like changing it, entity will have 10 hearts (20 hp)
-execute unless score @s sulstalk_health matches -1..20 run scoreboard players set @s sulstalk_health 20
-execute unless score @s sulstalk_damaged matches -1..1 run scoreboard players set @s sulstalk_damaged -1
-execute unless score @s sulstalk_should_die matches 0..1 run scoreboard players set @s sulstalk_should_die 0
 
 execute unless score @s sulstalk_is_in_block matches -9999..9999 run scoreboard players set @s sulstalk_is_in_block 0
 execute unless score @s sulstalk_should_move matches -1.. run scoreboard players set @s sulstalk_should_move -1
@@ -93,6 +86,7 @@ execute if score @s sulstalk_travel_timer matches 3600..3900 if score @s sulstal
 execute if score @s sulstalk_travel_timer matches 3600 if score @s sulstalk_is_in_block matches -1 run scoreboard players set @s sulstalk_travel_timer 0
 execute if score @s sulstalk_travel_timer matches 3300..3600 unless score @s sulstalk_is_in_block matches 0 run scoreboard players set @s sulstalk_is_in_block 0
 execute if score @s sulstalk_travel_timer matches 3300 if score @s sulstalk_is_in_block matches 0 run scoreboard players set @s sulstalk_travel_timer 0
+execute if score @s sulstalk_damaged matches 1 run scoreboard players set @s sulstalk_is_in_block 0
 
 execute if score @s sulstalk_is_in_block matches 1 at @s run tp ~0.0 ~0.05 ~0.0
 execute if score @s sulstalk_is_in_block matches 2 at @s run tp ~0.0 ~0.5 ~0.0
