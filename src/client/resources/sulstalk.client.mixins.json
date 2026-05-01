@@ -1,7 +1,7 @@
 {
-	"required": true,
+	"required": false,
 	"package": "com.sulstalk.mixin.client",
-	"compatibilityLevel": "JAVA_21",
+	"compatibilityLevel": "JAVA_25",
 	"client": [
 		"TestMixinClient"
 	],

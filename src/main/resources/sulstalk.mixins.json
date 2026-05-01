@@ -1,7 +1,7 @@
 {
-	"required": true,
+	"required": false,
 	"package": "com.sulstalk.mixin",
-	"compatibilityLevel": "JAVA_21",
+	"compatibilityLevel": "JAVA_25",
 	"mixins": [
 		"TestMixin"
 	],
@@ -9,6 +9,6 @@
 		"defaultRequire": 1
 	},
 	"overwrites": {
-		"requireAnnotations": true
+		"requireAnnotations": false
 	}
 }

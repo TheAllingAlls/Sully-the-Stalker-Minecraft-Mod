@@ -7,7 +7,7 @@ execute as @e[tag=sulstalk_spawned,limit=1,sort=nearest] if score @s sulstalk_da
 execute as @e[tag=sulstalk_spawned,limit=1,sort=nearest] if score @s sulstalk_damaged matches 0 run tellraw @a "sulstalk_damaged 0"
 
 execute if data entity @s attack.player if score @s sulstalk_damaged_delay matches -1 run scoreboard players set @e[tag=sulstalk_spawned,limit=1,sort=nearest] sulstalk_damaged 1
-execute as @e[tag=sulstalk_spawned,limit=1,sort=nearest] sulstalk_damaged matches 1 run scoreboard players set @s sulstalk_damaged_delay 10
+execute as @e[tag=sulstalk_spawned,limit=1,sort=nearest] if score @s sulstalk_damaged matches 1 run scoreboard players set @s sulstalk_damaged_delay 10
 execute as @e[tag=sulstalk_spawned,limit=1,sort=nearest] store result score @s sulstalk_damaged_by as @e[tag=sulstalk_hitbox,limit=1,sort=nearest] on attacker run data get entity @s UUID[0]
 
 #execute positioned as @s on attacker rotated as @s positioned ^ ^ ^5 as @e[tag=sulstalk_spawned,limit=1,sort=nearest] run tp ~ ~ ~
