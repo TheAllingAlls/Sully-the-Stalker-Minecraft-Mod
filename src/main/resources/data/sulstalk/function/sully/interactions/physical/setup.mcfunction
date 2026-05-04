@@ -10,7 +10,7 @@ execute unless score @s sulstalk_has_hitbox matches 0..1 run scoreboard players 
 execute positioned as @s unless score @e[tag=sulstalk_hitbox,distance=..1,limit=1] sulstalk_hitbox_id = @s sulstalk_spawned_number run scoreboard players set @s sulstalk_has_hitbox 0
 ##Unless I feel like changing it, entity will have 10 hearts (20 hp)
 execute unless score @s sulstalk_health matches -1..20 run scoreboard players set @s sulstalk_health 20
-execute unless score @s sulstalk_damaged matches -1..1 run scoreboard players set @s sulstalk_damaged -1
+execute unless score @s sulstalk_damaged matches -1..2 run scoreboard players set @s sulstalk_damaged -1
 execute unless score @s sulstalk_damaged_by matches -999999999.. run scoreboard players set @s sulstalk_damaged_by -1
 execute unless score @s sulstalk_damaged_delay matches -1..10 run scoreboard players set @s sulstalk_damaged_delay -1
 execute unless score @s sulstalk_should_die matches 0..1 run scoreboard players set @s sulstalk_should_die 0
