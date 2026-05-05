@@ -87,6 +87,7 @@ execute if score @s sulstalk_travel_timer matches 3600 if score @s sulstalk_is_i
 execute if score @s sulstalk_travel_timer matches 3300..3600 unless score @s sulstalk_is_in_block matches 0 run scoreboard players set @s sulstalk_is_in_block 0
 execute if score @s sulstalk_travel_timer matches 3300 if score @s sulstalk_is_in_block matches 0 run scoreboard players set @s sulstalk_travel_timer 0
 execute if score @s sulstalk_damaged matches 1 run scoreboard players set @s sulstalk_is_in_block 0
+execute if score @s sulstalk_should_die matches 1.. run scoreboard players set @s sulstalk_should_move 0
 
 execute if score @s sulstalk_is_in_block matches 1 at @s run tp ~0.0 ~0.05 ~0.0
 execute if score @s sulstalk_is_in_block matches 2 at @s run tp ~0.0 ~0.5 ~0.0
@@ -120,6 +121,9 @@ execute if score @s sulstalk_can_rotate_up matches 0 at @s run rotate @s ~0.0 0.
 #execute store result entity @s Pos[2] double 0.0001 run scoreboard players get @s sulstalk_position_z
 
 execute positioned ~ ~-2 ~ rotated ~ ~ run function sulstalk:sully/interactions
+
+##Trigger for this is defined in sulstalk:sully/interactions/physical/hitbox
+execute if score @s sulstalk_should_die matches 2 run kill @s
 
 ##Teleport duration is in ticks per second (20tps -> 1sec)
 data modify entity @s teleport_duration set value 5

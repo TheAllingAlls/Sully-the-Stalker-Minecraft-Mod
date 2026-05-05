@@ -1,6 +1,6 @@
 {
     "pack":{
-        "min_format":80,
+        "min_format":86,
         "max_format":999,
         "description":"It's almost time."
     }
