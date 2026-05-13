@@ -119,7 +119,7 @@ execute if score @s sulstalk_can_rotate_up matches 0 at @s run rotate @s ~0.0 0.
 
 execute positioned ~ ~-2 ~ rotated ~ ~ run function sulstalk:sully/interactions
 
-##Trigger for this is defined in sulstalk:sully/interactions/physical/hitbox
+##Trigger for this is separately defined for the hitbox in sulstalk:sully/interactions/physical/hitbox
 execute if score @s sulstalk_should_die matches 2 run kill @s
 
 ##Teleport duration is in ticks per second (20tps -> 1sec)
