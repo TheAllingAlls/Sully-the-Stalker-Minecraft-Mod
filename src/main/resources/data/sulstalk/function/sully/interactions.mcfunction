@@ -1,5 +1,5 @@
 function sulstalk:sully/interactions/physical/hitbox
-function sulstalk:sully/interactions/entity_to_entity/entity_setup
+function sulstalk:sully/interactions/entity_to_entity/entity_logic
 
 function sulstalk:sully/interactions/die_in_void
 function sulstalk:sully/interactions/water
