@@ -10,7 +10,7 @@ execute if score @s sulstalk_can_pick_up_items matches 1 positioned as @s as @e[
 execute as @e[type=item] positioned as @s if data entity @s {PickupDelay:1s} if entity @e[type=player,distance=..5] run data remove entity @s Item.components.minecraft:custom_data
 execute as @e[type=item] positioned as @s if data entity @s {PickupDelay:0s} if entity @e[type=player,distance=..5] run data remove entity @s Item.components.minecraft:custom_data
 
-execute if score @s sulstalk_can_pick_up_items matches 1 positioned as @s as @e[tag=sulstalk_stolen,distance=..5] unless score @s sulstalk_item_id matches -999999999..999999999 store result entity @s Item.components.minecraft:custom_data.UUID int 1 as @e[tag=sulstalk_spawned,distance=0..1] run scoreboard players get @s sulstalk_spawned_number
+execute if score @s sulstalk_can_pick_up_items matches 1 positioned as @s as @e[tag=sulstalk_stolen,distance=..5] unless score @s sulstalk_item_id matches -1999999999..1999999999 store result entity @s Item.components.minecraft:custom_data.UUID int 1 as @e[tag=sulstalk_spawned,distance=0..1] run scoreboard players get @s sulstalk_spawned_number
 execute if score @s sulstalk_can_pick_up_items matches 1 positioned as @s as @e[tag=sulstalk_stolen,distance=..5] store result score @s sulstalk_item_id run data get entity @s Item.components.minecraft:custom_data.UUID 1
 
 execute if score @s sulstalk_can_pick_up_items matches 1 positioned as @s positioned ~ ~-1 ~ as @e[tag=sulstalk_stolen,distance=..1] if score @s sulstalk_item_id = @e[tag=sulstalk_spawned,distance=..1,limit=1,sort=nearest] sulstalk_spawned_number run tp ~ ~1 ~

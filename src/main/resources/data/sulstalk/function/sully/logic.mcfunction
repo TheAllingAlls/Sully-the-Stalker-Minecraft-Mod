@@ -7,9 +7,9 @@ scoreboard objectives add sulstalk_travel_timer trigger ""
 scoreboard objectives add sulstalk_travel_timer_enabled trigger ""
 scoreboard objectives add sulstalk_should_rotate trigger ""
 scoreboard objectives add sulstalk_can_rotate_up trigger ""
-#execute unless score @s sulstalk_position_x matches -999999999..999999999 run scoreboard players set @s sulstalk_position_x 0
-#execute unless score @s sulstalk_position_y matches -999999999..999999999 run scoreboard players set @s sulstalk_position_y 0
-#execute unless score @s sulstalk_position_z matches -999999999..999999999 run scoreboard players set @s sulstalk_position_z 0
+#execute unless score @s sulstalk_position_x matches -1999999999..1999999999 run scoreboard players set @s sulstalk_position_x 0
+#execute unless score @s sulstalk_position_y matches -1999999999..1999999999 run scoreboard players set @s sulstalk_position_y 0
+#execute unless score @s sulstalk_position_z matches -1999999999..1999999999 run scoreboard players set @s sulstalk_position_z 0
 
 execute unless score @s sulstalk_is_in_block matches -9999..9999 run scoreboard players set @s sulstalk_is_in_block 0
 execute unless score @s sulstalk_should_move matches -1.. run scoreboard players set @s sulstalk_should_move -1
