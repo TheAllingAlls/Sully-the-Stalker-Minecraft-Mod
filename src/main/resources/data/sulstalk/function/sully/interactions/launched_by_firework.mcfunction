@@ -1,0 +1,1 @@
+execute positioned as @s if entity @e[type=firework_rocket,distance=..2.5] run tp ~ ~1.5 ~

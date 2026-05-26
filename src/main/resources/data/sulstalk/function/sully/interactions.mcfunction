@@ -9,6 +9,7 @@ function sulstalk:sully/interactions/consume_cake
 function sulstalk:sully/interactions/silence_jukebox
 function sulstalk:sully/interactions/place_obsidian
 function sulstalk:sully/interactions/drop_fire_charge
+function sulstalk:sully/interactions/launched_by_firework
 function sulstalk:sully/interactions/pick_up_items
 #function sulstalk:sully/interactions/trail
 #function sulstalk:sully/interactions/trail2

@@ -4,6 +4,10 @@ scoreboard objectives add sulstalk_health trigger ""
 scoreboard objectives add sulstalk_attack trigger ""
 scoreboard objectives add sulstalk_damaged trigger ""
 scoreboard objectives add sulstalk_has_attacker trigger ""
+scoreboard objectives add sulstalk_has_projectile trigger ""
+scoreboard objectives add sulstalk_projectile_durability trigger ""
+scoreboard objectives add sulstalk_projectile_rotation_x trigger ""
+scoreboard objectives add sulstalk_projectile_rotation_y trigger ""
 scoreboard objectives add sulstalk_attacker_id trigger ""
 scoreboard objectives add sulstalk_damaged_delay trigger ""
 scoreboard objectives add sulstalk_should_die trigger ""
@@ -16,6 +20,7 @@ execute unless score @s sulstalk_health matches -1..20 run scoreboard players se
 execute unless score @s sulstalk_attack matches -1.. run scoreboard players set @s sulstalk_attack -1
 execute unless score @s sulstalk_damaged matches -1..2 run scoreboard players set @s sulstalk_damaged -1
 execute unless score @s sulstalk_has_attacker matches -1.. run scoreboard players set @s sulstalk_has_attacker -1
+execute unless score @s sulstalk_has_projectile matches -1.. run scoreboard players set @s sulstalk_has_projectile -1
 execute unless score @s sulstalk_attacker_id matches -1999999999.. run scoreboard players set @s sulstalk_attacker_id -1
 execute unless score @s sulstalk_damaged_delay matches -1..10 run scoreboard players set @s sulstalk_damaged_delay -1
 execute unless score @s sulstalk_should_die matches -1..2 run scoreboard players set @s sulstalk_should_die -1
@@ -24,10 +29,12 @@ execute unless score @s sulstalk_should_die matches -1..2 run scoreboard players
 # execute positioned as @s as @e[tag=sulstalk_hitbox_offset,limit=1,sort=nearest] run tp ~ ~-2 ~
 
 execute positioned as @s rotated as @s unless entity @e[type=interaction,tag=sulstalk_hitbox,distance=..2] unless score @s sulstalk_has_hitbox matches 1 run summon interaction ~ ~ ~ {Tags:["sulstalk_hitbox"],OnGround:0b}
-execute positioned as @s as @e[tag=sulstalk_hitbox,distance=..1] unless score @s sulstalk_hitbox_id matches -1999999999.. store result score @s sulstalk_hitbox_id as @e[tag=sulstalk_spawned,sort=nearest] unless score @s sulstalk_has_hitbox matches 1 run scoreboard players get @s sulstalk_spawned_number
-execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest] unless score @s sulstalk_hitbox_id = @e[tag=sulstalk_spawned,sort=nearest,limit=1] sulstalk_spawned_number as @e[tag=sulstalk_spawned,sort=nearest,limit=1] run scoreboard players set @s sulstalk_has_hitbox 0
-execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest] if score @s sulstalk_hitbox_id = @e[tag=sulstalk_spawned,sort=nearest,limit=1] sulstalk_spawned_number as @e[tag=sulstalk_spawned,sort=nearest,limit=1] unless score @s sulstalk_has_hitbox matches 1 run scoreboard players set @s sulstalk_has_hitbox 1
+execute positioned as @s as @e[tag=sulstalk_hitbox,distance=..1] unless score @s sulstalk_hitbox_id matches -1999999999.. store result score @s sulstalk_hitbox_id as @e[tag=sulstalk_spawned,sort=nearest,distance=..1] unless score @s sulstalk_has_hitbox matches 1 run scoreboard players get @s sulstalk_spawned_number
+execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest,limit=1] unless score @s sulstalk_hitbox_id = @e[tag=sulstalk_spawned,sort=nearest,limit=1] sulstalk_spawned_number as @e[tag=sulstalk_spawned,sort=nearest,limit=1] run scoreboard players set @s sulstalk_has_hitbox 0
+execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest,limit=1] if score @s sulstalk_hitbox_id = @e[tag=sulstalk_spawned,sort=nearest,limit=1] sulstalk_spawned_number as @e[tag=sulstalk_spawned,sort=nearest,limit=1] unless score @s sulstalk_has_hitbox matches 1 run scoreboard players set @s sulstalk_has_hitbox 1
 # execute positioned as @s rotated as @s as @e[tag=sulstalk_hitbox,sort=nearest] if score @s sulstalk_hitbox_id = @e[tag=sulstalk_spawned,limit=1,sort=nearest] sulstalk_spawned_number run function sulstalk:sully/interactions/physical/hitbox
+
+execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest,limit=1,distance=..5] unless score @s sulstalk_hitbox_id = @e[tag=sulstalk_spawned,sort=nearest,limit=1,distance=..1] sulstalk_spawned_number run return fail
 
 execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest] if score @s sulstalk_hitbox_id = @e[tag=sulstalk_spawned,sort=nearest,limit=1] sulstalk_spawned_number if data entity @s attack as @e[tag=sulstalk_spawned,sort=nearest,limit=1] if score @s sulstalk_damaged_delay matches -1 run scoreboard players set @s sulstalk_has_attacker 1
 execute positioned as @s store result score @s sulstalk_attacker_id as @e[tag=sulstalk_hitbox,sort=nearest] if score @s sulstalk_hitbox_id = @e[tag=sulstalk_spawned,sort=nearest,limit=1] sulstalk_spawned_number if data entity @s attack on attacker run data get entity @s UUID[0]
@@ -37,12 +44,53 @@ execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest] if score @s sul
 execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest] if score @s sulstalk_hitbox_id = @e[tag=sulstalk_spawned,sort=nearest,limit=1] sulstalk_spawned_number if data entity @s interaction run data remove entity @s interaction
 execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest] if score @s sulstalk_hitbox_id = @e[tag=sulstalk_spawned,sort=nearest,limit=1] sulstalk_spawned_number run data merge entity @s {width:0.75f,height:2.4f}
 execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest] if score @s sulstalk_hitbox_id = @e[tag=sulstalk_spawned,sort=nearest,limit=1] sulstalk_spawned_number positioned ~ ~-1.25 ~ run tp ~ ~ ~
+
 execute positioned as @s if score @s sulstalk_damaged matches -1 run scoreboard players set @s sulstalk_damaged 0
 execute positioned as @s if score @s sulstalk_should_die matches -1 run scoreboard players set @s sulstalk_should_die 0
 execute positioned as @s if score @s sulstalk_damaged_delay matches -1 if score @s sulstalk_has_attacker matches 1 as @e[tag=sulstalk_hitbox,sort=nearest] if score @s sulstalk_hitbox_id = @e[tag=sulstalk_spawned,sort=nearest,limit=1] sulstalk_spawned_number as @e[tag=sulstalk_spawned,sort=nearest,limit=1] run scoreboard players set @s sulstalk_damaged 1
 execute positioned as @s if score @s sulstalk_has_attacker matches 1 store result score @s sulstalk_attack as @e[tag=sulstalk_hitbox,sort=nearest] if score @s sulstalk_hitbox_id = @e[tag=sulstalk_spawned,sort=nearest,limit=1] sulstalk_spawned_number on attacker run attribute @s minecraft:attack_damage get
 execute positioned as @s if score @s sulstalk_has_attacker matches 1 if score @s sulstalk_attack matches 2.. as @e[tag=sulstalk_hitbox,sort=nearest] if score @s sulstalk_hitbox_id = @e[tag=sulstalk_spawned,sort=nearest,limit=1] sulstalk_spawned_number on attacker if data entity @s {abilities:{invulnerable:0b}} run item modify entity @s weapon.mainhand [{function:set_damage,damage:-0.005,add:true}]
 execute positioned as @s if score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged_delay matches -1 if score @s sulstalk_attack matches 1.. run scoreboard players operation @s sulstalk_health -= @s sulstalk_attack
+
+##Projectile detection and damage
+execute positioned as @s as @e[type=#minecraft:impact_projectiles,sort=nearest] unless score @s sulstalk_projectile_rotation_x matches -1999999999.. store result score @s sulstalk_projectile_rotation_x on origin run data get entity @s Rotation[0] 10000
+execute positioned as @s as @e[type=#minecraft:impact_projectiles,sort=nearest] unless score @s sulstalk_projectile_rotation_y matches -1999999999.. store result score @s sulstalk_projectile_rotation_y on origin run data get entity @s Rotation[1] 10000
+
+execute positioned as @s positioned ~ ~ ~ if score @s sulstalk_has_hitbox matches 1 as @e[type=#minecraft:impact_projectiles,type=!firework_rocket,sort=nearest,limit=1,distance=..1] unless data entity @s {Motion:[0.0d,0.0d,0.0d]} run tag @s add sulstalk_projectile
+execute positioned as @s positioned ~ ~1 ~ if score @s sulstalk_has_hitbox matches 1 as @e[type=#minecraft:impact_projectiles,type=!firework_rocket,sort=nearest,limit=1,distance=..1] unless data entity @s {Motion:[0.0d,0.0d,0.0d]} run tag @s add sulstalk_projectile
+execute positioned as @s positioned ~ ~-1 ~ if score @s sulstalk_has_hitbox matches 1 as @e[type=#minecraft:impact_projectiles,type=!firework_rocket,sort=nearest,limit=1,distance=..1] unless data entity @s {Motion:[0.0d,0.0d,0.0d]} run tag @s add sulstalk_projectile
+execute positioned as @s positioned ~1 ~ ~ if score @s sulstalk_has_hitbox matches 1 as @e[type=#minecraft:impact_projectiles,type=!firework_rocket,sort=nearest,limit=1,distance=..1] unless data entity @s {Motion:[0.0d,0.0d,0.0d]} run tag @s add sulstalk_projectile
+execute positioned as @s positioned ~-1 ~ ~ if score @s sulstalk_has_hitbox matches 1 as @e[type=#minecraft:impact_projectiles,type=!firework_rocket,sort=nearest,limit=1,distance=..1] unless data entity @s {Motion:[0.0d,0.0d,0.0d]} run tag @s add sulstalk_projectile
+execute positioned as @s positioned ~ ~ ~1 if score @s sulstalk_has_hitbox matches 1 as @e[type=#minecraft:impact_projectiles,type=!firework_rocket,sort=nearest,limit=1,distance=..1] unless data entity @s {Motion:[0.0d,0.0d,0.0d]} run tag @s add sulstalk_projectile
+execute positioned as @s positioned ~ ~ ~-1 if score @s sulstalk_has_hitbox matches 1 as @e[type=#minecraft:impact_projectiles,type=!firework_rocket,sort=nearest,limit=1,distance=..1] unless data entity @s {Motion:[0.0d,0.0d,0.0d]} run tag @s add sulstalk_projectile
+
+execute positioned as @s if score @s sulstalk_has_hitbox matches 1 if score @s sulstalk_damaged_delay matches -1 if score @s sulstalk_has_attacker matches ..0 if entity @e[tag=sulstalk_projectile,distance=..2.25] run scoreboard players set @s sulstalk_has_projectile 1
+execute positioned as @s unless entity @e[tag=sulstalk_projectile,distance=..2.25] run scoreboard players set @s sulstalk_has_projectile 0
+
+execute positioned as @s if score @s sulstalk_has_projectile matches 1 store result score @s sulstalk_attack as @e[tag=sulstalk_projectile,distance=..2.25] run data get entity @s damage 2
+execute positioned as @s if score @s sulstalk_has_projectile matches 1 if score @s sulstalk_damaged_delay matches -1 run scoreboard players set @s sulstalk_damaged 1
+
+execute positioned as @s if score @s sulstalk_has_projectile matches 1 if score @s sulstalk_damaged matches 1 as @e[tag=sulstalk_projectile,distance=..2.25] if data entity @s item.components.minecraft:damage unless score @s sulstalk_projectile_durability matches -1999999999.. store result score @s sulstalk_projectile_durability run data get entity @s item.components.minecraft:damage
+execute positioned as @s if score @s sulstalk_has_projectile matches 1 if score @s sulstalk_damaged matches 1 as @e[tag=sulstalk_projectile,distance=..2.25] if score @s sulstalk_projectile_durability matches -1999999999.. run scoreboard players add @s sulstalk_projectile_durability 1
+execute positioned as @s if score @s sulstalk_has_projectile matches 1 if score @s sulstalk_damaged matches 1 as @e[tag=sulstalk_projectile,distance=..2.25] if score @s sulstalk_projectile_durability matches -1999999999.. store result entity @s item.components.minecraft:damage int 1 run scoreboard players get @s sulstalk_projectile_durability
+execute positioned as @s if score @s sulstalk_has_projectile matches 1 if score @s sulstalk_damaged matches 1 as @e[tag=sulstalk_projectile,distance=..2.25] if score @s sulstalk_projectile_durability matches -1999999999.. run scoreboard players reset @s sulstalk_projectile_durability
+execute positioned as @s if score @s sulstalk_has_projectile matches 1 if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches 1.. run scoreboard players operation @s sulstalk_health -= @s sulstalk_attack
+
+execute positioned as @s if score @s sulstalk_has_projectile matches 1 if score @s sulstalk_damaged matches 1 as @e[tag=sulstalk_projectile,distance=..2.25] store result entity @s Rotation[0] float 0.0001 run scoreboard players get @s sulstalk_projectile_rotation_x
+execute positioned as @s if score @s sulstalk_has_projectile matches 1 if score @s sulstalk_damaged matches 1 as @e[tag=sulstalk_projectile,distance=..2.25] store result entity @s Rotation[1] float 0.0001 run scoreboard players get @s sulstalk_projectile_rotation_y
+execute positioned as @s if score @s sulstalk_has_projectile matches 1 if score @s sulstalk_damaged matches 1 as @e[tag=sulstalk_projectile,distance=..2.25] if score @s sulstalk_projectile_rotation_x matches -1999999999.. if score @s sulstalk_projectile_rotation_y matches -1999999999.. rotated as @s as @e[limit=1,distance=..0.1,tag=sulstalk_spawned] positioned ^ ^-1 ^4 run tp ~ ~ ~
+execute positioned as @s if score @s sulstalk_has_projectile matches 1 if score @s sulstalk_damaged matches 1 as @e[tag=sulstalk_projectile,distance=..2.25] unless score @s sulstalk_projectile_rotation_x matches -1999999999.. unless score @s sulstalk_projectile_rotation_y matches -1999999999.. as @e[limit=1,distance=..0.1,tag=sulstalk_spawned] facing entity @e[tag=sulstalk_projectile,distance=..2.25] feet positioned ^ ^-1 ^-4 run tp ~ ~ ~
+execute positioned as @s if score @s sulstalk_has_projectile matches 1 if score @s sulstalk_damaged matches 1 as @e[tag=sulstalk_projectile,type=#minecraft:arrows,distance=..6,sort=nearest] if data entity @s {PierceLevel:0b} run kill @s
+execute positioned as @s if score @s sulstalk_has_projectile matches 1 if score @s sulstalk_damaged matches 1 as @e[tag=sulstalk_projectile,type=!#minecraft:arrows,distance=..6,sort=nearest] if data entity @s {PierceLevel:0b} store result entity @s Motion[0] double 0.00001 run data get entity @s Motion[0] -10000
+execute positioned as @s if score @s sulstalk_has_projectile matches 1 if score @s sulstalk_damaged matches 1 as @e[tag=sulstalk_projectile,type=!#minecraft:arrows,distance=..6,sort=nearest] if data entity @s {PierceLevel:0b} store result entity @s Motion[1] double 0.00001 run data get entity @s Motion[1] -10000
+execute positioned as @s if score @s sulstalk_has_projectile matches 1 if score @s sulstalk_damaged matches 1 as @e[tag=sulstalk_projectile,type=!#minecraft:arrows,distance=..6,sort=nearest] if data entity @s {PierceLevel:0b} store result entity @s Motion[2] double 0.00001 run data get entity @s Motion[2] -10000
+execute positioned as @s if score @s sulstalk_has_projectile matches 1 if score @s sulstalk_damaged matches 1 as @e[tag=sulstalk_projectile,type=!#minecraft:arrows,distance=..6,sort=nearest] unless data entity @s PierceLevel store result entity @s Motion[0] double 0.00001 run data get entity @s Motion[0] -10000
+execute positioned as @s if score @s sulstalk_has_projectile matches 1 if score @s sulstalk_damaged matches 1 as @e[tag=sulstalk_projectile,type=!#minecraft:arrows,distance=..6,sort=nearest] unless data entity @s PierceLevel store result entity @s Motion[1] double 0.00001 run data get entity @s Motion[1] -10000
+execute positioned as @s if score @s sulstalk_has_projectile matches 1 if score @s sulstalk_damaged matches 1 as @e[tag=sulstalk_projectile,type=!#minecraft:arrows,distance=..6,sort=nearest] unless data entity @s PierceLevel store result entity @s Motion[2] double 0.00001 run data get entity @s Motion[2] -10000
+execute positioned as @s as @e[tag=sulstalk_projectile,distance=..6,sort=nearest] if data entity @s {Motion:[0.0d,0.0d,0.0d]} run tag @s remove sulstalk_projectile
+# execute positioned as @s if score @s sulstalk_has_projectile matches 1 if score @s sulstalk_damaged matches 1 as @e[tag=sulstalk_projectile,type=!#minecraft:arrows,distance=..6,sort=nearest] if data entity @s {PierceLevel:0b} run data merge entity @s {Motion:[0.0d,0.0d,0.0d]}
+# execute positioned as @s if score @s sulstalk_has_projectile matches 1 if score @s sulstalk_damaged matches 1 as @e[tag=sulstalk_projectile,type=!#minecraft:arrows,distance=..6,sort=nearest] unless data entity @s PierceLevel run data merge entity @s {Motion:[0.0d,0.0d,0.0d]}
+####
 
 execute if score @s sulstalk_should_die matches 0 if score @s sulstalk_damaged matches 1 run scoreboard players set @s sulstalk_can_pick_up_items 0
 execute positioned as @s if score @s sulstalk_should_die matches 0 if score @s sulstalk_damaged matches 1 run summon item ~ ~-0.5 ~ {Tags:["sulstalk_dropped"],Item:{count:1,id:"minecraft:stick",components:{"minecraft:item_model":"minecraft:air"}},PickupDelay:20s}
@@ -78,6 +126,7 @@ execute if score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged
 execute if score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged matches 2 run scoreboard players set @s sulstalk_has_attacker 0
 execute unless score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged matches 2 run scoreboard players set @s sulstalk_attacker_id -1
 execute unless score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged matches 2 run scoreboard players set @s sulstalk_attack 0
+execute if score @s sulstalk_damaged matches 2 if score @s sulstalk_has_projectile matches 1 run scoreboard players set @s sulstalk_has_projectile 0
 execute unless score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged matches 2 run scoreboard players set @s sulstalk_damaged 0
 
 execute if score @s sulstalk_should_die matches ..0 unless score @s sulstalk_damaged matches 1 run scoreboard players set @s sulstalk_can_pick_up_items 1
