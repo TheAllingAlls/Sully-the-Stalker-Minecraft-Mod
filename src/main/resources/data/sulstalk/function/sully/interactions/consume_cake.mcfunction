@@ -1,19 +1,19 @@
-execute positioned ~ ~ ~ if block ~ ~ ~ #sulstalk:is_cake unless entity @e[tag=sulstalk_cake_consumer,distance=..2] run summon marker ~ ~ ~ {Tags:["sulstalk_cake_consumer"]}
-execute positioned ~1 ~ ~1 if block ~ ~ ~ #sulstalk:is_cake unless entity @e[tag=sulstalk_cake_consumer,distance=..2] run summon marker ~ ~ ~ {Tags:["sulstalk_cake_consumer"]}
-execute positioned ~1 ~ ~-1 if block ~ ~ ~ #sulstalk:is_cake unless entity @e[tag=sulstalk_cake_consumer,distance=..2] run summon marker ~ ~ ~ {Tags:["sulstalk_cake_consumer"]}
-execute positioned ~ ~ ~1 if block ~ ~ ~ #sulstalk:is_cake unless entity @e[tag=sulstalk_cake_consumer,distance=..2] run summon marker ~ ~ ~ {Tags:["sulstalk_cake_consumer"]}
-execute positioned ~ ~ ~-1 if block ~ ~ ~ #sulstalk:is_cake unless entity @e[tag=sulstalk_cake_consumer,distance=..2] run summon marker ~ ~ ~ {Tags:["sulstalk_cake_consumer"]}
-execute positioned ~1 ~ ~ if block ~ ~ ~ #sulstalk:is_cake unless entity @e[tag=sulstalk_cake_consumer,distance=..2] run summon marker ~ ~ ~ {Tags:["sulstalk_cake_consumer"]}
-execute positioned ~-1 ~ ~ if block ~ ~ ~ #sulstalk:is_cake unless entity @e[tag=sulstalk_cake_consumer,distance=..2] run summon marker ~ ~ ~ {Tags:["sulstalk_cake_consumer"]}
-execute positioned ~-1 ~ ~1 if block ~ ~ ~ #sulstalk:is_cake unless entity @e[tag=sulstalk_cake_consumer,distance=..2] run summon marker ~ ~ ~ {Tags:["sulstalk_cake_consumer"]}
-execute positioned ~-1 ~ ~-1 if block ~ ~ ~ #sulstalk:is_cake unless entity @e[tag=sulstalk_cake_consumer,distance=..2] run summon marker ~ ~ ~ {Tags:["sulstalk_cake_consumer"]}
+execute positioned ~ ~ ~ if block ~ ~ ~ #sulstalk:is_cake unless entity @e[tag=sulstalk_cake_consumer,distance=..2.5] run summon marker ~ ~ ~ {Tags:["sulstalk_cake_consumer"]}
+execute positioned ~1 ~ ~1 if block ~ ~ ~ #sulstalk:is_cake unless entity @e[tag=sulstalk_cake_consumer,distance=..2.5] run summon marker ~ ~ ~ {Tags:["sulstalk_cake_consumer"]}
+execute positioned ~1 ~ ~-1 if block ~ ~ ~ #sulstalk:is_cake unless entity @e[tag=sulstalk_cake_consumer,distance=..2.5] run summon marker ~ ~ ~ {Tags:["sulstalk_cake_consumer"]}
+execute positioned ~ ~ ~1 if block ~ ~ ~ #sulstalk:is_cake unless entity @e[tag=sulstalk_cake_consumer,distance=..2.5] run summon marker ~ ~ ~ {Tags:["sulstalk_cake_consumer"]}
+execute positioned ~ ~ ~-1 if block ~ ~ ~ #sulstalk:is_cake unless entity @e[tag=sulstalk_cake_consumer,distance=..2.5] run summon marker ~ ~ ~ {Tags:["sulstalk_cake_consumer"]}
+execute positioned ~1 ~ ~ if block ~ ~ ~ #sulstalk:is_cake unless entity @e[tag=sulstalk_cake_consumer,distance=..2.5] run summon marker ~ ~ ~ {Tags:["sulstalk_cake_consumer"]}
+execute positioned ~-1 ~ ~ if block ~ ~ ~ #sulstalk:is_cake unless entity @e[tag=sulstalk_cake_consumer,distance=..2.5] run summon marker ~ ~ ~ {Tags:["sulstalk_cake_consumer"]}
+execute positioned ~-1 ~ ~1 if block ~ ~ ~ #sulstalk:is_cake unless entity @e[tag=sulstalk_cake_consumer,distance=..2.5] run summon marker ~ ~ ~ {Tags:["sulstalk_cake_consumer"]}
+execute positioned ~-1 ~ ~-1 if block ~ ~ ~ #sulstalk:is_cake unless entity @e[tag=sulstalk_cake_consumer,distance=..2.5] run summon marker ~ ~ ~ {Tags:["sulstalk_cake_consumer"]}
 
-execute as @e[tag=sulstalk_cake_consumer] positioned as @s run setblock ~ ~ ~ air destroy
-execute as @e[tag=sulstalk_cake_consumer] positioned as @s run summon item ~ ~0.1 ~ {Item:{count:3,id:"minecraft:wheat"}}
-execute as @e[tag=sulstalk_cake_consumer] positioned as @s run summon item ~0.5 ~0.1 ~ {Item:{count:2,id:"minecraft:sugar"}}
-execute as @e[tag=sulstalk_cake_consumer] positioned as @s run summon item ~-0.5 ~0.1 ~ {Item:{count:1,id:"minecraft:egg"}}
-execute as @e[tag=sulstalk_cake_consumer] positioned as @s run summon item ~ ~0.1 ~0.5 {Item:{count:3,id:"minecraft:milk_bucket"}}
-execute as @e[tag=sulstalk_cake_consumer] run kill @s
+execute as @e[tag=sulstalk_cake_consumer,distance=..2] positioned as @s run setblock ~ ~ ~ air destroy
+execute as @e[tag=sulstalk_cake_consumer,distance=..2] positioned as @s run summon item ~ ~0.1 ~ {Item:{count:3,id:"minecraft:wheat"}}
+execute as @e[tag=sulstalk_cake_consumer,distance=..2] positioned as @s run summon item ~0.5 ~0.1 ~ {Item:{count:2,id:"minecraft:sugar"}}
+execute as @e[tag=sulstalk_cake_consumer,distance=..2] positioned as @s run summon item ~-0.5 ~0.1 ~ {Item:{count:1,id:"minecraft:egg"}}
+execute as @e[tag=sulstalk_cake_consumer,distance=..2] positioned as @s run summon item ~ ~0.1 ~0.5 {Item:{count:3,id:"minecraft:milk_bucket"}}
+execute as @e[tag=sulstalk_cake_consumer,distance=..2] run kill @s
 
 # scoreboard objectives add sulstalk_cake_consume_delay trigger ""
 # execute as @e[tag=sulstalk_cake_consumer] unless score @s sulstalk_cake_consume_delay matches 0.. run scoreboard players set @s sulstalk_cake_consume_delay 20

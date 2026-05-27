@@ -117,7 +117,7 @@ execute if score @s sulstalk_can_rotate_up matches 0 at @s run rotate @s ~0.0 0.
 #execute store result entity @s Pos[1] double 0.0001 run scoreboard players get @s sulstalk_position_y
 #execute store result entity @s Pos[2] double 0.0001 run scoreboard players get @s sulstalk_position_z
 
-execute positioned ~ ~-2 ~ rotated ~ ~ run function sulstalk:sully/interactions
+execute positioned as @s positioned ~ ~-2 ~ rotated as @s rotated ~ ~ run function sulstalk:sully/interactions
 
 ##Trigger for this is separately defined for the hitbox in sulstalk:sully/interactions/physical/hitbox
 execute if score @s sulstalk_should_die matches 2 run kill @s
