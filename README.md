@@ -1,9 +1,12 @@
-# Fabric Example Mod
+# Sully the Stalker
 
-## Setup
+A weird and creepy entity that roams en masse, stalking and defiling whatever it feels.
 
-For setup instructions please see the [fabric documentation page](https://docs.fabricmc.net/develop/getting-started/setting-up) that relates to the IDE that you are using.
+NOT DONE YET!!!
 
-## License
+## TODO 
+### (Made this after the right-click checks) (Priority is from top to bottom)
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+* Get mace to work
+* Anger meter and special abilities when full
+* Sully's Suspicious Stew, randomly drops when near a player and has extra special effects like explosions, freezing, insomnia, etc.
