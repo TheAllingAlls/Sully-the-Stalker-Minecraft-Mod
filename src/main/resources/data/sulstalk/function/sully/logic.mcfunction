@@ -27,7 +27,6 @@ execute if score @s sulstalk_travel_timer_enabled matches 1 if score @s sulstalk
 #execute if score @s sulstalk_travel_timer_enabled matches 1 if score @s sulstalk_travel_timer matches 0..20 if score @s sulstalk_should_move matches 1 run scoreboard players set @s sulstalk_should_move 0
 #execute if score @s sulstalk_travel_timer_enabled matches 1 if score @s sulstalk_travel_timer matches 20.. if score @s sulstalk_should_move matches 0 run scoreboard players set @s sulstalk_should_move 1
 
-
 execute positioned ~ ~ ~ if block ~ ~ ~ #sulstalk:can_pass_through if block ~ ~-1 ~ #sulstalk:can_pass_through if block ~ ~-2 ~ #sulstalk:can_pass_through if block ~ ~1 ~ #sulstalk:can_pass_through if block ~ ~2 ~ #sulstalk:can_pass_through run scoreboard players set @s sulstalk_is_in_block 0
 execute positioned ~ ~-2 ~ if block ~ ~ ~ #sulstalk:can_pass_through positioned as @s positioned ~ ~2 ~ unless block ~ ~ ~ #sulstalk:can_pass_through run scoreboard players set @s sulstalk_is_in_block -1
 execute positioned ~ ~-2 ~ if block ~ ~ ~ #sulstalk:can_pass_through positioned as @s positioned ~ ~1 ~ if block ~ ~ ~ #sulstalk:can_pass_through positioned ~ ~1 ~ if block ~ ~ ~ #sulstalk:can_pass_through run scoreboard players set @s sulstalk_is_in_block -1

@@ -10,6 +10,7 @@ scoreboard objectives add sulstalk_projectile_rotation_x trigger ""
 scoreboard objectives add sulstalk_projectile_rotation_y trigger ""
 scoreboard objectives add sulstalk_attacker_id trigger ""
 scoreboard objectives add sulstalk_damaged_delay trigger ""
+scoreboard objectives add sulstalk_interaction_delay trigger ""
 scoreboard objectives add sulstalk_should_die trigger ""
 
 execute unless score @s sulstalk_has_hitbox matches 0..1 run scoreboard players set @s sulstalk_has_hitbox 0
@@ -23,6 +24,7 @@ execute unless score @s sulstalk_has_attacker matches -1.. run scoreboard player
 execute unless score @s sulstalk_has_projectile matches -1.. run scoreboard players set @s sulstalk_has_projectile -1
 execute unless score @s sulstalk_attacker_id matches -1999999999.. run scoreboard players set @s sulstalk_attacker_id -1
 execute unless score @s sulstalk_damaged_delay matches -1..10 run scoreboard players set @s sulstalk_damaged_delay -1
+execute unless score @s sulstalk_interaction_delay matches -1.. run scoreboard players set @s sulstalk_interaction_delay -1
 execute unless score @s sulstalk_should_die matches -1..2 run scoreboard players set @s sulstalk_should_die -1
 
 # execute positioned as @s unless entity @e[type=marker,tag=sulstalk_hitbox_offset,sort=nearest] run summon marker ~ ~ ~ {Tags:["sulstalk_hitbox_offset"],OnGround:0b}
@@ -38,12 +40,24 @@ execute positioned as @s store result score @s sulstalk_attacker_id as @e[tag=su
 execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[tag=sulstalk_spawned,distance=..0.1,limit=1] sulstalk_spawned_number if data entity @s attack on attacker unless score @s sulstalk_attacker_id matches -1999999999.. store result score @s sulstalk_attacker_id run data get entity @s UUID[0]
 # execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10,limit=1] if score @s sulstalk_hitbox_id = @e[tag=sulstalk_spawned,distance=..0.1,limit=1] sulstalk_spawned_number unless data entity @s attack as @e[tag=sulstalk_spawned,distance=..0.1,limit=1] run scoreboard players set @s sulstalk_has_attacker 0
 # execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10,limit=1] if score @s sulstalk_hitbox_id = @e[tag=sulstalk_spawned,distance=..0.1,limit=1] sulstalk_spawned_number unless data entity @s attack as @e[tag=sulstalk_spawned,distance=..0.1,limit=1] run scoreboard players set @s sulstalk_attacker_id -1
-execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[tag=sulstalk_spawned,distance=..0.1,limit=1] sulstalk_spawned_number if data entity @s interaction run data remove entity @s interaction
-execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[tag=sulstalk_spawned,distance=..0.1,limit=1] sulstalk_spawned_number run data merge entity @s {width:0.75f,height:2.4f}
+# execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[tag=sulstalk_spawned,distance=..0.1,limit=1] sulstalk_spawned_number if data entity @s interaction run data remove entity @s interaction
+execute positioned as @s if score @s sulstalk_interaction_delay matches ..0 as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[tag=sulstalk_spawned,distance=..0.1,limit=1] sulstalk_spawned_number run data merge entity @s {width:0.75f,height:2.4f}
 execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[tag=sulstalk_spawned,distance=..0.1,limit=1] sulstalk_spawned_number positioned ~ ~-1.25 ~ run tp ~ ~ ~
 
-##Decrease player interaction range (right-click) when looking at entity and not holding an item that deals damage
+##Attempt to allow right-clicking entity
 
+#Decrease player interaction range (right-click) when looking at entity and not holding an item that deals damage
+# execute positioned as @s as @e[type=player,sort=nearest,distance=1.5..5] unless items entity @s weapon.* *[enchantable,!equippable,!blocks_attacks,!consumable] run execute if predicate {"condition":"entity_properties","entity":"this","predicate":{"type_specific":{"type":"minecraft:player","looking_at":{"type":"minecraft:interaction"}}}} run attribute @s minecraft:entity_interaction_range modifier add sulstalk:looking_at -1 add_multiplied_total
+# execute positioned as @s as @e[type=player,sort=nearest,distance=..5] unless predicate {"condition":"entity_properties","entity":"this","predicate":{"type_specific":{"type":"minecraft:player","looking_at":{"type":"minecraft:interaction"}}}} run attribute @s minecraft:entity_interaction_range modifier remove sulstalk:looking_at
+# execute positioned as @s as @e[type=player,sort=nearest,distance=..5] if items entity @s weapon.* *[enchantable,!equippable,!blocks_attacks,!consumable] run attribute @s minecraft:entity_interaction_range modifier remove sulstalk:looking_at
+# execute positioned as @s as @e[type=player,sort=nearest,distance=..5] unless items entity @s weapon.* * run attribute @s minecraft:entity_interaction_range modifier remove sulstalk:looking_at
+
+execute positioned as @s if score @s sulstalk_interaction_delay matches 0 run execute as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[tag=sulstalk_spawned,distance=..0.1,limit=1] sulstalk_spawned_number if data entity @s interaction run data merge entity @s {width:0.0f,height:0.0f}
+execute positioned as @s if score @s sulstalk_interaction_delay matches 0 run execute as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[tag=sulstalk_spawned,distance=..0.1,limit=1] sulstalk_spawned_number if data entity @s interaction run scoreboard players set @e[tag=sulstalk_spawned,distance=..0.1,limit=1] sulstalk_interaction_delay -1
+execute positioned as @s unless score @s sulstalk_interaction_delay matches 0 run execute as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[tag=sulstalk_spawned,distance=..0.1,limit=1] sulstalk_spawned_number if data entity @s interaction run data remove entity @s interaction
+
+execute if score @s sulstalk_interaction_delay matches -1 run scoreboard players set @s sulstalk_interaction_delay 4
+execute if score @s sulstalk_interaction_delay matches 1.. run scoreboard players remove @s sulstalk_interaction_delay 1
 ####
 
 execute positioned as @s if score @s sulstalk_damaged matches -1 run scoreboard players set @s sulstalk_damaged 0
