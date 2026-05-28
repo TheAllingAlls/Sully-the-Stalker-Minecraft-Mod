@@ -70,6 +70,7 @@ execute if score @s sulstalk_is_following_entity matches 1 run scoreboard player
 execute if score @s sulstalk_is_following_entity matches 1 run scoreboard players set @s sulstalk_will_be_in_block 0
 execute if score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_travel_timer_enabled matches 1 run scoreboard players set @s sulstalk_travel_timer_enabled 2
 execute if score @s sulstalk_is_following_entity matches 0 if score @s sulstalk_travel_timer_enabled matches 2 run scoreboard players set @s sulstalk_travel_timer_enabled 1
+execute if score @s sulstalk_underwater matches 4 if score @s sulstalk_travel_timer_enabled matches 1 run scoreboard players set @s sulstalk_travel_timer_enabled 2
 execute if score @s sulstalk_travel_timer matches 0..100 if score @s sulstalk_is_in_block matches ..-1 run scoreboard players set @s sulstalk_is_in_block 1
 execute if score @s sulstalk_travel_timer matches 0..50 if score @s sulstalk_is_in_block matches 1 run scoreboard players set @s sulstalk_is_in_block 0
 execute if score @s sulstalk_travel_timer matches 0..100 if score @s sulstalk_will_be_in_block matches ..-1 run scoreboard players set @s sulstalk_will_be_in_block 1
@@ -95,8 +96,8 @@ execute if score @s sulstalk_is_in_block matches -2 at @s run tp ~0.0 ~-0.2 ~0.0
 #execute if score @s sulstalk_is_in_block matches -2 run scoreboard players remove @s sulstalk_position_y 002000
 
 execute if score @s sulstalk_should_move matches -1 run scoreboard players set @s sulstalk_should_move 1
-execute unless score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_should_move matches 1 at @s run tp ^0.0 ^0.0 ^0.05
-execute unless score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_should_move matches 0 at @s run tp ^0.0 ^0.0 ^0.01
+execute unless score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_underwater_rotate matches 0 if score @s sulstalk_should_move matches 1 at @s run tp ^0.0 ^0.0 ^0.05
+execute unless score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_underwater_rotate matches 0 if score @s sulstalk_should_move matches 0 at @s run tp ^0.0 ^0.0 ^0.01
 
 execute if score @s sulstalk_should_rotate matches 0 store result score @s sulstalk_should_rotate run random value -200..200
 execute if score @s sulstalk_should_rotate matches 0..49 store result score @s sulstalk_should_rotate run random value 0..200
@@ -116,7 +117,7 @@ execute if score @s sulstalk_can_rotate_up matches 0 at @s run rotate @s ~0.0 0.
 #execute store result entity @s Pos[1] double 0.0001 run scoreboard players get @s sulstalk_position_y
 #execute store result entity @s Pos[2] double 0.0001 run scoreboard players get @s sulstalk_position_z
 
-execute positioned as @s positioned ~ ~-2 ~ rotated as @s rotated ~ ~ run function sulstalk:sully/interactions
+execute positioned as @s if entity @e[type=player,distance=..100] positioned ~ ~-2 ~ rotated as @s rotated ~ ~ run function sulstalk:sully/interactions
 
 ##Trigger for this is separately defined for the hitbox in sulstalk:sully/interactions/physical/hitbox
 execute if score @s sulstalk_should_die matches 2 run kill @s

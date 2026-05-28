@@ -28,7 +28,7 @@ execute if score @s sulstalk_following_entity_forget matches 0 run scoreboard pl
 execute if score @s sulstalk_following_entity_forget matches 0 run scoreboard players set @s sulstalk_should_follow 0
 execute if score @s sulstalk_following_entity_forget matches 0 run scoreboard players set @s sulstalk_following_entity_forget -1
 
-execute unless score @s sulstalk_nearby_entities matches 1.. run return fail
+execute if score @s sulstalk_underwater matches 4 run scoreboard players set @s sulstalk_following_entity_forget 0
 
 execute if score @s sulstalk_follow_priority matches 6 store result score @s sulstalk_should_follow run random value 1..2
 
