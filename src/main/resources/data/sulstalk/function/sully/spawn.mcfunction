@@ -15,7 +15,7 @@ execute as @e[tag=sulstalk_spawning] unless score @s sulstalk_spawn_chance match
 execute as @e[tag=sulstalk_spawning] if score @s sulstalk_spawn_chance matches 1 run data merge entity @s {Tags:["sulstalk_spawned","sulstalk_unpositioned"]}
 execute as @e[tag=sulstalk_spawned] store result score @s sulstalk_spawned_number run data get entity @s UUID[0]
 
-execute as @e[tag=sulstalk_spawned,tag=sulstalk_unpositioned] positioned as @s run spreadplayers ~ ~ 20 150 false @s
+execute as @e[tag=sulstalk_spawned,tag=sulstalk_unpositioned] positioned as @s run spreadplayers ~ ~ 20 100 false @s
 execute as @e[tag=sulstalk_spawned,tag=sulstalk_unpositioned] run data modify entity @s Tags[1] set value "sulstalk_positioned"
 
 execute as @e[tag=sulstalk_positioned] positioned as @s rotated as @s if loaded ~ ~ ~ run function sulstalk:sully/logic
