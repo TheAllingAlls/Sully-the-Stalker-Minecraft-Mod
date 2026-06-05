@@ -12,15 +12,6 @@ scoreboard objectives add sulstalk_following_entity_gift_type trigger ""
 scoreboard objectives add sulstalk_following_entity_anger trigger ""
 scoreboard objectives add sulstalk_is_angry trigger ""
 scoreboard objectives add sulstalk_special_ability_type trigger ""
-scoreboard objectives add sulstalk_special_ability_motion_x trigger ""
-scoreboard objectives add sulstalk_special_ability_motion_y trigger ""
-scoreboard objectives add sulstalk_special_ability_motion_z trigger ""
-scoreboard objectives add sulstalk_position_x trigger ""
-scoreboard objectives add sulstalk_position_y trigger ""
-scoreboard objectives add sulstalk_position_z trigger ""
-scoreboard objectives add sulstalk_following_entity_position_x trigger ""
-scoreboard objectives add sulstalk_following_entity_position_y trigger ""
-scoreboard objectives add sulstalk_following_entity_position_z trigger ""
 
 execute unless score @s sulstalk_nearby_entities matches -1.. run scoreboard players set @s sulstalk_nearby_entities -1
 execute unless score @s sulstalk_should_follow matches -1.. run scoreboard players set @s sulstalk_should_follow -1
@@ -79,6 +70,7 @@ execute positioned as @s as @e[scores={sulstalk_followed_entity_id=-2147483647..
 execute positioned as @s if score @s sulstalk_is_following_entity matches 1 run execute as @e[type=player,scores={sulstalk_followed_entity_id=-2147483647..},distance=..100] if data entity @s {abilities:{invulnerable:1b}} if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id run scoreboard players set @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_forget 0
 execute positioned as @s if score @s sulstalk_is_following_entity matches 1 run execute as @e[type=!player,scores={sulstalk_followed_entity_id=-2147483647..},distance=..100] if data entity @s {Invulnerable:1b} if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id run scoreboard players set @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_forget 0
 
+execute if score @s sulstalk_is_following_entity matches 1 run execute if score @s sulstalk_following_entity_forget matches 1.. positioned as @s as @e[scores={sulstalk_followed_entity_id=-2147483647..},distance=..100] if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id facing entity @s eyes run rotate @e[limit=1,distance=..0.1,tag=sulstalk_spawned] facing ^ ^ ^0.1
 execute if score @s sulstalk_is_following_entity matches 1 run execute unless score @s sulstalk_special_ability_type matches 0 if score @s sulstalk_following_entity_forget matches 1000..1200 positioned as @s as @e[scores={sulstalk_followed_entity_id=-2147483647..},distance=..100] if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id facing entity @s eyes rotated ~ ~-5 run tp @e[limit=1,distance=..0.1,tag=sulstalk_spawned] ^ ^ ^0.05
 execute if score @s sulstalk_is_following_entity matches 1 run execute unless score @s sulstalk_special_ability_type matches 0 if score @s sulstalk_following_entity_forget matches 700..999 positioned as @s as @e[scores={sulstalk_followed_entity_id=-2147483647..},distance=..100] if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id facing entity @s eyes rotated ~ ~-5 run tp @e[limit=1,distance=..0.1,tag=sulstalk_spawned] ^ ^ ^0.06
 execute if score @s sulstalk_is_following_entity matches 1 run execute unless score @s sulstalk_special_ability_type matches 0 if score @s sulstalk_following_entity_forget matches 500..699 positioned as @s as @e[scores={sulstalk_followed_entity_id=-2147483647..},distance=..100] if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id facing entity @s eyes rotated ~ ~-5 run tp @e[limit=1,distance=..0.1,tag=sulstalk_spawned] ^ ^ ^0.07
@@ -97,13 +89,14 @@ execute if score @s sulstalk_is_following_entity matches 1 run execute as @e[typ
 execute if score @s sulstalk_is_following_entity matches 1 run execute as @e[type=!player,scores={sulstalk_followed_entity_id=-2147483647..},distance=..100] unless data entity @s {active_effects:[{id:"minecraft:wither"}]} positioned as @s positioned ~ ~ ~ if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..2,tag=sulstalk_spawned] sulstalk_following_entity_id run effect give @s wither 2 255 false
 
 ##Anger & Special Abilities
-execute if score @s sulstalk_is_following_entity matches 1 run execute unless score @s sulstalk_following_entity_anger matches 199.. run scoreboard players set @s sulstalk_is_angry 0
-execute if score @s sulstalk_is_following_entity matches 1 run execute unless score @s sulstalk_following_entity_anger matches 199.. run scoreboard players set @s sulstalk_special_ability_type -1
-execute if score @s sulstalk_is_following_entity matches 1 run execute if score @s sulstalk_following_entity_anger matches 199.. run scoreboard players set @s sulstalk_is_angry 1
+execute if score @s sulstalk_is_following_entity matches 1 run execute unless score @s sulstalk_following_entity_anger matches 99.. run scoreboard players set @s sulstalk_is_angry 0
+execute if score @s sulstalk_is_following_entity matches 1 run execute unless score @s sulstalk_following_entity_anger matches 99.. run scoreboard players set @s sulstalk_special_ability_type -1
+execute if score @s sulstalk_is_following_entity matches 1 run execute if score @s sulstalk_following_entity_anger matches 99.. run scoreboard players set @s sulstalk_is_angry 1
 
-execute if score @s sulstalk_is_angry matches 1 if score @s sulstalk_following_entity_forget matches 1..10 run scoreboard players set @s sulstalk_following_entity_forget 10
+execute if score @s sulstalk_is_angry matches 1 if score @s sulstalk_following_entity_forget matches 1..50 run scoreboard players set @s sulstalk_following_entity_forget 50
 
 execute if score @s sulstalk_is_following_entity matches 1 run execute if score @s sulstalk_is_angry matches 1 unless score @s sulstalk_special_ability_type matches 0.. store result score @s sulstalk_special_ability_type run random value 1..3
+execute if score @s sulstalk_is_following_entity matches 1 run execute if score @s sulstalk_is_angry matches 1 run scoreboard players set @s sulstalk_special_ability_type 2
 
 ##Big Fireball
 execute positioned as @s rotated as @s if score @s sulstalk_is_following_entity matches 1 run execute if score @s sulstalk_is_angry matches 1 if score @s sulstalk_special_ability_type matches 0 run function sulstalk:sully/interactions/entity_to_entity/big_fireball

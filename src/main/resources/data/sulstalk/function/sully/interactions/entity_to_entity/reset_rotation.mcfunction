@@ -1,0 +1,1 @@
+execute if score @s sulstalk_can_rotate_up matches 0 at @s run rotate @s ~0.0 0.0
