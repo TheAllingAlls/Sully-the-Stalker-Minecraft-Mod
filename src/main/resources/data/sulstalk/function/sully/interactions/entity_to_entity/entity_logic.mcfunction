@@ -95,8 +95,9 @@ execute if score @s sulstalk_is_following_entity matches 1 run execute if score 
 
 execute if score @s sulstalk_is_angry matches 1 if score @s sulstalk_following_entity_forget matches 1..50 run scoreboard players set @s sulstalk_following_entity_forget 50
 
-execute if score @s sulstalk_is_following_entity matches 1 run execute if score @s sulstalk_is_angry matches 1 unless score @s sulstalk_special_ability_type matches 0.. store result score @s sulstalk_special_ability_type run random value 1..3
-execute if score @s sulstalk_is_following_entity matches 1 run execute if score @s sulstalk_is_angry matches 1 run scoreboard players set @s sulstalk_special_ability_type 2
+execute if score @s sulstalk_is_following_entity matches 1 run execute if score @s sulstalk_is_angry matches 1 unless score @s sulstalk_special_ability_type matches 0.. store result score @s sulstalk_special_ability_type run random value 0..3
+execute if score @s sulstalk_is_following_entity matches 1 run execute if score @s sulstalk_is_angry matches 1 if score @s sulstalk_special_ability_type matches 0.. run execute if dimension the_nether run scoreboard players set @s sulstalk_special_ability_type 1
+execute if score @s sulstalk_is_following_entity matches 1 run execute if score @s sulstalk_is_angry matches 1 run scoreboard players set @s sulstalk_special_ability_type 1
 
 ##Big Fireball
 execute positioned as @s rotated as @s if score @s sulstalk_is_following_entity matches 1 run execute if score @s sulstalk_is_angry matches 1 if score @s sulstalk_special_ability_type matches 0 run function sulstalk:sully/interactions/entity_to_entity/big_fireball
