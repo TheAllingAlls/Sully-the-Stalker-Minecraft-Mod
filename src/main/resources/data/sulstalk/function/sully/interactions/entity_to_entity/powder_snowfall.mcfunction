@@ -9,7 +9,9 @@ execute unless entity @e[type=falling_block,distance=..1,limit=1] store result e
 
 execute unless entity @e[type=falling_block,distance=..1,limit=1] run scoreboard players remove @s sulstalk_powder_snowfall_max 1
 execute unless entity @e[type=falling_block,distance=..1,limit=1] run summon falling_block ~ ~ ~ {Tags:["sulstalk_falling_block"],BlockState:{Name:"minecraft:powder_snow"},Motion:[0.0d,0.0d,0.0d]}
-execute if entity @e[tag=sulstalk_falling_block,type=falling_block,distance=..1,limit=1] run execute as @e[tag=sulstalk_falling_block,type=falling_block,distance=..1,limit=1] run data modify entity @s Motion set from entity @e[tag=sulstalk_spawned,distance=..0.1,limit=1] data.random_number
+execute if entity @e[tag=sulstalk_falling_block,type=falling_block,distance=..1,limit=1] run execute as @e[tag=sulstalk_falling_block,type=falling_block,distance=..1,limit=1] run data modify entity @s Motion[0] set from entity @e[tag=sulstalk_spawned,distance=..0.1,limit=1] data.random_number[0]
+execute if entity @e[tag=sulstalk_falling_block,type=falling_block,distance=..1,limit=1] run execute as @e[tag=sulstalk_falling_block,type=falling_block,distance=..1,limit=1] run data modify entity @s Motion[1] set from entity @e[tag=sulstalk_spawned,distance=..0.1,limit=1] data.random_number[1]
+execute if entity @e[tag=sulstalk_falling_block,type=falling_block,distance=..1,limit=1] run execute as @e[tag=sulstalk_falling_block,type=falling_block,distance=..1,limit=1] run data modify entity @s Motion[2] set from entity @e[tag=sulstalk_spawned,distance=..0.1,limit=1] data.random_number[2]
 execute store result entity @s data.powder_snowfall_max int 1 run scoreboard players get @s sulstalk_powder_snowfall_max
 data remove entity @s data.powder_snowfall_max
 data remove entity @s data.random_number
