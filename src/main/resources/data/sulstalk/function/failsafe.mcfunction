@@ -12,4 +12,4 @@ execute as @e[type=item] positioned as @s if data entity @s {PickupDelay:0s} unl
 execute as @e[tag=sulstalk_hitbox] positioned as @s unless entity @e[tag=sulstalk_spawned,distance=..10,limit=1] run kill @s
 
 ##Failsafe for blaze fireball special ability display not disappearing
-execute as @e[tag=sulstalk_special_ability] positioned as @s unless entity @e[tag=sulstalk_spawned,distance=..5,limit=1] run kill @s
+execute as @e[tag=sulstalk_special_ability,tag=!sulstalk_blaze_fireball] positioned as @s unless entity @e[tag=sulstalk_spawned,distance=..5,limit=1] run kill @s
