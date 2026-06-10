@@ -93,9 +93,9 @@ $execute if score @s sulstalk_is_following_entity matches 1 run execute as @e[ty
 $execute if score @s sulstalk_is_following_entity matches 1 run execute as @e[type=!player,scores={sulstalk_followed_entity_id=$(following_entity_id)},distance=..100] unless data entity @s {active_effects:[{id:"minecraft:wither"}]} positioned as @s positioned ~ ~ ~ if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..2,tag=sulstalk_spawned,scores={sulstalk_spawned_number=$(id)}] sulstalk_following_entity_id run effect give @s wither 2 255 false
 
 ##Anger & Special Abilities
-execute if score @s sulstalk_is_following_entity matches 1 run execute unless score @s sulstalk_following_entity_anger matches 99.. run scoreboard players set @s sulstalk_is_angry 0
-execute if score @s sulstalk_is_following_entity matches 1 run execute unless score @s sulstalk_following_entity_anger matches 99.. run scoreboard players set @s sulstalk_special_ability_type -1
-execute if score @s sulstalk_is_following_entity matches 1 run execute if score @s sulstalk_following_entity_anger matches 99.. run scoreboard players set @s sulstalk_is_angry 1
+execute if score @s sulstalk_is_following_entity matches 1 run execute unless score @s sulstalk_following_entity_anger matches 199.. run scoreboard players set @s sulstalk_is_angry 0
+execute if score @s sulstalk_is_following_entity matches 1 run execute unless score @s sulstalk_following_entity_anger matches 199.. run scoreboard players set @s sulstalk_special_ability_type -1
+execute if score @s sulstalk_is_following_entity matches 1 run execute if score @s sulstalk_following_entity_anger matches 199.. run scoreboard players set @s sulstalk_is_angry 1
 
 execute if score @s sulstalk_is_angry matches 1 if score @s sulstalk_following_entity_forget matches 1..50 run scoreboard players set @s sulstalk_following_entity_forget 50
 
