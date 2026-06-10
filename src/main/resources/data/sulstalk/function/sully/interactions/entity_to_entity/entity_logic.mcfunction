@@ -33,6 +33,7 @@ execute unless score @s sulstalk_is_following_entity matches 1 run execute posit
 
 execute if score @s sulstalk_following_entity_forget matches 0 run scoreboard players set @s sulstalk_is_following_entity 0
 execute if score @s sulstalk_following_entity_forget matches 0 run scoreboard players set @s sulstalk_following_entity_id -1
+execute if score @s sulstalk_following_entity_forget matches 0 run data modify entity @s data.following_entity_id set value -1
 execute if score @s sulstalk_following_entity_forget matches 0 run scoreboard players set @s sulstalk_should_follow 0
 execute if score @s sulstalk_following_entity_forget matches 0 run scoreboard players set @s sulstalk_following_entity_anger -1
 execute if score @s sulstalk_following_entity_forget matches 0 run scoreboard players set @s sulstalk_following_entity_forget -1
@@ -63,7 +64,6 @@ execute unless score @s sulstalk_is_following_entity matches 1 run execute if sc
 execute unless score @s sulstalk_is_following_entity matches 1 run execute if score @s sulstalk_should_follow matches 1 if score @s sulstalk_follow_priority matches 4 positioned as @s store result score @s sulstalk_following_entity_id run data get entity @e[sort=nearest,limit=1,distance=..2,scores={sulstalk_followed_entity_id=-2147483647..}] UUID[0]
 execute unless score @s sulstalk_is_following_entity matches 1 run execute if score @s sulstalk_should_follow matches 1 if score @s sulstalk_follow_priority matches 5..6 positioned as @s store result score @s sulstalk_following_entity_id run data get entity @e[type=player,nbt={abilities:{invulnerable:0b}},sort=nearest,limit=1,distance=..20,scores={sulstalk_followed_entity_id=-2147483647..}] UUID[0]
 execute if predicate {condition:entity_scores,entity:this,scores:{sulstalk_following_entity_id:{}}} store result entity @s data.following_entity_id int 1 run scoreboard players get @s sulstalk_following_entity_id
-execute unless predicate {condition:entity_scores,entity:this,scores:{sulstalk_following_entity_id:{}}} run data modify entity @s data.following_entity_id set value -1
 
 $execute positioned as @s as @e[scores={sulstalk_followed_entity_id=$(following_entity_id)},distance=..100] run scoreboard players set @e[limit=1,distance=..0.1,tag=sulstalk_spawned,scores={sulstalk_spawned_number=$(id)}] sulstalk_is_following_entity 1
 
