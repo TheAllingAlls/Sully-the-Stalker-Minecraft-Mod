@@ -50,7 +50,7 @@ execute unless score @s sulstalk_should_follow matches 1 run execute if score @s
 execute unless score @s sulstalk_should_follow matches 1 run execute positioned as @s if entity @e[distance=..5,type=player,nbt={abilities:{invulnerable:0b}}] run scoreboard players set @s sulstalk_follow_priority 5
 execute unless score @s sulstalk_should_follow matches 1 run execute unless score @s sulstalk_is_following_entity matches 1 run execute if score @s sulstalk_follow_priority matches 5 store result score @s sulstalk_should_follow run random value 1..100
 
-execute if score @s sulstalk_is_following_entity matches 1 run execute unless score @s sulstalk_following_entity_forget matches 1.. store result score @s sulstalk_following_entity_forget run random value 200..1200
+execute if score @s sulstalk_is_following_entity matches 1 run execute if score @s sulstalk_following_entity_forget matches -1 store result score @s sulstalk_following_entity_forget run random value 200..1200
 execute if score @s sulstalk_is_following_entity matches 1 run execute if score @s sulstalk_following_entity_forget matches 1.. run scoreboard players remove @s sulstalk_following_entity_forget 1
 
 ##Health stored in score is multiplied by 100 to account for decimals sneaking in, therefore 20 hp is 2000
