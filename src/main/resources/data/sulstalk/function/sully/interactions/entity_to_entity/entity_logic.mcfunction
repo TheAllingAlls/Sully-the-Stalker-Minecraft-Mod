@@ -16,9 +16,9 @@ scoreboard objectives add sulstalk_special_ability_type trigger ""
 execute unless score @s sulstalk_nearby_entities matches -1.. run scoreboard players set @s sulstalk_nearby_entities -1
 execute unless score @s sulstalk_should_follow matches -1.. run scoreboard players set @s sulstalk_should_follow -1
 execute unless score @s sulstalk_follow_priority matches 0.. run scoreboard players set @s sulstalk_follow_priority 0
-execute unless score @s sulstalk_following_entity_forget matches -1.. run scoreboard players set @s sulstalk_following_entity_forget -1
+execute unless score @s sulstalk_following_entity_forget = @s sulstalk_following_entity_forget run scoreboard players set @s sulstalk_following_entity_forget -1
 execute unless score @s sulstalk_is_following_entity matches -1.. run scoreboard players set @s sulstalk_is_following_entity -1
-execute unless score @s sulstalk_following_entity_id matches -2147483647..2147483647 run scoreboard players set @s sulstalk_following_entity_id -1
+execute unless score @s sulstalk_following_entity_id = @s sulstalk_following_entity_id run scoreboard players set @s sulstalk_following_entity_id -1
 execute unless score @s sulstalk_is_attacking_entity matches -1.. run scoreboard players set @s sulstalk_is_attacking_entity -1
 execute unless score @s sulstalk_following_entity_anger matches -1.. run scoreboard players set @s sulstalk_following_entity_anger -1
 execute unless score @s sulstalk_is_angry matches 0..1 run scoreboard players set @s sulstalk_is_angry 0
@@ -36,7 +36,7 @@ execute if score @s sulstalk_following_entity_forget matches 0 run scoreboard pl
 execute if score @s sulstalk_following_entity_forget matches 0 run data modify entity @s data.following_entity_id set value -1
 execute if score @s sulstalk_following_entity_forget matches 0 run scoreboard players set @s sulstalk_should_follow 0
 execute if score @s sulstalk_following_entity_forget matches 0 run scoreboard players set @s sulstalk_following_entity_anger -1
-execute if score @s sulstalk_following_entity_forget matches 0 run scoreboard players set @s sulstalk_following_entity_forget -1
+# execute if score @s sulstalk_following_entity_forget matches 0 run scoreboard players set @s sulstalk_following_entity_forget -1
 
 execute if score @s sulstalk_underwater matches 4 run scoreboard players set @s sulstalk_following_entity_forget 0
 
@@ -50,7 +50,8 @@ execute unless score @s sulstalk_should_follow matches 1 run execute if score @s
 execute unless score @s sulstalk_should_follow matches 1 run execute positioned as @s if entity @e[distance=..5,type=player,nbt={abilities:{invulnerable:0b}}] run scoreboard players set @s sulstalk_follow_priority 5
 execute unless score @s sulstalk_should_follow matches 1 run execute unless score @s sulstalk_is_following_entity matches 1 run execute if score @s sulstalk_follow_priority matches 5 store result score @s sulstalk_should_follow run random value 1..100
 
-execute if score @s sulstalk_is_following_entity matches 1 run execute if score @s sulstalk_following_entity_forget matches -1 store result score @s sulstalk_following_entity_forget run random value 200..1200
+execute if score @s sulstalk_should_follow matches 1 if score @s sulstalk_following_entity_forget matches 0 run scoreboard players set @s sulstalk_following_entity_forget -1
+execute if score @s sulstalk_is_following_entity matches 1 run execute unless score @s sulstalk_following_entity_id matches -1 if score @s sulstalk_following_entity_forget matches -1 store result score @s sulstalk_following_entity_forget run random value 400..1200
 execute if score @s sulstalk_is_following_entity matches 1 run execute if score @s sulstalk_following_entity_forget matches 1.. run scoreboard players remove @s sulstalk_following_entity_forget 1
 
 ##Health stored in score is multiplied by 100 to account for decimals sneaking in, therefore 20 hp is 2000
