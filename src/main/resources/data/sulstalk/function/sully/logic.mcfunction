@@ -118,12 +118,7 @@ execute if score @s sulstalk_can_rotate_up matches 0 at @s run rotate @s ~0.0 0.
 #execute store result entity @s Pos[2] double 0.0001 run scoreboard players get @s sulstalk_position_z
 
 execute positioned as @s if entity @e[type=player,distance=..100] positioned ~ ~-2 ~ rotated as @s rotated ~ ~ run function sulstalk:sully/interactions
+execute positioned as @s if entity @e[type=player,distance=..100] positioned ~ ~-2 ~ rotated as @s rotated ~ ~ run function sulstalk:sully/model_logic
 
 ##Trigger for this is separately defined for the hitbox in sulstalk:sully/interactions/physical/hitbox
 execute if score @s sulstalk_should_die matches 2 run kill @s
-
-##Teleport duration is in ticks per second (20tps -> 1sec)
-data modify entity @s teleport_duration set value 5
-data merge entity @s {item_display:"head",billboard:"vertical"}
-##Temporary model is Rue
-data merge entity @s {item:{count:1,id:"minecraft:azalea_leaves",components:{"minecraft:item_model":"rue:rue"}}}

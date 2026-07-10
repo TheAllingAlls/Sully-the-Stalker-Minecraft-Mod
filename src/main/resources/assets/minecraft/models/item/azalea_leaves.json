@@ -1,0 +1,9 @@
+{
+	"parent":"minecraft:block/azalea_leaves",
+	"textures":{
+		"layer0":"minecraft:block/azalea_leaves"
+	},
+	"overrides":[
+		{"predicate":{"custom_model_data":1921121225},"model":"rue:item/rue"}
+	]
+}

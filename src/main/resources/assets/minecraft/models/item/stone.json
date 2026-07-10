@@ -1,0 +1,9 @@
+{
+	"parent":"minecraft:block/stone",
+	"textures":{
+		"layer0":"minecraft:block/stone"
+	},
+	"overrides":[
+		{"predicate":{"custom_model_data":1},"model":"test:item/block"}
+	]
+}
