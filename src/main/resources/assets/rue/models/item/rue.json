@@ -3,7 +3,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [91, 298],
 	"textures": {
-		"1": "rue:item/rueful"
+		"1": "rue:item/rueful",
+		"particle": "rue:item/rueful"
 	},
 	"gui_light": "front",
 	"elements": [

@@ -11,7 +11,7 @@
                 "when":"sully",
                 "model":{
                     "type":"model",
-                    "model":"sulstalk:item/sully"
+                    "model":"sulstalk:item/sully_idle_0000"
                 }
             }
         ]

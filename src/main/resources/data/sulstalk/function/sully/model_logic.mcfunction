@@ -1,13 +1,25 @@
 scoreboard objectives add sulstalk_model_type trigger ""
 scoreboard objectives add sulstalk_model_framerate trigger ""
-scoreboard objectives add sulstalk_model trigger ""
+scoreboard objectives add sulstalk_model_number trigger ""
 
 execute unless score @s sulstalk_model_type matches 0.. run scoreboard players set @s sulstalk_model_type 0
-execute unless score @s sulstalk_model_framerate matches 1.. run scoreboard players set @s sulstalk_model_framerate 60
-execute unless score @s sulstalk_model matches -1.. run scoreboard players set @s sulstalk_model -1
+execute unless score @s sulstalk_model_framerate matches 0.. run scoreboard players set @s sulstalk_model_framerate 0
+execute unless score @s sulstalk_model_number matches 0..143 run scoreboard players set @s sulstalk_model_number 0
 
 ##Teleport duration is in ticks per second (20tps -> 1sec)
 data modify entity @s teleport_duration set value 5
 data merge entity @s {item_display:"head",billboard:"vertical"}
 data merge entity @s {item:{count:1,id:"minecraft:azalea_leaves"}}
-data merge entity @s {item:{components:{"minecraft:item_model":"rue:rue"}}}
+
+execute if score @s sulstalk_model_framerate matches 0 run scoreboard players add @s sulstalk_model_number 1
+execute if score @s sulstalk_model_number matches 143.. run scoreboard players set @s sulstalk_model_number 0
+execute if score @s sulstalk_model_framerate matches 0 store result entity @s data.model_number int 1 run scoreboard players get @s sulstalk_model_number
+$execute if score @s sulstalk_model_framerate matches 0 unless score @s sulstalk_model_number matches 10.. run data modify entity @s data.model_file set value "$(model_name)000$(model_number)"
+$execute if score @s sulstalk_model_framerate matches 0 unless score @s sulstalk_model_number matches 100.. run data modify entity @s data.model_file set value "$(model_name)00$(model_number)"
+$execute if score @s sulstalk_model_framerate matches 0 unless score @s sulstalk_model_number matches 1000.. run data modify entity @s data.model_file set value "$(model_name)0$(model_number)"
+
+$execute if score @s sulstalk_model_framerate matches 0 run say "$(model_file)"
+$execute if score @s sulstalk_model_framerate matches 0 run data modify entity @s item.components.minecraft:item_model set value "$(model_file)"
+
+execute if score @s sulstalk_model_framerate matches 0 run scoreboard players set @s sulstalk_model_framerate -1
+execute if score @s sulstalk_model_framerate matches 1.. run scoreboard players remove @s sulstalk_model_framerate 1
