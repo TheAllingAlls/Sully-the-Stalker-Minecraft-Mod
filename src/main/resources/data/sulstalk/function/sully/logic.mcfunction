@@ -119,9 +119,15 @@ execute if score @s sulstalk_can_rotate_up matches 0 at @s run rotate @s ~0.0 0.
 
 execute positioned as @s if entity @e[type=player,distance=..100] positioned ~ ~-2 ~ rotated as @s rotated ~ ~ run function sulstalk:sully/interactions
 
-execute unless data entity @s data.model_name run data modify entity @s data.model_name set value "sulstalk:sully_idle_"
+execute unless data entity @s data.model_name run data modify entity @s data.model_name set value "sulstalk:sully"
+execute unless data entity @s data.model_type[0] run data modify entity @s data.model_type[0] set value "idle"
+execute unless data entity @s data.model_type[1] run data modify entity @s data.model_type[1] set value "attacking"
+execute unless data entity @s data.model_type[2] run data modify entity @s data.model_type[2] set value "dying"
+execute unless data entity @s data.model_type[3] run data modify entity @s data.model_type[3] set value "dyingloop"
+execute unless data entity @s data.model_type[4] run data modify entity @s data.model_type[4] set value "dead"
 execute unless data entity @s data.model_number run data modify entity @s data.model_number set value 0
 execute unless data entity @s data.model_file run data modify entity @s data.model_file set value ""
+execute positioned as @s if entity @e[type=player,distance=..100] run function sulstalk:sully/model_logic with entity @s data
 execute positioned as @s if entity @e[type=player,distance=..100] run function sulstalk:sully/model_logic with entity @s data
 
 ##Trigger for this is separately defined for the hitbox in sulstalk:sully/interactions/physical/hitbox

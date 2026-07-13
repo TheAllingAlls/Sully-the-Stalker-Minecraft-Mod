@@ -37,7 +37,7 @@ $execute positioned as @s store result score @s sulstalk_attacker_id as @e[tag=s
 execute if predicate {condition:entity_scores,entity:this,scores:{sulstalk_attacker_id:{}}} store result entity @s data.attacker_id int 1 run scoreboard players get @s sulstalk_attacker_id
 execute unless predicate {condition:entity_scores,entity:this,scores:{sulstalk_attacker_id:{}}} run data modify entity @s data.attacker_id set value -1
 $execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10,scores={sulstalk_hitbox_id=$(id)}] if data entity @s attack on attacker unless score @s sulstalk_attacker_id matches -2147483647.. store result score @s sulstalk_attacker_id run data get entity @s UUID[0]
-execute positioned as @s if score @s sulstalk_interaction_delay matches ..0 as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] run data merge entity @s {width:0.75f,height:2.4f}
+execute positioned as @s if score @s sulstalk_interaction_delay matches ..0 as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] run data merge entity @s {width:1.1f,height:2.6f}
 $execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10,scores={sulstalk_hitbox_id=$(id)}] positioned ~ ~-1.25 ~ run tp ~ ~ ~
 
 ##Attempt to allow right-clicking entity
