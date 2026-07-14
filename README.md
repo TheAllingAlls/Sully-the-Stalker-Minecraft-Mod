@@ -15,3 +15,6 @@ NOT DONE YET!!!
   * <s>Wind Charges</s>
   * <s>Powder Snowfall</s>
 * Sully's Suspicious Stew, randomly drops when near a player and has extra special effects like explosions, freezing, insomnia, etc.
+* Fix Sullys all being telported on one being hit (Multiplayer-specific)
+* Have Sully do a 180 turn on reaching further than 100 blocks of any player
+* Disable block-breaking alongside block-replacement when "griefing" is disabled (underwater mechanics on surface)
