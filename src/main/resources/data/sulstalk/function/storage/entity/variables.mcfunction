@@ -11,7 +11,7 @@ scoreboard objectives add sulstalk_griefing_enabled_count trigger ""
 execute run scoreboard players set @s sulstalk_ticks_half 10
 execute run scoreboard players set @s sulstalk_half_tick 0
 
-execute run scoreboard players set @s sulstalk_spawn_max 1
+execute run scoreboard players set @s sulstalk_spawn_max 10
 execute run scoreboard players set @s sulstalk_spawn 0
 execute run scoreboard players set @s sulstalk_can_spawn 1
 execute run scoreboard players set @s sulstalk_disable_griefing 0

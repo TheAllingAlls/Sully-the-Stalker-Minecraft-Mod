@@ -22,5 +22,5 @@ execute as @e[tag=sulstalk_spawned,tag=sulstalk_unpositioned] run data modify en
 execute as @e[tag=sulstalk_positioned] positioned as @s rotated as @s if loaded ~ ~ ~ run function sulstalk:sully/logic with entity @s data
 
 ##Temporary name set as Rue until I make an original character
-execute as @e[tag=sulstalk_spawning] run data merge entity @s {CustomName:"Unbridled Rue"}
-execute as @e[tag=sulstalk_spawned] run data merge entity @s {CustomName:"Rue"}
+execute as @e[tag=sulstalk_spawning] run data merge entity @s {CustomName:"Unbridled Sully"}
+execute as @e[tag=sulstalk_spawned] run data merge entity @s {CustomName:"Sully"}

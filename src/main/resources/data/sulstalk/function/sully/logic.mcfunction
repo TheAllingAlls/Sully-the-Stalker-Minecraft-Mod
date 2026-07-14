@@ -3,6 +3,8 @@
 #scoreboard objectives add sulstalk_position_z trigger ""
 scoreboard objectives add sulstalk_is_in_block trigger ""
 scoreboard objectives add sulstalk_should_move trigger ""
+scoreboard objectives add sulstalk_disable_griefing trigger ""
+scoreboard objectives add sulstalk_half_tick trigger ""
 scoreboard objectives add sulstalk_travel_timer trigger ""
 scoreboard objectives add sulstalk_travel_timer_enabled trigger ""
 scoreboard objectives add sulstalk_should_rotate trigger ""
@@ -13,6 +15,8 @@ scoreboard objectives add sulstalk_can_rotate_up trigger ""
 
 execute unless score @s sulstalk_is_in_block matches -9999..9999 run scoreboard players set @s sulstalk_is_in_block 0
 execute unless score @s sulstalk_should_move matches -1.. run scoreboard players set @s sulstalk_should_move -1
+execute store result score @s sulstalk_disable_griefing run scoreboard players get @e[tag=sulstalk_storage,limit=1,distance=..100] sulstalk_disable_griefing
+execute store result score @s sulstalk_half_tick run scoreboard players get @e[tag=sulstalk_storage,limit=1,distance=..100] sulstalk_half_tick
 execute unless score @s sulstalk_travel_timer matches -1.. run scoreboard players set @s sulstalk_travel_timer -1
 execute unless score @s sulstalk_travel_timer_enabled matches 0.. run scoreboard players set @s sulstalk_travel_timer_enabled 1
 execute unless score @s sulstalk_should_rotate matches -1..1 run scoreboard players set @s sulstalk_should_rotate 0
@@ -39,31 +43,33 @@ execute positioned ~ ~-1 ~ unless block ~ ~ ~ #sulstalk:can_pass_through positio
 execute positioned ~ ~ ~ unless block ~ ~ ~ #sulstalk:can_pass_through positioned ~ ~1 ~ unless block ~ ~ ~ #sulstalk:can_pass_through positioned ~ ~1 ~ unless block ~ ~ ~ #sulstalk:can_pass_through positioned ~ ~1 ~ unless block ~ ~ ~ #sulstalk:can_pass_through positioned as @s positioned ~ ~-1 ~ unless block ~ ~ ~ #sulstalk:can_pass_through positioned ~ ~-1 ~ unless block ~ ~ ~ #sulstalk:can_pass_through positioned ~ ~-1 ~ unless block ~ ~ ~ #sulstalk:can_pass_through positioned ~ ~-1 ~ unless block ~ ~ ~ #sulstalk:can_pass_through positioned ~ ~-1 ~ unless block ~ ~ ~ #sulstalk:can_pass_through run scoreboard players set @s sulstalk_is_in_block 3
 
 
-execute positioned ^ ^ ^0.1 positioned ~ ~ ~ unless score @s sulstalk_is_in_block matches -1..2 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
-execute positioned ^ ^ ^0.1 positioned ~ ~1 ~ unless score @s sulstalk_is_in_block matches -1..2 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
-execute positioned ^ ^ ^0.1 positioned ~ ~-1 ~ unless score @s sulstalk_is_in_block matches -1..2 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
-execute positioned ^ ^ ^0.1 positioned ~ ~2 ~ unless score @s sulstalk_is_in_block matches -1..2 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
-execute positioned ^ ^ ^0.1 positioned ~0.1 ~ ~ unless score @s sulstalk_is_in_block matches -1..2 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
-execute positioned ^ ^ ^0.1 positioned ~0.1 ~ ~0.1 unless score @s sulstalk_is_in_block matches -1..2 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
-execute positioned ^ ^ ^0.1 positioned ~0.1 ~ ~-0.1 unless score @s sulstalk_is_in_block matches -1..2 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
-execute positioned ^ ^ ^0.1 positioned ~-0.1 ~ ~ unless score @s sulstalk_is_in_block matches -1..2 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
-execute positioned ^ ^ ^0.1 positioned ~-0.1 ~ ~0.1 unless score @s sulstalk_is_in_block matches -1..2 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
-execute positioned ^ ^ ^0.1 positioned ~-0.1 ~ ~-0.1 unless score @s sulstalk_is_in_block matches -1..2 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
-execute positioned ^ ^ ^0.1 positioned ~ ~ ~0.1 unless score @s sulstalk_is_in_block matches -1..2 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
-execute positioned ^ ^ ^0.1 positioned ~ ~ ~-0.1 unless score @s sulstalk_is_in_block matches -1..2 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
+execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^ ^ ^0.1 positioned ~ ~ ~ unless score @s sulstalk_is_in_block matches -1..2 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
+execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^ ^ ^0.1 positioned ~ ~1 ~ unless score @s sulstalk_is_in_block matches -1..2 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
+execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^ ^ ^0.1 positioned ~ ~-1 ~ unless score @s sulstalk_is_in_block matches -1..2 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
+execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^ ^ ^0.1 positioned ~ ~2 ~ unless score @s sulstalk_is_in_block matches -1..2 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
+execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^ ^ ^0.1 positioned ~0.1 ~ ~ unless score @s sulstalk_is_in_block matches -1..2 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
+execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^ ^ ^0.1 positioned ~0.1 ~ ~0.1 unless score @s sulstalk_is_in_block matches -1..2 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
+execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^ ^ ^0.1 positioned ~0.1 ~ ~-0.1 unless score @s sulstalk_is_in_block matches -1..2 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
+execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^ ^ ^0.1 positioned ~-0.1 ~ ~ unless score @s sulstalk_is_in_block matches -1..2 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
+execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^ ^ ^0.1 positioned ~-0.1 ~ ~0.1 unless score @s sulstalk_is_in_block matches -1..2 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
+execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^ ^ ^0.1 positioned ~-0.1 ~ ~-0.1 unless score @s sulstalk_is_in_block matches -1..2 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
+execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^ ^ ^0.1 positioned ~ ~ ~0.1 unless score @s sulstalk_is_in_block matches -1..2 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
+execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^ ^ ^0.1 positioned ~ ~ ~-0.1 unless score @s sulstalk_is_in_block matches -1..2 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
 
-execute positioned ^ ^ ^0.1 positioned ~ ~ ~ if score @s sulstalk_travel_timer matches 3600..4000 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
-execute positioned ^ ^ ^0.1 positioned ~ ~1 ~ if score @s sulstalk_travel_timer matches 3600..4000 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
-execute positioned ^ ^ ^0.1 positioned ~ ~-1 ~ if score @s sulstalk_travel_timer matches 3600..4000 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
-execute positioned ^ ^ ^0.1 positioned ~ ~2 ~ if score @s sulstalk_travel_timer matches 3600..4000 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
-execute positioned ^ ^ ^0.1 positioned ~0.1 ~ ~ if score @s sulstalk_travel_timer matches 3600..4000 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
-execute positioned ^ ^ ^0.1 positioned ~0.1 ~ ~0.1 if score @s sulstalk_travel_timer matches 3600..4000 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
-execute positioned ^ ^ ^0.1 positioned ~0.1 ~ ~-0.1 if score @s sulstalk_travel_timer matches 3600..4000 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
-execute positioned ^ ^ ^0.1 positioned ~-0.1 ~ ~ if score @s sulstalk_travel_timer matches 3600..4000 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
-execute positioned ^ ^ ^0.1 positioned ~-0.1 ~ ~0.1 if score @s sulstalk_travel_timer matches 3600..4000 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
-execute positioned ^ ^ ^0.1 positioned ~-0.1 ~ ~-0.1 if score @s sulstalk_travel_timer matches 3600..4000 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
-execute positioned ^ ^ ^0.1 positioned ~ ~ ~0.1 if score @s sulstalk_travel_timer matches 3600..4000 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
-execute positioned ^ ^ ^0.1 positioned ~ ~ ~-0.1 if score @s sulstalk_travel_timer matches 3600..4000 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
+execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^ ^ ^0.1 positioned ~ ~ ~ if score @s sulstalk_travel_timer matches 3600..4000 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
+execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^ ^ ^0.1 positioned ~ ~1 ~ if score @s sulstalk_travel_timer matches 3600..4000 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
+execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^ ^ ^0.1 positioned ~ ~-1 ~ if score @s sulstalk_travel_timer matches 3600..4000 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
+execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^ ^ ^0.1 positioned ~ ~2 ~ if score @s sulstalk_travel_timer matches 3600..4000 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
+execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^ ^ ^0.1 positioned ~0.1 ~ ~ if score @s sulstalk_travel_timer matches 3600..4000 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
+execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^ ^ ^0.1 positioned ~0.1 ~ ~0.1 if score @s sulstalk_travel_timer matches 3600..4000 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
+execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^ ^ ^0.1 positioned ~0.1 ~ ~-0.1 if score @s sulstalk_travel_timer matches 3600..4000 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
+execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^ ^ ^0.1 positioned ~-0.1 ~ ~ if score @s sulstalk_travel_timer matches 3600..4000 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
+execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^ ^ ^0.1 positioned ~-0.1 ~ ~0.1 if score @s sulstalk_travel_timer matches 3600..4000 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
+execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^ ^ ^0.1 positioned ~-0.1 ~ ~-0.1 if score @s sulstalk_travel_timer matches 3600..4000 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
+execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^ ^ ^0.1 positioned ~ ~ ~0.1 if score @s sulstalk_travel_timer matches 3600..4000 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
+execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^ ^ ^0.1 positioned ~ ~ ~-0.1 if score @s sulstalk_travel_timer matches 3600..4000 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
+
+execute if score @s sulstalk_disable_griefing matches 1 run execute positioned as @s if block ~ ~ ~ #sulstalk:can_interact_with rotated as @s rotated ~ 0.0 run tp ^ ^ ^-0.01
 
 
 execute if score @s sulstalk_is_following_entity matches 1 run scoreboard players set @s sulstalk_is_in_block 0
@@ -77,9 +83,9 @@ execute if score @s sulstalk_travel_timer matches 0..100 if score @s sulstalk_wi
 execute if score @s sulstalk_travel_timer matches 0..50 if score @s sulstalk_will_be_in_block matches 1 run scoreboard players set @s sulstalk_will_be_in_block 0
 execute if score @s sulstalk_underwater matches 1..2 if score @s sulstalk_is_in_block matches 1.. run scoreboard players set @s sulstalk_is_in_block -1
 execute if score @s sulstalk_underwater matches -2..-1 run scoreboard players set @s sulstalk_is_in_block 1
-execute if score @s sulstalk_travel_timer matches 3900..4000 if score @s sulstalk_is_in_block matches -9999.. run scoreboard players set @s sulstalk_is_in_block -2
+execute if score @s sulstalk_disable_griefing matches 0 if score @s sulstalk_travel_timer matches 3900..4000 if score @s sulstalk_is_in_block matches -9999.. run scoreboard players set @s sulstalk_is_in_block -2
 execute if score @s sulstalk_travel_timer matches 3900 if score @s sulstalk_is_in_block matches -2 run scoreboard players set @s sulstalk_travel_timer 0
-execute if score @s sulstalk_travel_timer matches 3600..3900 if score @s sulstalk_is_in_block matches -9999.. run scoreboard players set @s sulstalk_is_in_block -1
+execute if score @s sulstalk_disable_griefing matches 0 if score @s sulstalk_travel_timer matches 3600..3900 if score @s sulstalk_is_in_block matches -9999.. run scoreboard players set @s sulstalk_is_in_block -1
 execute if score @s sulstalk_travel_timer matches 3600 if score @s sulstalk_is_in_block matches -1 run scoreboard players set @s sulstalk_travel_timer 0
 execute if score @s sulstalk_travel_timer matches 3300..3600 unless score @s sulstalk_is_in_block matches 0 run scoreboard players set @s sulstalk_is_in_block 0
 execute if score @s sulstalk_travel_timer matches 3300 if score @s sulstalk_is_in_block matches 0 run scoreboard players set @s sulstalk_travel_timer 0
@@ -95,7 +101,12 @@ execute if score @s sulstalk_is_in_block matches -2 at @s run tp ~0.0 ~-0.2 ~0.0
 #execute if score @s sulstalk_is_in_block matches -1 run scoreboard players remove @s sulstalk_position_y 000500
 #execute if score @s sulstalk_is_in_block matches -2 run scoreboard players remove @s sulstalk_position_y 002000
 
+
 execute if score @s sulstalk_should_move matches -1 run scoreboard players set @s sulstalk_should_move 1
+execute if score @s sulstalk_disable_griefing matches 1 run execute positioned as @s rotated as @s rotated ~ 0.0 unless block ^ ^ ^1 #sulstalk:can_pass_through unless block ^-0.1 ^ ^1 #sulstalk:can_pass_through unless block ^0.1 ^ ^1 #sulstalk:can_pass_through unless block ^ ^1 ^1 #sulstalk:can_pass_through run scoreboard players set @s sulstalk_should_move -1
+execute if score @s sulstalk_disable_griefing matches 1 run execute if score @s sulstalk_should_move matches -1 if predicate {condition:random_chance,chance:0.50} run rotate @s ~-45 ~
+execute if score @s sulstalk_disable_griefing matches 1 run execute if score @s sulstalk_should_move matches -1 if predicate {condition:random_chance,chance:0.50} run rotate @s ~45 ~
+
 execute unless score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_underwater_rotate matches 0 if score @s sulstalk_should_move matches 1 at @s run tp ^0.0 ^0.0 ^0.05
 execute unless score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_underwater_rotate matches 0 if score @s sulstalk_should_move matches 0 at @s run tp ^0.0 ^0.0 ^0.01
 
@@ -112,6 +123,8 @@ execute if score @s sulstalk_should_rotate matches 1 at @s run rotate @s ~1 ~0.0
 execute if score @s sulstalk_should_rotate matches 2 at @s run rotate @s ~5 ~0.0
 execute if score @s sulstalk_should_rotate matches 200 at @s run rotate @s ~45 ~0.0
 execute if score @s sulstalk_can_rotate_up matches 0 at @s run rotate @s ~0.0 0.0
+
+execute positioned as @s rotated as @s unless entity @e[type=player,distance=..50] run execute facing entity @e[type=player,sort=random] eyes run rotate @s facing ^ ^ ^1
 
 #execute store result entity @s Pos[0] double 0.0001 run scoreboard players get @s sulstalk_position_x
 #execute store result entity @s Pos[1] double 0.0001 run scoreboard players get @s sulstalk_position_y
