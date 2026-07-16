@@ -4,7 +4,7 @@ execute unless data entity @s data.following_entity_id run data modify entity @s
 function sulstalk:sully/interactions/entity_to_entity/entity_logic with entity @s data
 function sulstalk:sully/interactions/entity_to_entity/reset_rotation
 
-#sulstalk:sully/interactions/suspicious_stew runs for players
+# sulstalk:sully/interactions/suspicious_stew runs for players
 function sulstalk:sully/interactions/drop_suspicious_stew
 function sulstalk:sully/interactions/die_in_void
 function sulstalk:sully/interactions/water
@@ -16,6 +16,6 @@ function sulstalk:sully/interactions/place_obsidian
 function sulstalk:sully/interactions/drop_fire_charge
 function sulstalk:sully/interactions/launched_by_firework
 function sulstalk:sully/interactions/pick_up_items with entity @s data
-#function sulstalk:sully/interactions/trail
-#function sulstalk:sully/interactions/trail2
+# function sulstalk:sully/interactions/trail
+# function sulstalk:sully/interactions/trail2
 function sulstalk:sully/interactions/trail3

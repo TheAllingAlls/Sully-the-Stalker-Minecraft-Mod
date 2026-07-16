@@ -124,13 +124,13 @@ execute if score @s sulstalk_should_rotate matches 2 at @s run rotate @s ~5 ~0.0
 execute if score @s sulstalk_should_rotate matches 200 at @s run rotate @s ~45 ~0.0
 execute if score @s sulstalk_can_rotate_up matches 0 at @s run rotate @s ~0.0 0.0
 
-execute positioned as @s rotated as @s unless entity @e[type=player,distance=..50] run execute facing entity @e[type=player,sort=random] eyes run rotate @s facing ^ ^ ^1
+execute positioned as @s rotated as @s unless entity @e[type=player,distance=..50,limit=1] run execute facing entity @e[type=player,sort=random] eyes run rotate @s facing ^ ^ ^1
 
 #execute store result entity @s Pos[0] double 0.0001 run scoreboard players get @s sulstalk_position_x
 #execute store result entity @s Pos[1] double 0.0001 run scoreboard players get @s sulstalk_position_y
 #execute store result entity @s Pos[2] double 0.0001 run scoreboard players get @s sulstalk_position_z
 
-execute positioned as @s if entity @e[type=player,distance=..100] positioned ~ ~-2 ~ rotated as @s rotated ~ ~ run function sulstalk:sully/interactions
+execute positioned as @s if entity @e[type=player,distance=..60,limit=1] positioned ~ ~-2 ~ rotated as @s rotated ~ ~ run function sulstalk:sully/interactions
 
 execute unless data entity @s data.model_prefix run data modify entity @s data.model_prefix set value "sulstalk:sully"
 execute unless data entity @s data.model_type_number run data modify entity @s data.model_type_number set value 0
@@ -139,8 +139,7 @@ execute unless data entity @s data.model_types run data merge entity @s {data:{m
 execute unless data entity @s data.model_name run data modify entity @s data.model_name set value ""
 execute unless data entity @s data.model_number run data modify entity @s data.model_number set value 0
 execute unless data entity @s data.model_file run data modify entity @s data.model_file set value ""
-execute positioned as @s if entity @e[type=player,distance=..100] run function sulstalk:sully/model_logic with entity @s data
-execute positioned as @s if entity @e[type=player,distance=..100] run function sulstalk:sully/model_logic with entity @s data
+execute positioned as @s run function sulstalk:sully/model_logic with entity @s data
 
 ##Trigger for this is separately defined for the hitbox in sulstalk:sully/interactions/physical/hitbox
 execute if score @s sulstalk_should_die matches 2 run kill @s

@@ -1,0 +1,13 @@
+execute if items entity @s weapon.mainhand minecraft:mace store result score @s sulstalk_attacker_motion_y run data get entity @s Motion[1] 10000
+execute if items entity @s weapon.mainhand minecraft:mace if score @s sulstalk_attacker_motion_y matches ..-5000 positioned as @s run effect give @s resistance 1 255 true
+execute if items entity @s weapon.mainhand minecraft:mace[enchantments={wind_burst:1}] if score @s sulstalk_attacker_motion_y matches ..-5000 positioned as @s run effect give @s resistance 2 255 true
+execute if items entity @s weapon.mainhand minecraft:mace[enchantments={wind_burst:2}] if score @s sulstalk_attacker_motion_y matches ..-5000 positioned as @s run effect give @s resistance 3 255 true
+execute if items entity @s weapon.mainhand minecraft:mace[enchantments={wind_burst:3}] if score @s sulstalk_attacker_motion_y matches ..-5000 positioned as @s run effect give @s resistance 5 255 true
+execute if items entity @s weapon.mainhand minecraft:mace if score @s sulstalk_attacker_motion_y matches ..-5000 run damage @s 1 cramming
+execute if items entity @s weapon.mainhand minecraft:mace if score @s sulstalk_attacker_motion_y matches ..-5000 positioned as @s run summon wind_charge ~ ~-0.001 ~ {Motion:[0.0d,10.0d,0.0d]}
+execute if items entity @s weapon.mainhand minecraft:mace[enchantments={wind_burst:1}] if score @s sulstalk_attacker_motion_y matches ..-5000 positioned as @s run summon breeze_wind_charge ~ ~-0.001 ~ {Motion:[0.0d,10.0d,0.0d]}
+execute if items entity @s weapon.mainhand minecraft:mace[enchantments={wind_burst:2}] if score @s sulstalk_attacker_motion_y matches ..-5000 positioned as @s run summon breeze_wind_charge ~ ~-0.001 ~ {Motion:[0.0d,10.0d,0.0d]}
+execute if items entity @s weapon.mainhand minecraft:mace[enchantments={wind_burst:2}] if score @s sulstalk_attacker_motion_y matches ..-5000 positioned as @s run summon breeze_wind_charge ~ ~-0.001 ~ {Motion:[0.0d,10.0d,0.0d]}
+execute if items entity @s weapon.mainhand minecraft:mace[enchantments={wind_burst:3}] if score @s sulstalk_attacker_motion_y matches ..-5000 positioned as @s run summon breeze_wind_charge ~ ~-0.001 ~ {Motion:[0.0d,10.0d,0.0d]}
+execute if items entity @s weapon.mainhand minecraft:mace[enchantments={wind_burst:3}] if score @s sulstalk_attacker_motion_y matches ..-5000 positioned as @s run summon breeze_wind_charge ~ ~-0.001 ~ {Motion:[0.0d,10.0d,0.0d]}
+execute if items entity @s weapon.mainhand minecraft:mace[enchantments={wind_burst:3}] if score @s sulstalk_attacker_motion_y matches ..-5000 positioned as @s run summon breeze_wind_charge ~ ~-0.001 ~ {Motion:[0.0d,10.0d,0.0d]}

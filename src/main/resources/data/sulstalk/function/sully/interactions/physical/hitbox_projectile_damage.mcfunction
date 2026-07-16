@@ -1,0 +1,8 @@
+execute if data entity @s item.components.minecraft:damage unless score @s sulstalk_projectile_durability matches -2147483647.. store result score @s sulstalk_projectile_durability run data get entity @s item.components.minecraft:damage
+execute if score @s sulstalk_projectile_durability matches -2147483647.. run scoreboard players add @s sulstalk_projectile_durability 1
+execute if score @s sulstalk_projectile_durability matches -2147483647.. store result entity @s item.components.minecraft:damage int 1 run scoreboard players get @s sulstalk_projectile_durability
+execute if score @s sulstalk_projectile_durability matches -2147483647.. run scoreboard players reset @s sulstalk_projectile_durability
+execute store result entity @s Rotation[0] float 0.0001 run scoreboard players get @s sulstalk_projectile_rotation_x
+execute store result entity @s Rotation[1] float 0.0001 run scoreboard players get @s sulstalk_projectile_rotation_y
+$execute if score @s sulstalk_projectile_rotation_x matches -2147483647.. if score @s sulstalk_projectile_rotation_y matches -2147483647.. rotated as @s as @e[limit=1,distance=..0.5,tag=sulstalk_spawned,scores={sulstalk_spawned_number=$(id)}] positioned ^ ^-1 ^4 run tp ~ ~ ~
+$execute unless score @s sulstalk_projectile_rotation_x matches -2147483647.. unless score @s sulstalk_projectile_rotation_y matches -2147483647.. as @e[limit=1,distance=..0.5,tag=sulstalk_spawned,scores={sulstalk_spawned_number=$(id)}] facing entity @e[tag=sulstalk_projectile,distance=..2.25] feet positioned ^ ^-1 ^-4 run tp ~ ~ ~
