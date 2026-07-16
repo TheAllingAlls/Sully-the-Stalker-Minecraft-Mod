@@ -4,6 +4,7 @@ scoreboard objectives add sulstalk_follow_priority trigger ""
 scoreboard objectives add sulstalk_followed_entity_id trigger ""
 scoreboard objectives add sulstalk_followed_entity_health trigger ""
 scoreboard objectives add sulstalk_following_entity_forget trigger ""
+scoreboard objectives add sulstalk_following_entity_found trigger ""
 scoreboard objectives add sulstalk_is_following_entity trigger ""
 scoreboard objectives add sulstalk_following_entity_id trigger ""
 scoreboard objectives add sulstalk_is_attacking_entity trigger ""
@@ -17,6 +18,7 @@ execute unless score @s sulstalk_nearby_entities matches -1.. run scoreboard pla
 execute unless score @s sulstalk_should_follow matches -1.. run scoreboard players set @s sulstalk_should_follow -1
 execute unless score @s sulstalk_follow_priority matches 0.. run scoreboard players set @s sulstalk_follow_priority 0
 execute unless score @s sulstalk_following_entity_forget = @s sulstalk_following_entity_forget run scoreboard players set @s sulstalk_following_entity_forget -1
+execute unless score @s sulstalk_following_entity_found = @s sulstalk_following_entity_found run scoreboard players set @s sulstalk_following_entity_found -1
 execute unless score @s sulstalk_is_following_entity matches -1.. run scoreboard players set @s sulstalk_is_following_entity -1
 execute unless score @s sulstalk_following_entity_id = @s sulstalk_following_entity_id run scoreboard players set @s sulstalk_following_entity_id -1
 execute unless score @s sulstalk_is_attacking_entity matches -1.. run scoreboard players set @s sulstalk_is_attacking_entity -1
@@ -70,7 +72,8 @@ $execute positioned as @s as @e[scores={sulstalk_followed_entity_id=$(following_
 
 # execute positioned as @s as @e[scores={sulstalk_followed_entity_id=-2147483647..}] unless score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned,scores={sulstalk_spawned_number=$(id)}] sulstalk_following_entity_id run scoreboard players set @e[limit=1,distance=..0.1,tag=sulstalk_spawned,scores={sulstalk_spawned_number=$(id)}] sulstalk_following_entity_forget 0
 
-$execute positioned as @s if score @s sulstalk_is_following_entity matches 1 run execute unless @e[scores={sulstalk_followed_entity_id=$(following_entity_id)},distance=..100] run scoreboard players set @s sulstalk_following_entity_forget 0
+$execute positioned as @s if score @s sulstalk_is_following_entity matches 1 store success score @s sulstalk_following_entity_found run execute if entity @e[scores={sulstalk_followed_entity_id=$(following_entity_id)},distance=..100]
+execute positioned as @s if score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_following_entity_found matches 0 run scoreboard players set @s sulstalk_following_entity_forget 0
 
 $execute positioned as @s if score @s sulstalk_is_following_entity matches 1 run execute as @e[type=player,scores={sulstalk_followed_entity_id=$(following_entity_id)},distance=..100] if data entity @s {abilities:{invulnerable:1b}} run scoreboard players set @e[limit=1,distance=..0.1,tag=sulstalk_spawned,scores={sulstalk_spawned_number=$(id)}] sulstalk_following_entity_forget 0
 $execute positioned as @s if score @s sulstalk_is_following_entity matches 1 run execute as @e[type=!player,scores={sulstalk_followed_entity_id=$(following_entity_id)},distance=..100] if data entity @s {Invulnerable:1b} run scoreboard players set @e[limit=1,distance=..0.1,tag=sulstalk_spawned,scores={sulstalk_spawned_number=$(id)}] sulstalk_following_entity_forget 0
