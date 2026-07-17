@@ -110,6 +110,16 @@ execute positioned as @s if score @s sulstalk_should_die matches 1 unless data e
 
 execute if score @s sulstalk_should_die matches 1.. run scoreboard players set @s sulstalk_following_entity_forget 0
 
+execute positioned as @s if score @s sulstalk_damaged matches 1 unless score @s sulstalk_attack matches 2.. run playsound minecraft:entity.player.attack.weak neutral @e[type=player,distance=..5] ~ ~ ~ 100 1 0
+execute positioned as @s if score @s sulstalk_damaged matches 1 unless score @s sulstalk_attack matches 2.. run playsound minecraft:entity.player.attack.weak neutral @e[type=player,distance=6..10] ~ ~ ~ 75 1 0
+execute positioned as @s if score @s sulstalk_damaged matches 1 unless score @s sulstalk_attack matches 2.. run playsound minecraft:entity.player.attack.weak neutral @e[type=player,distance=11..20] ~ ~ ~ 35 1 0
+execute positioned as @s if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches 2..6 run playsound minecraft:entity.player.attack.strong neutral @e[type=player,distance=..5] ~ ~ ~ 100 1 0
+execute positioned as @s if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches 2..6 run playsound minecraft:entity.player.attack.strong neutral @e[type=player,distance=6..10] ~ ~ ~ 75 1 0
+execute positioned as @s if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches 2..6 run playsound minecraft:entity.player.attack.strong neutral @e[type=player,distance=11..20] ~ ~ ~ 35 1 0
+execute positioned as @s if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches 7.. run playsound minecraft:entity.player.attack.knockback neutral @e[type=player,distance=..5] ~ ~ ~ 100 1 0
+execute positioned as @s if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches 7.. run playsound minecraft:entity.player.attack.knockback neutral @e[type=player,distance=6..10] ~ ~ ~ 75 1 0
+execute positioned as @s if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches 7.. run playsound minecraft:entity.player.attack.knockback neutral @e[type=player,distance=11..20] ~ ~ ~ 35 1 0
+
 execute if score @s sulstalk_damaged matches 0 if score @s sulstalk_damaged_delay matches 0.. run scoreboard players remove @s sulstalk_damaged_delay 1
 execute if score @s sulstalk_damaged matches 1 if score @s sulstalk_damaged_delay matches -1 run scoreboard players set @s sulstalk_damaged_delay 10
 execute if score @s sulstalk_damaged_delay matches 10 if score @s sulstalk_damaged matches 1 run scoreboard players set @s sulstalk_damaged 2

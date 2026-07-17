@@ -69,7 +69,7 @@ execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^
 execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^ ^ ^0.1 positioned ~ ~ ~0.1 if score @s sulstalk_travel_timer matches 3600..4000 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
 execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^ ^ ^0.1 positioned ~ ~ ~-0.1 if score @s sulstalk_travel_timer matches 3600..4000 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
 
-execute if score @s sulstalk_disable_griefing matches 1 run execute positioned as @s if block ~ ~ ~ #sulstalk:can_interact_with rotated as @s rotated ~ 0.0 run tp ^ ^ ^-0.01
+execute if score @s sulstalk_disable_griefing matches 1 run execute positioned as @s if block ^ ^ ^0.5 #sulstalk:can_interact_with rotated as @s rotated ~ 0.0 run tp ^ ^ ^-0.01
 
 
 execute if score @s sulstalk_is_following_entity matches 1 run scoreboard players set @s sulstalk_is_in_block 0

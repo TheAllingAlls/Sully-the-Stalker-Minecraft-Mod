@@ -30,8 +30,7 @@ execute if score @s sulstalk_stew_player_holding matches 1 unless score @s sulst
 execute if score @s sulstalk_stew_player_holding matches 2 if score @s sulstalk_stew_type matches 1.. run scoreboard players set @s sulstalk_stew_timer 0
 execute if score @s sulstalk_stew_type matches 1.. run scoreboard players operation @s sulstalk_stew_last_type = @s sulstalk_stew_type
 execute if score @s sulstalk_stew_player_holding matches 2 store result score @s sulstalk_stew_type run random value 0..11
-execute if score @s sulstalk_stew_player_holding matches 2 if score @s sulstalk_stew_type = @s sulstalk_stew_last_type unless score @s sulstalk_stew_timer matches 1.. if predicate {"condition":"minecraft:random_chance","chance":0.50} run scoreboard players add @s sulstalk_stew_type 1
-execute if score @s sulstalk_stew_player_holding matches 2 if score @s sulstalk_stew_type = @s sulstalk_stew_last_type unless score @s sulstalk_stew_timer matches 1.. if predicate {"condition":"minecraft:random_chance","chance":0.50} run scoreboard players remove @s sulstalk_stew_type 1
+execute if score @s sulstalk_stew_player_holding matches 2 if score @s sulstalk_stew_type = @s sulstalk_stew_last_type unless score @s sulstalk_stew_timer matches 1.. store result score @s sulstalk_stew_type run random value 0..11
 
 execute if score @s sulstalk_stew_player_holding matches 2 run scoreboard players operation @s sulstalk_stew_player_used = @s sulstalk_stew_player_used_count
 
@@ -58,7 +57,7 @@ execute if score @s sulstalk_stew_type matches 1 unless score @s sulstalk_stew_t
 execute if score @s sulstalk_stew_type matches 1 if score @s sulstalk_stew_timer matches 5900..6000 run title @s actionbar "Good Regeneration, at the loss of all your Hunger. Temporary."
 execute if score @s sulstalk_stew_type matches 1 unless data entity @s {active_effects:[{id:"minecraft:regeneration"}]} run effect give @s regeneration 300 5 false
 execute if score @s sulstalk_stew_type matches 1 unless data entity @s {active_effects:[{id:"minecraft:hunger"}]} run effect give @s hunger 300 100 false
-execute if score @s sulstalk_stew_type matches 0 if score @s sulstalk_stew_timer matches 6000 positioned as @s run playsound minecraft:entity.elder_guardian.ambient ambient @s ~ ~ ~ 100 1 0
+execute if score @s sulstalk_stew_type matches 1 if score @s sulstalk_stew_timer matches 6000 positioned as @s run playsound minecraft:entity.elder_guardian.ambient ambient @s ~ ~ ~ 100 1 0
 #
 #Stew Type 2
 execute if score @s sulstalk_stew_type matches 2 unless score @s sulstalk_stew_timer matches 1.. run scoreboard players set @s sulstalk_stew_timer 2400
@@ -66,14 +65,14 @@ execute if score @s sulstalk_stew_type matches 2 if score @s sulstalk_stew_timer
 execute if score @s sulstalk_stew_type matches 2 unless data entity @s {active_effects:[{id:"minecraft:jump_boost"}]} run effect give @s jump_boost 120 3 false
 execute if score @s sulstalk_stew_type matches 2 unless data entity @s {active_effects:[{id:"minecraft:resistance"}]} run effect give @s resistance 120 3 false
 execute if score @s sulstalk_stew_type matches 2 unless data entity @s {active_effects:[{id:"minecraft:nausea"}]} run effect give @s nausea 120 0 false
-execute if score @s sulstalk_stew_type matches 0 if score @s sulstalk_stew_timer matches 2400 positioned as @s run playsound minecraft:entity.elder_guardian.ambient ambient @s ~ ~ ~ 100 1 0
+execute if score @s sulstalk_stew_type matches 2 if score @s sulstalk_stew_timer matches 2400 positioned as @s run playsound minecraft:entity.elder_guardian.ambient ambient @s ~ ~ ~ 100 1 0
 #
 #Stew Type 3
 execute if score @s sulstalk_stew_type matches 3 unless score @s sulstalk_stew_timer matches 1.. run scoreboard players set @s sulstalk_stew_timer 2400
 execute if score @s sulstalk_stew_type matches 3 if score @s sulstalk_stew_timer matches 2300..2400 run title @s actionbar "Strength, at the cost of Mining Fatigue. Temporary."
 execute if score @s sulstalk_stew_type matches 3 unless data entity @s {active_effects:[{id:"minecraft:strength"}]} run effect give @s strength 120 1 false
 execute if score @s sulstalk_stew_type matches 3 unless data entity @s {active_effects:[{id:"minecraft:mining_fatigue"}]} run effect give @s mining_fatigue 120 0 false
-execute if score @s sulstalk_stew_type matches 0 if score @s sulstalk_stew_timer matches 2400 positioned as @s run playsound minecraft:entity.elder_guardian.ambient ambient @s ~ ~ ~ 100 1 0
+execute if score @s sulstalk_stew_type matches 3 if score @s sulstalk_stew_timer matches 2400 positioned as @s run playsound minecraft:entity.elder_guardian.ambient ambient @s ~ ~ ~ 100 1 0
 #
 #Stew Type 4
 execute if score @s sulstalk_stew_type matches 4 unless score @s sulstalk_stew_timer matches 1.. run scoreboard players set @s sulstalk_stew_timer 6000
@@ -81,7 +80,7 @@ execute if score @s sulstalk_stew_type matches 4 if score @s sulstalk_stew_timer
 execute if score @s sulstalk_stew_type matches 4 unless data entity @s {active_effects:[{id:"minecraft:resistance"}]} run effect give @s resistance 300 2 false
 execute if score @s sulstalk_stew_type matches 4 unless data entity @s {active_effects:[{id:"minecraft:weakness"}]} run effect give @s weakness 300 1 false
 execute if score @s sulstalk_stew_type matches 4 unless data entity @s {active_effects:[{id:"minecraft:slowness"}]} run effect give @s slowness 300 1 false
-execute if score @s sulstalk_stew_type matches 0 if score @s sulstalk_stew_timer matches 6000 positioned as @s run playsound minecraft:entity.elder_guardian.ambient ambient @s ~ ~ ~ 100 1 0
+execute if score @s sulstalk_stew_type matches 4 if score @s sulstalk_stew_timer matches 6000 positioned as @s run playsound minecraft:entity.elder_guardian.ambient ambient @s ~ ~ ~ 100 1 0
 #
 #Stew Type 5
 execute if score @s sulstalk_stew_type matches 5 unless score @s sulstalk_stew_timer matches 1.. run scoreboard players set @s sulstalk_stew_timer 6000
@@ -89,14 +88,14 @@ execute if score @s sulstalk_stew_type matches 5 if score @s sulstalk_stew_timer
 execute if score @s sulstalk_stew_type matches 5 unless data entity @s {active_effects:[{id:"minecraft:saturation"}]} run effect give @s saturation 300 1 false
 execute if score @s sulstalk_stew_type matches 5 unless data entity @s {active_effects:[{id:"minecraft:speed"}]} run effect give @s speed 300 1 false
 execute if score @s sulstalk_stew_type matches 5 run attribute @s max_health modifier add sulstalk:suspicious_stew_three_quarters_hearts -0.25 add_multiplied_total
-execute if score @s sulstalk_stew_type matches 0 if score @s sulstalk_stew_timer matches 6000 positioned as @s run playsound minecraft:entity.elder_guardian.ambient ambient @s ~ ~ ~ 100 1 0
+execute if score @s sulstalk_stew_type matches 5 if score @s sulstalk_stew_timer matches 6000 positioned as @s run playsound minecraft:entity.elder_guardian.ambient ambient @s ~ ~ ~ 100 1 0
 #
 #Stew Type 6
 execute if score @s sulstalk_stew_type matches 6 unless score @s sulstalk_stew_timer matches 1.. run scoreboard players set @s sulstalk_stew_timer 6000
 execute if score @s sulstalk_stew_type matches 6 if score @s sulstalk_stew_timer matches 5900..6000 run title @s actionbar "A village erects, but so does some outposts of the nearby pillagers. They will raid you - fight back with your strength and special shield."
 execute if score @s sulstalk_stew_type matches 6 unless data entity @s {active_effects:[{id:"minecraft:strength"}]} run effect give @s strength 300 1 false
 execute if score @s sulstalk_stew_type matches 6 unless data entity @s {active_effects:[{id:"minecraft:resistance"}]} run effect give @s resistance 300 2 false
-execute if score @s sulstalk_stew_type matches 6 if score @s sulstalk_stew_timer matches 6000 unless data entity @s {active_effects:[{id:"minecraft:raid_omen"}]} run effect give @s raid_omen 10 10 false
+execute if score @s sulstalk_stew_type matches 6 if score @s sulstalk_stew_timer matches 6000 unless data entity @s {active_effects:[{id:"minecraft:raid_omen"}]} run effect give @s bad_omen 1 0 false
 execute if score @s sulstalk_stew_type matches 6 if score @s sulstalk_stew_timer matches 5995 unless items entity @s container.* shield[enchantments={unbreaking:2,thorns:1},blocks_attacks={disable_cooldown_scale:0}] run give @s shield[enchantments={unbreaking:2,thorns:1},blocks_attacks={disable_cooldown_scale:0,block_sound:"minecraft:item.shield.block"},lore=[{"text":"Cannot be disabled by certain attacks when held up","italic":false,"color":gray}]]
 execute if score @s sulstalk_stew_type matches 6 if score @s sulstalk_stew_timer matches 5995 positioned as @s positioned over motion_blocking if biome ~ ~ ~ plains run place structure village_plains ~ ~ ~
 execute if score @s sulstalk_stew_type matches 6 if score @s sulstalk_stew_timer matches 5995 positioned as @s positioned over motion_blocking if biome ~ ~ ~ sunflower_plains run place structure village_plains ~ ~ ~
@@ -118,10 +117,10 @@ execute if score @s sulstalk_stew_type matches 6 if score @s sulstalk_stew_timer
 execute if score @s sulstalk_stew_type matches 6 if score @s sulstalk_stew_timer matches 5995 positioned as @s positioned over motion_blocking rotated as @s run place structure pillager_outpost ^ ^ ^50
 execute if score @s sulstalk_stew_type matches 6 if score @s sulstalk_stew_timer matches 5995 positioned as @s positioned over motion_blocking rotated as @s run place structure pillager_outpost ^50 ^ ^50
 execute if score @s sulstalk_stew_type matches 6 if score @s sulstalk_stew_timer matches 5995 positioned as @s positioned over motion_blocking rotated as @s run place structure pillager_outpost ^-50 ^ ^50
-execute if score @s sulstalk_stew_type matches 6 if score @s sulstalk_stew_timer matches 5995 positioned as @s rotated as @s run playsound minecraft:event.raid.horn hostile @s ^10 ^ ^10 100 1 0
-execute if score @s sulstalk_stew_type matches 6 if score @s sulstalk_stew_timer matches 5994 positioned as @s rotated as @s run playsound minecraft:event.raid.horn hostile @s ^-10 ^ ^10 100 1 0
-execute if score @s sulstalk_stew_type matches 6 if score @s sulstalk_stew_timer matches 5993 positioned as @s rotated as @s run playsound minecraft:event.raid.horn hostile @s ^-10 ^ ^-10 100 1 0
-execute if score @s sulstalk_stew_type matches 6 if score @s sulstalk_stew_timer matches 5992 positioned as @s rotated as @s run playsound minecraft:event.raid.horn hostile @s ^10 ^ ^-10 100 1 0
+execute if score @s sulstalk_stew_type matches 6 if score @s sulstalk_stew_timer matches 5300 unless data entity @s {active_effects:[{id:"minecraft:raid_omen"}]} positioned as @s rotated as @s run playsound minecraft:event.raid.horn hostile @s ^10 ^ ^10 100 1 0
+execute if score @s sulstalk_stew_type matches 6 if score @s sulstalk_stew_timer matches 5299 unless data entity @s {active_effects:[{id:"minecraft:raid_omen"}]} positioned as @s rotated as @s run playsound minecraft:event.raid.horn hostile @s ^-10 ^ ^10 100 1 0
+execute if score @s sulstalk_stew_type matches 6 if score @s sulstalk_stew_timer matches 5298 unless data entity @s {active_effects:[{id:"minecraft:raid_omen"}]} positioned as @s rotated as @s run playsound minecraft:event.raid.horn hostile @s ^-10 ^ ^-10 100 1 0
+execute if score @s sulstalk_stew_type matches 6 if score @s sulstalk_stew_timer matches 5297 unless data entity @s {active_effects:[{id:"minecraft:raid_omen"}]} positioned as @s rotated as @s run playsound minecraft:event.raid.horn hostile @s ^10 ^ ^-10 100 1 0
 #
 #Stew Type 7
 execute if score @s sulstalk_stew_type matches 7 unless score @s sulstalk_stew_timer matches 1.. run scoreboard players set @s sulstalk_stew_timer 3600
@@ -205,9 +204,11 @@ execute if score @s sulstalk_stew_timer matches 0 run effect clear @s weakness
 execute if score @s sulstalk_stew_timer matches 0 run effect clear @s slowness
 execute if score @s sulstalk_stew_timer matches 0 run effect clear @s speed
 execute if score @s sulstalk_stew_timer matches 0 run attribute @s max_health modifier remove sulstalk:suspicious_stew_three_quarters_hearts
-execute if score @s sulstalk_stew_timer matches 0 if score @s sulstalk_stew_type matches 10 run time resume
+execute if score @s sulstalk_stew_timer matches 0 run time resume
 execute if score @s sulstalk_stew_timer matches 0 if score @s sulstalk_stew_type matches 10 run time set day
+execute if score @s sulstalk_stew_timer matches 0 if score @s sulstalk_stew_last_type matches 10 run time set day
 execute if score @s sulstalk_stew_timer matches 0 if score @s sulstalk_stew_type matches 10 run gamerule players_sleeping_percentage 100
+execute if score @s sulstalk_stew_timer matches 0 if score @s sulstalk_stew_last_type matches 10 run gamerule players_sleeping_percentage 100
 #
 #Reset Stew Conditions
 execute if score @s sulstalk_stew_timer matches 0 run scoreboard players reset @s sulstalk_stew_type
