@@ -19,7 +19,7 @@ execute as @e[tag=sulstalk_spawned] store result entity @s data.id int 1 run dat
 execute as @e[tag=sulstalk_spawned,tag=sulstalk_unpositioned] positioned as @s run spreadplayers ~ ~ 20 100 false @s
 execute as @e[tag=sulstalk_spawned,tag=sulstalk_unpositioned] run data modify entity @s Tags[1] set value "sulstalk_positioned"
 
-execute as @e[tag=sulstalk_positioned] positioned as @s rotated as @s if loaded ~ ~ ~ run function sulstalk:sully/logic with entity @s data
+execute as @e[tag=sulstalk_positioned] positioned as @s rotated as @s if loaded ~ ~ ~ run function sulstalk:sully/logic
 
 execute as @e[tag=sulstalk_spawning] run data merge entity @s {CustomName:"Unbridled Sully"}
 execute as @e[tag=sulstalk_spawned] run data merge entity @s {CustomName:"Sully"}

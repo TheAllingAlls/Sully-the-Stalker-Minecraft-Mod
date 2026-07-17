@@ -68,6 +68,6 @@ execute unless score @s sulstalk_is_following_entity matches 1 run execute if sc
 execute unless score @s sulstalk_is_following_entity matches 1 run execute if score @s sulstalk_should_follow matches 1 if score @s sulstalk_follow_priority matches 5..6 positioned as @s store result score @s sulstalk_following_entity_id run data get entity @e[type=player,nbt={abilities:{invulnerable:0b}},sort=nearest,limit=1,distance=..20,scores={sulstalk_followed_entity_id=-2147483647..}] UUID[0]
 execute if predicate {condition:entity_scores,entity:this,scores:{sulstalk_following_entity_id:{}}} store result entity @s data.following_entity_id int 1 run scoreboard players get @s sulstalk_following_entity_id
 
-$execute positioned as @s as @e[scores={sulstalk_followed_entity_id=$(following_entity_id)},distance=..100,limit=1] run scoreboard players set @e[limit=1,distance=..0.1,tag=sulstalk_spawned,scores={sulstalk_spawned_number=$(id)}] sulstalk_is_following_entity 1
+execute positioned as @s as @e[distance=..100] if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id run scoreboard players set @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_is_following_entity 1
 
-execute if score @s sulstalk_is_following_entity matches 1 run function sulstalk:sully/interactions/entity_to_entity/entity_follow_logic with entity @s data
+execute positioned as @s if score @s sulstalk_is_following_entity matches 1 run function sulstalk:sully/interactions/entity_to_entity/entity_follow_logic
