@@ -95,7 +95,7 @@ execute if score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged
 ####
 
 ##Related to sulstalk:sully/interactions/entity_to_entity/entity_logic
-execute positioned as @s if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches ..4 run scoreboard players set @s sulstalk_follow_priority 6
+execute positioned as @s if score @s sulstalk_damaged matches 1 run scoreboard players set @s sulstalk_follow_priority 6
 execute positioned as @s if score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_following_entity_forget matches 100.. if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches 1..4 run scoreboard players remove @s sulstalk_following_entity_forget 100
 execute positioned as @s if score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_following_entity_forget matches 1.. if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches 5.. run scoreboard players remove @s sulstalk_following_entity_forget 200
 execute positioned as @s if score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_following_entity_forget matches 1.. if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches 7.. run scoreboard players remove @s sulstalk_following_entity_forget 200
