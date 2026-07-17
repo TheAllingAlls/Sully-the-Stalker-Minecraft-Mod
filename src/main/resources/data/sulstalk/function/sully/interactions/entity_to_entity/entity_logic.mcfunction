@@ -70,4 +70,4 @@ execute if predicate {condition:entity_scores,entity:this,scores:{sulstalk_follo
 
 execute positioned as @s as @e[distance=..100] if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id run scoreboard players set @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_is_following_entity 1
 
-execute positioned as @s if score @s sulstalk_is_following_entity matches 1 run function sulstalk:sully/interactions/entity_to_entity/entity_follow_logic
+execute positioned as @s rotated as @s if score @s sulstalk_is_following_entity matches 1 run function sulstalk:sully/interactions/entity_to_entity/entity_follow_logic

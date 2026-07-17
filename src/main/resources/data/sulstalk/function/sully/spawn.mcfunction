@@ -1,9 +1,10 @@
 scoreboard objectives add sulstalk_spawn_chance trigger ""
 scoreboard objectives add sulstalk_spawned_number trigger ""
-execute as @e[tag=sulstalk_storage] if entity @e[tag=sulstalk_spawned] store result score @s sulstalk_spawn run execute if entity @e[tag=sulstalk_spawned]
+execute as @e[tag=sulstalk_storage] if entity @e[tag=sulstalk_spawned,limit=1] store result score @s sulstalk_spawn run execute if entity @e[tag=sulstalk_spawned]
 execute as @e[tag=sulstalk_storage] unless entity @e[tag=sulstalk_spawned] run scoreboard players set @s sulstalk_spawn 0
 execute as @e[tag=sulstalk_storage] if score @s sulstalk_spawn >= @s sulstalk_spawn_max run scoreboard players set @s sulstalk_can_spawn 0
 execute as @e[tag=sulstalk_storage] if score @s sulstalk_spawn < @s sulstalk_spawn_max run scoreboard players set @s sulstalk_can_spawn 1
+execute as @e[tag=sulstalk_storage] if score @s sulstalk_spawn > @s sulstalk_spawn_max run kill @e[limit=1,sort=furthest,tag=sulstalk_spawned]
 execute as @e[tag=sulstalk_storage] if score @s sulstalk_can_spawn matches 1 unless entity @e[tag=sulstalk_spawning] at @r run summon item_display ~ ~ ~ {Tags:["sulstalk_spawning"]}
 execute as @e[tag=sulstalk_spawning] unless score @s sulstalk_spawn_chance matches -1..1 run scoreboard players set @s sulstalk_spawn_chance -1
 
