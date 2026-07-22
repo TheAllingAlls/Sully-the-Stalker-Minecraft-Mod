@@ -15,6 +15,13 @@ NOT DONE YET!!!
   * <s>Wind Charges</s>
   * <s>Powder Snowfall</s>
 * <s>Sully's Suspicious Stew, randomly drops when near a player and has extra special effects after buffs like explosions, freezing, insomnia, etc.</s>
-* Fix Sullys all being telported on one being hit (Multiplayer-specific)
+* <s>Fix Sullys all being telported on one being hit (Multiplayer-specific)</s>
 * <s>Have Sully do a 180 turn on reaching further than 100 blocks of any player</s>
 * <s>Disable block-breaking alongside block-replacement when "griefing" is disabled (underwater mechanics on surface)</s>
+* <s>Sully's Suspicious Stew shouldn't drop if nearby player already has one in their inventory</s>
+* Sully's anger meter should increase damage resistance and apply on taking damage
+* Sully should target entities from a distance more often (including players)
+* Haste but Blindness (Sully's Suspicious Stew)
+* Fix beds no longer working after eating another stew after the 2-day nighttime stew
+* Max Strength but 2/10 Hearts
+* Allow Sully to phase through walls using sulstalk_travel_timer
