@@ -7,7 +7,7 @@ execute unless score @s sulstalk_blaze_fireballs_max matches -1.. store result s
 execute unless score @s sulstalk_blaze_fireballs_delay matches -1.. run scoreboard players set @s sulstalk_blaze_fireballs_delay -1
 
 execute if score @s sulstalk_blaze_fireballs_delay matches -1 unless entity @e[tag=sulstalk_blaze_fireball,distance=..3,limit=1] run scoreboard players remove @s sulstalk_blaze_fireballs_max 1
-execute if score @s sulstalk_blaze_fireballs_delay matches -1 unless entity @e[tag=sulstalk_blaze_fireball,distance=..3,limit=1] run playsound minecraft:entity.blaze.shoot hostile @s ~ ~ ~ 100 1 0
+execute if score @s sulstalk_blaze_fireballs_delay matches -1 unless entity @e[tag=sulstalk_blaze_fireball,distance=..3,limit=1] run playsound minecraft:entity.blaze.shoot hostile @e[type=player,distance=..20] ~ ~ ~ 100 1 0
 execute if score @s sulstalk_blaze_fireballs_delay matches -1 run execute if score @s sulstalk_blaze_fireballs_delay matches -1 unless entity @e[tag=sulstalk_blaze_fireball,distance=..3,limit=1] run summon small_fireball ~ ~ ~ {Tags:["sulstalk_blaze_fireball","sulstalk_special_ability"],Motion:[0.0d,0.0d,0.0d]}
 
 execute if score @s sulstalk_blaze_fireballs_delay matches -1 run execute positioned ^0.5 ^1.4 ^ unless entity @e[tag=sulstalk_blaze_fireball_1,distance=..1,limit=1] run summon item_display ~ ~ ~ {Tags:["sulstalk_blaze_fireball_1","sulstalk_blaze_fireball_item_display","sulstalk_special_ability"],Motion:[0.0d,0.0d,0.0d],teleport_duration:5}

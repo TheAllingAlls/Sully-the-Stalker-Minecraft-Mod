@@ -1,16 +1,18 @@
 scoreboard objectives add sulstalk_spawn_chance trigger ""
 scoreboard objectives add sulstalk_spawned_number trigger ""
-execute as @e[tag=sulstalk_storage] if entity @e[tag=sulstalk_spawned,limit=1] store result score @s sulstalk_spawn run execute if entity @e[tag=sulstalk_spawned]
-execute as @e[tag=sulstalk_storage] unless entity @e[tag=sulstalk_spawned] run scoreboard players set @s sulstalk_spawn 0
-execute as @e[tag=sulstalk_storage] if score @s sulstalk_spawn >= @s sulstalk_spawn_max run scoreboard players set @s sulstalk_can_spawn 0
-execute as @e[tag=sulstalk_storage] if score @s sulstalk_spawn < @s sulstalk_spawn_max run scoreboard players set @s sulstalk_can_spawn 1
-execute as @e[tag=sulstalk_storage] if score @s sulstalk_spawn > @s sulstalk_spawn_max as @e[limit=1,sort=random,tag=sulstalk_spawned] unless entity @e[type=player,distance=..50] run kill @s
-execute as @e[tag=sulstalk_storage] if score @s sulstalk_can_spawn matches 1 unless entity @e[tag=sulstalk_spawning] at @r run summon item_display ~ ~ ~ {Tags:["sulstalk_spawning"]}
+execute positioned 0 0 0 as @e[tag=sulstalk_storage,sort=nearest,limit=1] if entity @e[tag=sulstalk_spawned,limit=1] store result score @s sulstalk_spawn run execute if entity @e[tag=sulstalk_spawned]
+execute positioned 0 0 0 as @e[tag=sulstalk_storage,sort=nearest,limit=1] unless entity @e[tag=sulstalk_spawned] run scoreboard players set @s sulstalk_spawn 0
+execute positioned 0 0 0 as @e[tag=sulstalk_storage,sort=nearest,limit=1] if score @s sulstalk_spawn >= @s sulstalk_spawn_max run scoreboard players set @s sulstalk_can_spawn 0
+execute positioned 0 0 0 as @e[tag=sulstalk_storage,sort=nearest,limit=1] if score @s sulstalk_spawn < @s sulstalk_spawn_max run scoreboard players set @s sulstalk_can_spawn 1
+execute positioned 0 0 0 as @e[tag=sulstalk_storage,sort=nearest,limit=1] if score @s sulstalk_spawn > @s sulstalk_spawn_max as @e[limit=1,sort=random,tag=sulstalk_spawned] positioned as @s unless entity @e[type=player,distance=..50] run kill @s
+execute positioned 0 0 0 as @e[tag=sulstalk_storage,sort=nearest,limit=1] if score @s sulstalk_can_spawn matches 1 unless entity @e[tag=sulstalk_spawning] positioned as @r run summon item_display ~ ~ ~ {Tags:["sulstalk_spawning"]}
 execute as @e[tag=sulstalk_spawning] unless score @s sulstalk_spawn_chance matches -1..1 run scoreboard players set @s sulstalk_spawn_chance -1
 
 ##RANDOM VALUE FOR SPAWN CHANCE IS IN THIS COMMAND#
 execute as @e[tag=sulstalk_spawning] if score @s sulstalk_spawn_chance matches -1 store result score @s sulstalk_spawn_chance run random value 0..100
 ###
+
+execute as @e[tag=sulstalk_spawning] run data merge entity @s {CustomName:"Unbridled Sully"}
 
 execute as @e[tag=sulstalk_spawning] unless score @s sulstalk_spawn_chance matches 1 run kill @s
 execute as @e[tag=sulstalk_spawning] if score @s sulstalk_spawn_chance matches 1 run data merge entity @s {Tags:["sulstalk_spawned","sulstalk_unpositioned"]}
@@ -22,7 +24,6 @@ execute as @e[tag=sulstalk_spawned,tag=sulstalk_unpositioned] run data modify en
 
 execute as @e[tag=sulstalk_positioned] positioned as @s rotated as @s if loaded ~ ~ ~ run function sulstalk:sully/logic
 
-execute as @e[tag=sulstalk_spawning] run data merge entity @s {CustomName:"Unbridled Sully"}
 execute as @e[tag=sulstalk_spawned] run data merge entity @s {CustomName:"Sully"}
 
 execute as @e[type=player,limit=1,sort=random] run function sulstalk:sully/interactions/suspicious_stew

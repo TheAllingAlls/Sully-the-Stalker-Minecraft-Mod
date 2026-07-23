@@ -1,6 +1,7 @@
 #scoreboard objectives add sulstalk_position_x trigger ""
 #scoreboard objectives add sulstalk_position_y trigger ""
 #scoreboard objectives add sulstalk_position_z trigger ""
+scoreboard objectives add sulstalk_nearby_similar_entities trigger ""
 scoreboard objectives add sulstalk_is_in_block trigger ""
 scoreboard objectives add sulstalk_should_move trigger ""
 scoreboard objectives add sulstalk_disable_griefing trigger ""
@@ -13,10 +14,11 @@ scoreboard objectives add sulstalk_can_rotate_up trigger ""
 #execute unless score @s sulstalk_position_y matches -2147483647..2147483647 run scoreboard players set @s sulstalk_position_y 0
 #execute unless score @s sulstalk_position_z matches -2147483647..2147483647 run scoreboard players set @s sulstalk_position_z 0
 
+execute unless score @s sulstalk_nearby_similar_entities = @s sulstalk_nearby_similar_entities run scoreboard players set @s sulstalk_nearby_similar_entities -1
 execute unless score @s sulstalk_is_in_block matches -9999..9999 run scoreboard players set @s sulstalk_is_in_block 0
 execute unless score @s sulstalk_should_move matches -1.. run scoreboard players set @s sulstalk_should_move -1
-execute store result score @s sulstalk_disable_griefing run scoreboard players get @e[tag=sulstalk_storage,limit=1,distance=..100] sulstalk_disable_griefing
-execute store result score @s sulstalk_half_tick run scoreboard players get @e[tag=sulstalk_storage,limit=1,distance=..100] sulstalk_half_tick
+execute positioned 0 0 0 store result score @s sulstalk_disable_griefing run scoreboard players get @e[tag=sulstalk_storage,limit=1,sort=nearest] sulstalk_disable_griefing
+execute positioned 0 0 0 store result score @s sulstalk_half_tick run scoreboard players get @e[tag=sulstalk_storage,limit=1,sort=nearest] sulstalk_half_tick
 execute unless score @s sulstalk_travel_timer matches -1.. run scoreboard players set @s sulstalk_travel_timer -1
 execute unless score @s sulstalk_travel_timer_enabled matches 0.. run scoreboard players set @s sulstalk_travel_timer_enabled 1
 execute unless score @s sulstalk_should_rotate matches -1..1 run scoreboard players set @s sulstalk_should_rotate 0
@@ -69,7 +71,7 @@ execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^
 execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^ ^ ^0.1 positioned ~ ~ ~0.1 if score @s sulstalk_travel_timer matches 3600..4000 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
 execute if score @s sulstalk_disable_griefing matches 0 run execute positioned ^ ^ ^0.1 positioned ~ ~ ~-0.1 if score @s sulstalk_travel_timer matches 3600..4000 unless block ~ ~ ~ #sulstalk:can_interact_with run setblock ~ ~ ~ air destroy
 
-execute if score @s sulstalk_disable_griefing matches 1 run execute positioned as @s if block ^ ^ ^0.5 #sulstalk:can_interact_with rotated as @s rotated ~ 0.0 run tp ^ ^ ^-0.01
+execute if score @s sulstalk_disable_griefing matches 1 if score @s sulstalk_travel_timer matches 200..3000 run execute positioned as @s if block ^ ^ ^0.5 #sulstalk:can_interact_with rotated as @s rotated ~ 0.0 run tp ^ ^ ^-0.01
 
 
 execute if score @s sulstalk_is_following_entity matches 1 run scoreboard players set @s sulstalk_is_in_block 0
@@ -123,6 +125,10 @@ execute if score @s sulstalk_should_rotate matches 1 at @s run rotate @s ~1 ~0.0
 execute if score @s sulstalk_should_rotate matches 2 at @s run rotate @s ~5 ~0.0
 execute if score @s sulstalk_should_rotate matches 200 at @s run rotate @s ~45 ~0.0
 execute if score @s sulstalk_can_rotate_up matches 0 at @s run rotate @s ~0.0 0.0
+
+execute positioned as @s if score @s sulstalk_half_tick matches 1 store result score @s sulstalk_nearby_similar_entities run execute if entity @e[tag=sulstalk_spawned,distance=0..10]
+# execute positioned as @s rotated as @s if entity @e[tag=sulstalk_spawned,limit=1,distance=0.1..2] run spreadplayers ~ ~ 0 1 false @s
+execute positioned as @s rotated as @s if entity @e[tag=sulstalk_spawned,limit=1,distance=0.1..1] store result score @s sulstalk_should_rotate run random value -1..1
 
 execute positioned as @s rotated as @s unless entity @e[type=player,distance=..50,limit=1] run execute facing entity @e[type=player,sort=random] eyes run rotate @s facing ^ ^ ^1
 

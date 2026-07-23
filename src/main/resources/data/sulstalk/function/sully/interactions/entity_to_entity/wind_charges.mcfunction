@@ -7,7 +7,7 @@ execute unless score @s sulstalk_wind_charges_max matches -1.. store result scor
 execute unless score @s sulstalk_wind_charges_delay matches -1.. run scoreboard players set @s sulstalk_wind_charges_delay -1
 
 execute if score @s sulstalk_wind_charges_delay matches -1 run execute unless entity @e[tag=sulstalk_wind_charge,distance=..1,limit=1] run scoreboard players remove @s sulstalk_wind_charges_max 1
-execute if score @s sulstalk_wind_charges_delay matches -1 run execute unless entity @e[tag=sulstalk_wind_charge,distance=..1,limit=1] run playsound minecraft:entity.breeze.shoot hostile @s ~ ~ ~ 100 1 0
+execute if score @s sulstalk_wind_charges_delay matches -1 run execute unless entity @e[tag=sulstalk_wind_charge,distance=..1,limit=1] run playsound minecraft:entity.breeze.shoot hostile @e[type=player,distance=..20] ~ ~ ~ 100 1 0
 execute if score @s sulstalk_wind_charges_delay matches -1 run execute unless entity @e[tag=sulstalk_wind_charge,distance=..1,limit=1] run summon breeze_wind_charge ~ ~ ~ {Tags:["sulstalk_wind_charge","sulstalk_special_ability"],Motion:[0.0d,0.0d,0.0d]}
 execute if entity @e[tag=sulstalk_wind_charge,tag=sulstalk_special_ability,distance=2.5..,limit=1] as @e[tag=sulstalk_wind_charge,tag=sulstalk_special_ability,distance=2.5..,limit=1] run tag @s remove sulstalk_special_ability
 
