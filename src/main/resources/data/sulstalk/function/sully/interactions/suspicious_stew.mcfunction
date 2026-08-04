@@ -83,8 +83,8 @@ execute if score @s sulstalk_stew_type matches 3 if score @s sulstalk_stew_timer
 execute if score @s sulstalk_stew_type matches 4 unless score @s sulstalk_stew_timer matches 1.. run scoreboard players set @s sulstalk_stew_timer 6000
 execute if score @s sulstalk_stew_type matches 4 if score @s sulstalk_stew_timer matches 5900..6000 run title @s actionbar "Resistance, at the cost of Weakness and Slowness. Temporary."
 execute if score @s sulstalk_stew_type matches 4 unless data entity @s {active_effects:[{id:"minecraft:resistance"}]} run effect give @s resistance 300 2 false
-execute if score @s sulstalk_stew_type matches 4 unless data entity @s {active_effects:[{id:"minecraft:weakness"}]} run effect give @s weakness 300 1 false
-execute if score @s sulstalk_stew_type matches 4 unless data entity @s {active_effects:[{id:"minecraft:slowness"}]} run effect give @s slowness 300 1 false
+execute if score @s sulstalk_stew_type matches 4 unless data entity @s {active_effects:[{id:"minecraft:weakness"}]} run effect give @s weakness 300 0 false
+execute if score @s sulstalk_stew_type matches 4 unless data entity @s {active_effects:[{id:"minecraft:slowness"}]} run effect give @s slowness 300 0 false
 execute if score @s sulstalk_stew_type matches 4 if score @s sulstalk_stew_timer matches 6000 positioned as @s run playsound minecraft:entity.elder_guardian.ambient ambient @s ~ ~ ~ 100 1 0
 #
 #Stew Type 5

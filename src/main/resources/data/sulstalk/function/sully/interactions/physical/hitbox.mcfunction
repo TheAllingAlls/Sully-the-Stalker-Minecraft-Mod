@@ -107,12 +107,12 @@ execute positioned as @s if score @s sulstalk_should_die matches 0 if score @s s
 execute positioned as @s if score @s sulstalk_should_die matches 0 if score @s sulstalk_damaged matches 1 run execute as @e[tag=!sulstalk_dropped,type=item,limit=1,distance=..0.5] run data remove entity @s Item.components.minecraft:custom_data
 execute positioned as @s if score @s sulstalk_should_die matches 0 if score @s sulstalk_damaged matches 1 run data remove entity @s item.components.minecraft:bundle_contents[-1]
 
+##Mace functionality
+execute positioned as @s if score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged_delay matches -1 as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number on attacker run function sulstalk:sully/interactions/physical/hitbox_mace
+####
+
 execute positioned as @s if score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged_delay matches -1 unless score @s sulstalk_is_following_entity matches 1 run execute as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number on attacker rotated as @s as @e[limit=1,distance=..0.1,tag=sulstalk_spawned] positioned ^ ^ ^5 positioned ~ ~3 ~ run tp ~ ~ ~
 execute positioned as @s if score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged_delay matches -1 if score @s sulstalk_is_following_entity matches 1 run execute as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number on attacker rotated as @s as @e[limit=1,distance=..0.1,tag=sulstalk_spawned] positioned ^ ^ ^2 positioned ~ ~1 ~ run tp ~ ~ ~
-
-##Mace functionality
-execute if score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged_delay matches -1 as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10,limit=1] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number on attacker run function sulstalk:sully/interactions/physical/hitbox_mace
-####
 
 ##Related to sulstalk:sully/interactions/entity_to_entity/entity_logic
 execute positioned as @s if score @s sulstalk_damaged matches 1 run scoreboard players set @s sulstalk_follow_priority 6

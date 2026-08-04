@@ -17,8 +17,8 @@ scoreboard objectives add sulstalk_can_rotate_up trigger ""
 execute unless score @s sulstalk_nearby_similar_entities = @s sulstalk_nearby_similar_entities run scoreboard players set @s sulstalk_nearby_similar_entities -1
 execute unless score @s sulstalk_is_in_block matches -9999..9999 run scoreboard players set @s sulstalk_is_in_block 0
 execute unless score @s sulstalk_should_move matches -1.. run scoreboard players set @s sulstalk_should_move -1
-execute positioned 0 0 0 store result score @s sulstalk_disable_griefing run scoreboard players get @e[tag=sulstalk_storage,limit=1,sort=nearest] sulstalk_disable_griefing
-execute positioned 0 0 0 store result score @s sulstalk_half_tick run scoreboard players get @e[tag=sulstalk_storage,limit=1,sort=nearest] sulstalk_half_tick
+execute positioned 0 0 0 store result score @s sulstalk_disable_griefing run scoreboard players get @e[tag=sulstalk_storage,limit=1,sort=furthest] sulstalk_disable_griefing
+execute positioned 0 0 0 store result score @s sulstalk_half_tick run scoreboard players get @e[tag=sulstalk_storage,limit=1,sort=furthest] sulstalk_half_tick
 execute unless score @s sulstalk_travel_timer matches -1.. run scoreboard players set @s sulstalk_travel_timer -1
 execute unless score @s sulstalk_travel_timer_enabled matches 0.. run scoreboard players set @s sulstalk_travel_timer_enabled 1
 execute unless score @s sulstalk_should_rotate matches -1..1 run scoreboard players set @s sulstalk_should_rotate 0
