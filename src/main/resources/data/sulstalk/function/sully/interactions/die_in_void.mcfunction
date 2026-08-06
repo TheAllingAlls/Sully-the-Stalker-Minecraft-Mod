@@ -1,1 +1,1 @@
-execute positioned as @s positioned ~ -130 ~ if entity @s[distance=..5] run kill @s
+execute positioned as @s positioned ~ -130 ~ unless score @s sulstalk_should_die matches 1..2 if entity @s[distance=..5] run scoreboard players set @s sulstalk_should_die 1
