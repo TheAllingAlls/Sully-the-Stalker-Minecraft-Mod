@@ -1,6 +1,6 @@
 # data merge entity @s {Radius:0.0f}
 execute if score @s sulstalk_half_tick matches 1 store result score @s sulstalk_storage_spawn run execute if entity @e[tag=sulstalk_storage]
-execute if score @s sulstalk_half_tick matches 1 if score @s sulstalk_storage_spawn matches 2.. as @e[tag=sulstalk_storage,limit=1,sort=furthest] run kill @s
+execute if score @s sulstalk_half_tick matches 1 if score @s sulstalk_storage_spawn matches 2.. as @e[tag=sulstalk_storage,limit=1,sort=nearest] run kill @s
 
 data modify entity @s Pos set from entity @r Pos
 execute store result score @s sulstalk_gametime_storage run time query gametime
