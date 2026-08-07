@@ -76,8 +76,8 @@ execute if score @s sulstalk_disable_griefing matches 1 if score @s sulstalk_tra
 
 execute if score @s sulstalk_is_following_entity matches 1 run scoreboard players set @s sulstalk_is_in_block 0
 execute if score @s sulstalk_is_following_entity matches 1 run scoreboard players set @s sulstalk_will_be_in_block 0
-execute if score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_travel_timer_enabled matches 1 run scoreboard players set @s sulstalk_travel_timer_enabled 2
-execute if score @s sulstalk_is_following_entity matches 0 if score @s sulstalk_travel_timer_enabled matches 2 run scoreboard players set @s sulstalk_travel_timer_enabled 1
+#execute if score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_travel_timer_enabled matches 1 run scoreboard players set @s sulstalk_travel_timer_enabled 2
+#execute if score @s sulstalk_is_following_entity matches 0 if score @s sulstalk_travel_timer_enabled matches 2 run scoreboard players set @s sulstalk_travel_timer_enabled 1
 execute if score @s sulstalk_underwater matches 4 if score @s sulstalk_travel_timer_enabled matches 1 run scoreboard players set @s sulstalk_travel_timer_enabled 2
 execute if score @s sulstalk_travel_timer matches 0..100 if score @s sulstalk_is_in_block matches ..-1 run scoreboard players set @s sulstalk_is_in_block 1
 execute if score @s sulstalk_travel_timer matches 0..50 if score @s sulstalk_is_in_block matches 1 run scoreboard players set @s sulstalk_is_in_block 0
@@ -125,6 +125,7 @@ execute if score @s sulstalk_should_rotate matches 1 at @s run rotate @s ~1 ~0.0
 execute if score @s sulstalk_should_rotate matches 2 at @s run rotate @s ~5 ~0.0
 execute if score @s sulstalk_should_rotate matches 200 at @s run rotate @s ~45 ~0.0
 execute if score @s sulstalk_can_rotate_up matches 0 at @s run rotate @s ~0.0 0.0
+
 
 execute positioned as @s if score @s sulstalk_half_tick matches 1 store result score @s sulstalk_nearby_similar_entities run execute if entity @e[tag=sulstalk_spawned,distance=0..10]
 # execute positioned as @s rotated as @s if entity @e[tag=sulstalk_spawned,limit=1,distance=0.1..2] run spreadplayers ~ ~ 0 1 false @s

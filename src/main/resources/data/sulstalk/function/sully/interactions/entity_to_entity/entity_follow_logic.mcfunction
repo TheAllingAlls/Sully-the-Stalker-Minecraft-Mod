@@ -2,6 +2,8 @@ execute run scoreboard players set @s sulstalk_following_entity_found 0
 execute as @e[distance=..100] if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id run scoreboard players set @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_found 1
 execute if score @s sulstalk_following_entity_found matches 0 run scoreboard players set @s sulstalk_following_entity_forget 0
 
+execute run scoreboard players set @s sulstalk_travel_timer 0
+
 execute as @e[type=player,distance=..100] if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id if data entity @s {abilities:{invulnerable:1b}} run scoreboard players set @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_forget 0
 execute as @e[type=!player,distance=..100] if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id if data entity @s {Invulnerable:1b} run scoreboard players set @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_forget 0
 
@@ -25,7 +27,8 @@ execute as @e[type=!player,distance=..100] if score @s sulstalk_followed_entity_
 
 execute positioned ~ ~-2 ~ as @e[type=player,distance=..1] positioned ~ ~2 ~ if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id unless data entity @s {active_effects:[{id:"minecraft:poison"}]} run effect give @s poison 1 10 true
 execute positioned ~ ~-2 ~ as @e[type=player,distance=..2] positioned ~ ~2 ~ if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id if data entity @s {active_effects:[{id:"minecraft:poison"}]} unless data entity @s {active_effects:[{id:"minecraft:hunger"}]} if score @s sulstalk_followed_entity_health matches ..190 run effect give @s hunger 10 1 true
-execute as @e[type=!player,distance=..2] if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id run damage @s 1 cramming
+execute positioned ~ ~-2 ~ as @e[type=player,distance=..2] positioned ~ ~2 ~ if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id run scoreboard players remove @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_forget 1
+execute as @e[type=!player,distance=..2] if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id run damage @s 3 cramming
 execute as @e[type=!player,distance=..2] if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id unless data entity @s {active_effects:[{id:"minecraft:wither"}]} run effect give @s wither 2 255 false
 
 ##Anger & Special Abilities

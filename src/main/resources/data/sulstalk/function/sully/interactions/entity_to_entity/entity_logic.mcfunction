@@ -44,13 +44,13 @@ execute if score @s sulstalk_underwater matches 4 run scoreboard players set @s 
 
 execute if score @s sulstalk_follow_priority matches 6 store result score @s sulstalk_should_follow run random value 1..2
 
-execute unless score @s sulstalk_should_follow matches 1 run execute unless score @s sulstalk_is_following_entity matches 1 run execute unless score @s sulstalk_follow_priority matches 5 store result score @s sulstalk_should_follow run random value 1..100
+execute unless score @s sulstalk_should_follow matches 1 run execute if score @s sulstalk_nearby_entities matches 1.. unless score @s sulstalk_is_following_entity matches 1 run execute unless score @s sulstalk_follow_priority matches 5 store result score @s sulstalk_should_follow run random value 1..100
 execute unless score @s sulstalk_should_follow matches 1 run execute if score @s sulstalk_nearby_entities matches 10.. run scoreboard players set @s sulstalk_follow_priority 1
 execute unless score @s sulstalk_should_follow matches 1 run execute if score @s sulstalk_nearby_entities matches 5..9 run scoreboard players set @s sulstalk_follow_priority 2
 execute unless score @s sulstalk_should_follow matches 1 run execute if score @s sulstalk_nearby_entities matches 3..4 run scoreboard players set @s sulstalk_follow_priority 3
 execute unless score @s sulstalk_should_follow matches 1 run execute if score @s sulstalk_nearby_entities matches 1..2 run scoreboard players set @s sulstalk_follow_priority 4
-execute unless score @s sulstalk_should_follow matches 1 run execute positioned as @s if entity @e[distance=..10,type=player,nbt={abilities:{invulnerable:0b}}] run scoreboard players set @s sulstalk_follow_priority 5
-execute unless score @s sulstalk_should_follow matches 1 run execute unless score @s sulstalk_is_following_entity matches 1 run execute if score @s sulstalk_follow_priority matches 5 store result score @s sulstalk_should_follow run random value 1..100
+execute unless score @s sulstalk_should_follow matches 1 run execute positioned as @s if entity @e[distance=..7,type=player,nbt={abilities:{invulnerable:0b}}] run scoreboard players set @s sulstalk_follow_priority 5
+execute unless score @s sulstalk_should_follow matches 1 run execute unless score @s sulstalk_is_following_entity matches 1 run execute if score @s sulstalk_follow_priority matches 5 store result score @s sulstalk_should_follow run random value 1..75
 
 execute if score @s sulstalk_should_follow matches 1 if score @s sulstalk_following_entity_forget matches 0 run scoreboard players set @s sulstalk_following_entity_forget -1
 execute if score @s sulstalk_is_following_entity matches 1 run execute unless score @s sulstalk_following_entity_id matches -1 if score @s sulstalk_following_entity_forget matches -1 store result score @s sulstalk_following_entity_forget run random value 400..1200
@@ -69,5 +69,6 @@ execute unless score @s sulstalk_is_following_entity matches 1 run execute if sc
 execute if predicate {condition:entity_scores,entity:this,scores:{sulstalk_following_entity_id:{}}} store result entity @s data.following_entity_id int 1 run scoreboard players get @s sulstalk_following_entity_id
 
 execute positioned as @s as @e[distance=..100] if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id run scoreboard players set @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_is_following_entity 1
+execute unless score @s sulstalk_is_following_entity matches 1 run scoreboard players set @s sulstalk_should_follow -1
 
 execute positioned as @s rotated as @s if score @s sulstalk_is_following_entity matches 1 run function sulstalk:sully/interactions/entity_to_entity/entity_follow_logic

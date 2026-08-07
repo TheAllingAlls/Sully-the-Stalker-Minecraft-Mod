@@ -39,6 +39,7 @@ execute if score @s sulstalk_stew_player_holding matches 2 if score @s sulstalk_
 
 execute if score @s sulstalk_stew_player_holding matches 2 run scoreboard players operation @s sulstalk_stew_player_used = @s sulstalk_stew_player_used_count
 
+execute unless score @s sulstalk_stew_type matches 0.. run return fail
 
 
 
@@ -138,8 +139,8 @@ execute if score @s sulstalk_stew_type matches 7 if score @s sulstalk_stew_timer
 execute if score @s sulstalk_stew_type matches 7 if score @s sulstalk_stew_timer matches 3600 positioned as @s run summon enderman ~ ~ ~
 execute if score @s sulstalk_stew_type matches 7 if score @s sulstalk_stew_timer matches 3600 positioned as @s as @e[distance=..1,type=enderman] run data modify entity @s angry_at set from entity @e[distance=..1,type=player,limit=1] UUID
 execute if score @s sulstalk_stew_type matches 7 if score @s sulstalk_stew_timer matches 3600 positioned as @s as @e[distance=..1,type=enderman] run spreadplayers ~ ~ 5 10 false @s
-execute if score @s sulstalk_stew_type matches 7 if score @s sulstalk_stew_timer matches 3599 positioned as @s as @e[distance=..11,type=enderman] positioned as @s run playsound minecraft:entity.enderman.teleport hostile @s ~ ~ ~ 100 1 0
-execute if score @s sulstalk_stew_type matches 7 if score @s sulstalk_stew_timer matches 3598 positioned as @s as @e[distance=..11,type=enderman] positioned as @s run playsound minecraft:entity.enderman.scream hostile @s ~ ~ ~ 100 1 0
+execute if score @s sulstalk_stew_type matches 7 if score @s sulstalk_stew_timer matches 3599 positioned as @s as @e[distance=..11,type=enderman] positioned as @s run playsound minecraft:entity.enderman.teleport hostile @a ~ ~ ~ 100 1 0
+execute if score @s sulstalk_stew_type matches 7 if score @s sulstalk_stew_timer matches 3598 positioned as @s as @e[distance=..11,type=enderman] positioned as @s run playsound minecraft:entity.enderman.scream hostile @a ~ ~ ~ 100 1 0
 #
 #Stew Type 8
 execute if score @s sulstalk_stew_type matches 8 unless score @s sulstalk_stew_timer matches 1.. run scoreboard players set @s sulstalk_stew_timer 3600
@@ -162,7 +163,7 @@ execute if score @s sulstalk_stew_type matches 9 if score @s sulstalk_stew_timer
 execute if score @s sulstalk_stew_type matches 9 if score @s sulstalk_stew_timer matches 98 positioned as @s run summon warden ~ ~ ~ {Brain:{memories:{"minecraft:is_emerging":{value:{},ttl:100L},"minecraft:dig_cooldown":{value:{},ttl:1200L}}}}
 execute if score @s sulstalk_stew_type matches 9 if score @s sulstalk_stew_timer matches 97 positioned as @s run summon warden ~ ~ ~ {Brain:{memories:{"minecraft:is_emerging":{value:{},ttl:100L},"minecraft:dig_cooldown":{value:{},ttl:1200L}}}}
 execute if score @s sulstalk_stew_type matches 9 if score @s sulstalk_stew_timer matches 96 positioned as @s as @e[distance=..1,type=warden] run spreadplayers ~ ~ 10 20 false @s
-execute if score @s sulstalk_stew_type matches 9 if score @s sulstalk_stew_timer matches 95 positioned as @s as @e[distance=..20,type=warden] positioned as @s run playsound minecraft:entity.warden.emerge hostile @s ~ ~ ~ 100 1 0
+execute if score @s sulstalk_stew_type matches 9 if score @s sulstalk_stew_timer matches 95 positioned as @s as @e[distance=..20,type=warden] positioned as @s run playsound minecraft:entity.warden.emerge hostile @a ~ ~ ~ 100 1 0
 execute if score @s sulstalk_stew_type matches 9 if score @s sulstalk_stew_timer matches 95 positioned as @s as @e[distance=..20,type=warden] positioned as @s positioned over motion_blocking run place feature sculk_patch_deep_dark ~ ~ ~10
 execute if score @s sulstalk_stew_type matches 9 if score @s sulstalk_stew_timer matches 95 positioned as @s as @e[distance=..20,type=warden] positioned as @s positioned over motion_blocking run place feature sculk_patch_deep_dark ~ ~ ~
 execute if score @s sulstalk_stew_type matches 9 if score @s sulstalk_stew_timer matches 95 positioned as @s as @e[distance=..20,type=warden] positioned as @s positioned over motion_blocking run place feature sculk_patch_deep_dark ~ ~ ~-10

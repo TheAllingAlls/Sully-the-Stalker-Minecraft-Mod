@@ -10,12 +10,12 @@ scoreboard objectives add sulstalk_disable_griefing trigger ""
 scoreboard objectives add sulstalk_griefing_disabled_count trigger ""
 scoreboard objectives add sulstalk_griefing_enabled_count trigger ""
 
-execute run scoreboard players set @s sulstalk_ticks_half 10
-execute run scoreboard players set @s sulstalk_half_tick 0
+execute unless score @s sulstalk_ticks_half = @s sulstalk_ticks_half run scoreboard players set @s sulstalk_ticks_half 10
+execute unless score @s sulstalk_half_tick = @s sulstalk_half_tick run scoreboard players set @s sulstalk_half_tick 0
 
-execute run scoreboard players set @s sulstalk_spawn_max 5
-execute run scoreboard players set @s sulstalk_spawn 0
-execute run scoreboard players set @s sulstalk_can_spawn 1
-execute run scoreboard players set @s sulstalk_disable_griefing 0
-execute run scoreboard players set @s sulstalk_griefing_disabled_count 0
-execute run scoreboard players set @s sulstalk_griefing_enabled_count 0
+execute unless score @s sulstalk_spawn_max = @s sulstalk_spawn_max run scoreboard players set @s sulstalk_spawn_max 5
+execute unless score @s sulstalk_spawn = @s sulstalk_spawn run scoreboard players set @s sulstalk_spawn 0
+execute unless score @s sulstalk_can_spawn = @s sulstalk_can_spawn run scoreboard players set @s sulstalk_can_spawn 1
+execute unless score @s sulstalk_disable_griefing = @s sulstalk_disable_griefing run scoreboard players set @s sulstalk_disable_griefing 0
+execute unless score @s sulstalk_griefing_disabled_count = @s sulstalk_griefing_disabled_count run scoreboard players set @s sulstalk_griefing_disabled_count 0
+execute unless score @s sulstalk_griefing_enabled_count = @s sulstalk_griefing_enabled_count run scoreboard players set @s sulstalk_griefing_enabled_count 0
