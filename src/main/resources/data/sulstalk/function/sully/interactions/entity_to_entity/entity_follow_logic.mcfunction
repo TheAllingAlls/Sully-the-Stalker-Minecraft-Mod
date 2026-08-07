@@ -4,6 +4,8 @@ execute if score @s sulstalk_following_entity_found matches 0 run scoreboard pla
 
 execute run scoreboard players set @s sulstalk_travel_timer 0
 
+execute if score @s sulstalk_following_entity_player_cooldown matches 1.. as @e[type=player,distance=..100] if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id run scoreboard players set @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_forget 0
+execute if score @s sulstalk_following_entity_player_cooldown matches 0 as @e[type=player,distance=..100] if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id run scoreboard players set @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_player_cooldown -1
 execute as @e[type=player,distance=..100] if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id if data entity @s {abilities:{invulnerable:1b}} run scoreboard players set @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_forget 0
 execute as @e[type=!player,distance=..100] if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id if data entity @s {Invulnerable:1b} run scoreboard players set @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_forget 0
 
