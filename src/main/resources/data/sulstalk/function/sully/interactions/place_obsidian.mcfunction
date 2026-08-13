@@ -1,2 +1,2 @@
-execute if block ~ ~ ~ #sulstalk:can_convert_to_obsidian positioned as @s run playsound minecraft:block.fire.extinguish block @e[type=player,distance=..8] ~ ~ ~ 10 1 0
+execute if block ~ ~ ~ #sulstalk:can_convert_to_obsidian positioned as @s run playsound minecraft:block.fire.extinguish block @e[type=player,distance=..8] ~ ~ ~ 0.1 1 0
 execute if block ~ ~ ~ #sulstalk:can_convert_to_obsidian run setblock ~ ~ ~ obsidian destroy
