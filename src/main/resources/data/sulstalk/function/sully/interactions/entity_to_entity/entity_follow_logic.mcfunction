@@ -27,6 +27,7 @@ execute unless score @s sulstalk_special_ability_type matches 0 as @e[distance=1
 execute as @e[type=player,distance=..100] if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id if score @s sulstalk_followed_entity_health matches ..10 run scoreboard players set @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_forget 0
 execute as @e[type=!player,distance=..100] if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id if score @s sulstalk_followed_entity_health matches ..200 run scoreboard players set @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_forget 0
 
+execute positioned ~ ~-2 ~ as @e[type=player,distance=..1] positioned ~ ~2 ~ if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id unless data entity @s {active_effects:[{id:"minecraft:poison"}]} if score @s sulstalk_followed_entity_health matches 500.. run damage @s 2 cramming
 execute positioned ~ ~-2 ~ as @e[type=player,distance=..1] positioned ~ ~2 ~ if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id unless data entity @s {active_effects:[{id:"minecraft:poison"}]} run effect give @s poison 1 10 true
 execute positioned ~ ~-2 ~ as @e[type=player,distance=..2] positioned ~ ~2 ~ if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id if data entity @s {active_effects:[{id:"minecraft:poison"}]} unless data entity @s {active_effects:[{id:"minecraft:hunger"}]} if score @s sulstalk_followed_entity_health matches ..190 run effect give @s hunger 10 1 true
 execute positioned ~ ~-2 ~ as @e[type=player,distance=..2] positioned ~ ~2 ~ if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id run scoreboard players remove @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_forget 1
@@ -41,7 +42,7 @@ execute if score @s sulstalk_following_entity_anger matches 199.. run scoreboard
 execute if score @s sulstalk_is_angry matches 1 if score @s sulstalk_following_entity_forget matches 1..50 run scoreboard players set @s sulstalk_following_entity_forget 50
 
 execute if score @s sulstalk_is_angry matches 1 unless score @s sulstalk_special_ability_type matches 0.. store result score @s sulstalk_special_ability_type run random value 1..3
-execute if score @s sulstalk_is_angry matches 1 if score @s sulstalk_special_ability_type matches 0.. run execute if dimension the_nether run scoreboard players set @s sulstalk_special_ability_type 1
+execute if score @s sulstalk_is_angry matches 1 if score @s sulstalk_special_ability_type matches 0.. run execute at @s if dimension the_nether run scoreboard players set @s sulstalk_special_ability_type 1
 
 ##Big Fireball
 execute rotated as @s run execute if score @s sulstalk_is_angry matches 1 if score @s sulstalk_special_ability_type matches 0 run function sulstalk:sully/interactions/entity_to_entity/big_fireball

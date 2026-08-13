@@ -53,7 +53,7 @@ execute positioned as @s store result score @s sulstalk_attacker_id as @e[tag=su
 execute if predicate {condition:entity_scores,entity:this,scores:{sulstalk_attacker_id:{}}} store result entity @s data.attacker_id int 1 run scoreboard players get @s sulstalk_attacker_id
 execute unless predicate {condition:entity_scores,entity:this,scores:{sulstalk_attacker_id:{}}} run data modify entity @s data.attacker_id set value -1
 execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number if data entity @s attack on attacker unless score @s sulstalk_attacker_id = @s sulstalk_attacker_id store result score @s sulstalk_attacker_id run data get entity @s UUID[0]
-execute positioned as @s if score @s sulstalk_interaction_delay matches ..0 as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] run data merge entity @s {width:1.1f,height:3.05f}
+execute positioned as @s if score @s sulstalk_interaction_delay matches ..0 as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number run data merge entity @s {width:1.1f,height:3.05f}
 execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number positioned ~ ~-1.75 ~ run tp ~ ~ ~
 
 ##Attempt to allow right-clicking entity
@@ -116,9 +116,10 @@ execute positioned as @s if score @s sulstalk_has_attacker matches 1 if score @s
 
 ##Related to sulstalk:sully/interactions/entity_to_entity/entity_logic
 execute positioned as @s if score @s sulstalk_damaged matches 1 run scoreboard players set @s sulstalk_follow_priority 6
-execute positioned as @s if score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_following_entity_forget matches 100.. if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches 1..4 run scoreboard players add @s sulstalk_following_entity_forget 10
-execute positioned as @s if score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_following_entity_forget matches 1.. if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches 5.. run scoreboard players add @s sulstalk_following_entity_forget 20
-execute positioned as @s if score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_following_entity_forget matches 1.. if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches 7.. run scoreboard players add @s sulstalk_following_entity_forget 20
+execute positioned as @s if score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_following_entity_forget matches 100.. if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches ..1 run scoreboard players remove @s sulstalk_following_entity_forget 50
+execute positioned as @s if score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_following_entity_forget matches ..200 if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches 2..4 run scoreboard players add @s sulstalk_following_entity_forget 10
+execute positioned as @s if score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_following_entity_forget matches ..200 if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches 5.. run scoreboard players add @s sulstalk_following_entity_forget 20
+execute positioned as @s if score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_following_entity_forget matches ..100 if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches 7.. run scoreboard players add @s sulstalk_following_entity_forget 20
 ####
 
 execute if score @s sulstalk_should_die matches 1.. run scoreboard players set @s sulstalk_can_pick_up_items 0

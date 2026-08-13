@@ -1,2 +1,3 @@
 execute if block ~ ~ ~ #sulstalk:can_convert_to_fire_charge positioned ~ ~1 ~ run summon item ~ ~ ~ {Tags:["sulstalk_dropped"],Item:{count:1,id:"minecraft:fire_charge"}}
+execute if block ~ ~ ~ #sulstalk:can_convert_to_fire_charge run playsound minecraft:block.fire.extinguish block @e[type=player,distance=..8] ~ ~ ~ 10 1 0
 execute if block ~ ~ ~ #sulstalk:can_convert_to_fire_charge run setblock ~ ~ ~ air destroy

@@ -26,6 +26,7 @@ execute unless score @s sulstalk_stew_player_used = @s sulstalk_stew_player_used
 #   12: Haste | Darkness | 3 Minutes
 #   14: Haste | Weakness | 5 Minutes
 #   15: High Strength | Quarter Hearts | 5 Minutes
+#   16: Fire Resistance | Three-Quarters Hearts | 5 Minutes
 ##
 
 execute if items entity @s weapon.* suspicious_stew[custom_name="Sully's Suspicious Stew",item_name="Sully's Suspicious Stew"] run scoreboard players set @s sulstalk_stew_player_holding 1
@@ -34,8 +35,12 @@ execute if score @s sulstalk_stew_player_holding matches 1 unless score @s sulst
 
 execute if score @s sulstalk_stew_player_holding matches 2 if score @s sulstalk_stew_type matches 1.. run scoreboard players set @s sulstalk_stew_timer 0
 execute if score @s sulstalk_stew_type matches 1.. run scoreboard players operation @s sulstalk_stew_last_type = @s sulstalk_stew_type
-execute if score @s sulstalk_stew_player_holding matches 2 store result score @s sulstalk_stew_type run random value 0..15
-execute if score @s sulstalk_stew_player_holding matches 2 if score @s sulstalk_stew_type = @s sulstalk_stew_last_type unless score @s sulstalk_stew_timer matches 1.. store result score @s sulstalk_stew_type run random value 0..15
+execute if score @s sulstalk_stew_player_holding matches 2 store result score @s sulstalk_stew_type run random value 0..16
+execute if score @s sulstalk_stew_player_holding matches 2 if score @s sulstalk_stew_type = @s sulstalk_stew_last_type unless score @s sulstalk_stew_timer matches 1.. store result score @s sulstalk_stew_type run random value 0..16
+
+execute at @s unless dimension overworld if score @s sulstalk_stew_player_holding matches 2 if score @s sulstalk_stew_type matches 10 store result score @s sulstalk_stew_type run random value 0..16
+execute at @s unless dimension overworld if score @s sulstalk_stew_player_holding matches 2 if score @s sulstalk_stew_type matches 6 store result score @s sulstalk_stew_type run random value 0..16
+execute at @s if dimension the_nether if score @s sulstalk_stew_player_holding matches 2 unless score @s sulstalk_stew_type matches 0 unless score @s sulstalk_stew_type matches 16 store result score @s sulstalk_stew_type run random value 0..16
 
 execute if score @s sulstalk_stew_player_holding matches 2 run scoreboard players operation @s sulstalk_stew_player_used = @s sulstalk_stew_player_used_count
 
@@ -219,6 +224,13 @@ execute if score @s sulstalk_stew_type matches 15 if score @s sulstalk_stew_time
 execute if score @s sulstalk_stew_type matches 15 unless data entity @s {active_effects:[{id:"minecraft:strength"}]} run effect give @s strength 300 8 false
 execute if score @s sulstalk_stew_type matches 15 run attribute @s max_health modifier add sulstalk:suspicious_stew_quarter_hearts -0.75 add_multiplied_total
 execute if score @s sulstalk_stew_type matches 15 if score @s sulstalk_stew_timer matches 6000 positioned as @s run playsound minecraft:entity.elder_guardian.ambient ambient @s ~ ~ ~ 100 1 0
+#
+#Stew Type 16
+execute if score @s sulstalk_stew_type matches 16 unless score @s sulstalk_stew_timer matches 1.. run scoreboard players set @s sulstalk_stew_timer 6000
+execute if score @s sulstalk_stew_type matches 16 if score @s sulstalk_stew_timer matches 5900..6000 run title @s actionbar "Fire Resistance, at the cost of some of your Health. Temporary."
+execute if score @s sulstalk_stew_type matches 16 unless data entity @s {active_effects:[{id:"minecraft:fire_resistance"}]} run effect give @s fire_resistance 300 255 false
+execute if score @s sulstalk_stew_type matches 16 run attribute @s max_health modifier add sulstalk:suspicious_stew_three_quarters_hearts -0.25 add_multiplied_total
+execute if score @s sulstalk_stew_type matches 16 if score @s sulstalk_stew_timer matches 6000 positioned as @s run playsound minecraft:entity.elder_guardian.ambient ambient @s ~ ~ ~ 100 1 0
 #
 
 
