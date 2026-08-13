@@ -4,6 +4,7 @@ scoreboard objectives add sulstalk_ticks_quarter trigger ""
 scoreboard objectives add sulstalk_quarter_tick trigger ""
 scoreboard objectives add sulstalk_ticks_other trigger ""
 scoreboard objectives add sulstalk_other_tick trigger ""
+scoreboard objectives add sulstalk_age trigger ""
 scoreboard objectives add sulstalk_gametime_storage trigger ""
 scoreboard objectives add sulstalk_daytime_storage trigger ""
 scoreboard objectives add sulstalk_storage_spawn trigger ""
@@ -13,6 +14,8 @@ scoreboard objectives add sulstalk_can_spawn trigger ""
 scoreboard objectives add sulstalk_disable_griefing trigger ""
 scoreboard objectives add sulstalk_griefing_disabled_count trigger ""
 scoreboard objectives add sulstalk_griefing_enabled_count trigger ""
+
+execute unless score @s sulstalk_age = @s sulstalk_age run scoreboard players set @s sulstalk_age 0
 
 execute unless score @s sulstalk_ticks_half = @s sulstalk_ticks_half run scoreboard players set @s sulstalk_ticks_half 10
 execute unless score @s sulstalk_half_tick = @s sulstalk_half_tick run scoreboard players set @s sulstalk_half_tick 0
