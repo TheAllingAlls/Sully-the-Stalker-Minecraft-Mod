@@ -133,6 +133,13 @@ execute if score @s sulstalk_should_die matches 1.. run scoreboard players set @
 execute positioned as @s if score @s sulstalk_damaged matches 1 unless score @s sulstalk_attack matches 2.. run playsound minecraft:entity.player.attack.weak neutral @e[type=player,distance=..20] ~ ~ ~ 100 1 0
 execute positioned as @s if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches 2..6 run playsound minecraft:entity.player.attack.strong neutral @e[type=player,distance=..20] ~ ~ ~ 100 1 0
 execute positioned as @s if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches 7.. run playsound minecraft:entity.player.attack.knockback neutral @e[type=player,distance=..20] ~ ~ ~ 100 1 0
+execute positioned as @s if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches 7.. run particle crit ~ ~ ~ 0 0 0 1 10 normal @e[type=player,distance=..20]
+execute positioned as @s if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches 1.. run particle damage_indicator ~ ~ ~ 0 1.5 0 0.1 1 normal @e[type=player,distance=..20]
+execute positioned as @s if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches 2.. run particle damage_indicator ~ ~ ~ 0 1.5 0 0.1 1 normal @e[type=player,distance=..20]
+execute positioned as @s if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches 3.. run particle damage_indicator ~ ~ ~ 0 1.5 0 0.1 1 normal @e[type=player,distance=..20]
+execute positioned as @s if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches 4.. run particle damage_indicator ~ ~ ~ 0 1.5 0 0.1 1 normal @e[type=player,distance=..20]
+execute positioned as @s if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches 5.. run particle damage_indicator ~ ~ ~ 0 1.5 0 0.1 1 normal @e[type=player,distance=..20]
+execute positioned as @s if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches 6.. run particle damage_indicator ~ ~ ~ 0 1.5 0 0.1 1 normal @e[type=player,distance=..20]
 
 execute if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches 1.. if score @s sulstalk_health_resistance matches ..0 run scoreboard players operation @s sulstalk_health_resistance = @s sulstalk_attack
 execute if score @s sulstalk_damaged matches 1 if score @s sulstalk_attack matches 1.. if score @s sulstalk_health_resistance matches 100.. run scoreboard players operation @s sulstalk_health_resistance /= @s sulstalk_attack_divider
@@ -167,4 +174,6 @@ execute if score @s sulstalk_health matches ..0 if score @s sulstalk_should_die 
 execute positioned as @s if score @s sulstalk_should_die matches 2 run execute as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number run kill @s
 
 execute if score @s sulstalk_health matches ..0 if score @s sulstalk_should_die matches ..0 run scoreboard players set @s sulstalk_should_die 1
+execute positioned as @s if score @s sulstalk_should_die matches 1 run particle poof ~ ~ ~ 0 0 0 0 5 normal @a
+execute positioned as @s if score @s sulstalk_should_die matches 1 run particle poof ~ ~1 ~ 0 0 0 0 5 normal @a
 execute if score @s sulstalk_should_die matches 2 run kill @s
