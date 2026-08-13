@@ -78,6 +78,7 @@ execute if score @s sulstalk_is_following_entity matches 1 run scoreboard player
 execute if score @s sulstalk_is_following_entity matches 1 run scoreboard players set @s sulstalk_will_be_in_block 0
 #execute if score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_travel_timer_enabled matches 1 run scoreboard players set @s sulstalk_travel_timer_enabled 2
 #execute if score @s sulstalk_is_following_entity matches 0 if score @s sulstalk_travel_timer_enabled matches 2 run scoreboard players set @s sulstalk_travel_timer_enabled 1
+execute if score @s sulstalk_underwater matches 4 if score @s sulstalk_is_following_entity matches 1 run scoreboard players set @s sulstalk_following_entity_forget 0
 execute if score @s sulstalk_underwater matches 4 if score @s sulstalk_travel_timer_enabled matches 1 run scoreboard players set @s sulstalk_travel_timer_enabled 2
 execute if score @s sulstalk_travel_timer matches 0..100 if score @s sulstalk_is_in_block matches ..-1 run scoreboard players set @s sulstalk_is_in_block 1
 execute if score @s sulstalk_travel_timer matches 0..50 if score @s sulstalk_is_in_block matches 1 run scoreboard players set @s sulstalk_is_in_block 0
