@@ -2,7 +2,7 @@
 scoreboard players add @s sulstalk_age 1
 
 execute if score @s sulstalk_half_tick matches 1 store result score @s sulstalk_storage_spawn run execute if entity @e[tag=sulstalk_storage]
-execute if score @s sulstalk_half_tick matches 1 if score @s sulstalk_storage_spawn matches 2.. as @e[tag=sulstalk_storage,sort=nearest,distance=0.1..] unless score @s sulstalk_age > @e[tag=sulstalk_storage,sort=nearest,distance=..0.1,limit=1] sulstalk_age run kill @s
+execute if score @s sulstalk_half_tick matches 1 if score @s sulstalk_storage_spawn matches 2.. unless score @s sulstalk_age > @e[tag=sulstalk_storage,sort=random,limit=1] sulstalk_age run kill @s
 execute if score @s sulstalk_half_tick matches 1 if score @s sulstalk_spawn > @s sulstalk_spawn_max as @e[tag=sulstalk_spawned,limit=1,sort=random] positioned as @s unless entity @e[type=player,distance=..40] run scoreboard players set @s sulstalk_should_die 1
 
 data modify entity @s Pos set from entity @r Pos
