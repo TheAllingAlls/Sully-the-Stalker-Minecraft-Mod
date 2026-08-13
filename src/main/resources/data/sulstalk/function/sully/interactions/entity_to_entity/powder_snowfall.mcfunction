@@ -3,9 +3,9 @@ execute unless score @s sulstalk_powder_snowfall_max matches -1.. store result e
 execute store result score @s sulstalk_powder_snowfall_max run data get entity @s data.powder_snowfall_max
 
 execute unless data entity @s data.random_number run data merge entity @s {data:{random_number:[0.0d,0.0d,0.0d]}}
-execute unless entity @e[type=falling_block,distance=..0.2,limit=1] store result entity @s data.random_number[0] double 0.1 run random value -10..10
+execute unless entity @e[type=falling_block,distance=..0.2,limit=1] store result entity @s data.random_number[0] double 1 run random value -1..1
 execute unless data entity @s data.random_number[1] run data modify entity @s data.random_number[1] set value 0.5d
-execute unless entity @e[type=falling_block,distance=..0.2,limit=1] store result entity @s data.random_number[2] double 0.1 run random value -10..10
+execute unless entity @e[type=falling_block,distance=..0.2,limit=1] store result entity @s data.random_number[2] double 1 run random value -1..1
 
 execute unless entity @e[type=falling_block,distance=..5,limit=1] run scoreboard players remove @s sulstalk_powder_snowfall_max 1
 execute unless entity @e[type=falling_block,distance=..5,limit=1] run playsound minecraft:block.powder_snow.break block @e[type=player,distance=..20] ~ ~ ~ 100 1 0

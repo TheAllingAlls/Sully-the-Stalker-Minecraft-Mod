@@ -28,7 +28,7 @@ execute unless score @s sulstalk_following_entity_anger matches -1.. run scorebo
 execute unless score @s sulstalk_is_angry matches 0..1 run scoreboard players set @s sulstalk_is_angry 0
 execute unless score @s sulstalk_special_ability_type matches -1..3 run scoreboard players set @s sulstalk_special_ability_type -1
 
-execute if score @s sulstalk_other_tick matches 1 unless score @s sulstalk_is_following_entity matches 1 run execute positioned as @s store result score @s sulstalk_nearby_entities run execute if entity @e[type=!item,type=!experience_orb,tag=!sulstalk_spawned,tag=!sulstalk_hitbox,tag=!sulstalk_storage,distance=..20,nbt={Invulnerable:0b}]
+execute if score @s sulstalk_half_tick matches 1 unless score @s sulstalk_is_following_entity matches 1 run execute positioned as @s store result score @s sulstalk_nearby_entities run execute if entity @e[type=!item,type=!experience_orb,tag=!sulstalk_spawned,tag=!sulstalk_hitbox,tag=!sulstalk_storage,distance=..20,nbt={Invulnerable:0b}]
 # execute if score @s sulstalk_is_following_entity matches 1 run execute run scoreboard players set @s sulstalk_nearby_entities -1
 # execute if score @s sulstalk_is_following_entity matches 1 run execute run scoreboard players set @s sulstalk_should_follow 0
 # execute if score @s sulstalk_nearby_entities matches 10.. positioned as @s store result score @s sulstalk_nearby_entities run execute if entity @e[distance=0.5..10]
@@ -53,7 +53,7 @@ execute unless score @s sulstalk_should_follow matches 1 run execute if score @s
 execute unless score @s sulstalk_should_follow matches 1 run execute if score @s sulstalk_nearby_entities matches 5..9 run scoreboard players set @s sulstalk_follow_priority 2
 execute unless score @s sulstalk_should_follow matches 1 run execute if score @s sulstalk_nearby_entities matches 3..4 run scoreboard players set @s sulstalk_follow_priority 3
 execute unless score @s sulstalk_should_follow matches 1 run execute if score @s sulstalk_nearby_entities matches 1..2 run scoreboard players set @s sulstalk_follow_priority 4
-execute if score @s sulstalk_other_tick matches 1 unless score @s sulstalk_should_follow matches 1 run execute positioned as @s if entity @e[distance=..7,type=player,nbt={abilities:{invulnerable:0b}}] run scoreboard players set @s sulstalk_follow_priority 5
+execute if score @s sulstalk_quarter_tick matches 1 unless score @s sulstalk_should_follow matches 1 run execute positioned as @s if entity @e[distance=..7,type=player,nbt={abilities:{invulnerable:0b}}] run scoreboard players set @s sulstalk_follow_priority 5
 execute unless score @s sulstalk_should_follow matches 1 run execute unless score @s sulstalk_is_following_entity matches 1 run execute if score @s sulstalk_follow_priority matches 5 store result score @s sulstalk_should_follow run random value 1..75
 
 execute if score @s sulstalk_should_follow matches 1 if score @s sulstalk_following_entity_forget matches 0 run scoreboard players set @s sulstalk_following_entity_forget -1
@@ -61,7 +61,7 @@ execute if score @s sulstalk_is_following_entity matches 1 run execute unless sc
 execute if score @s sulstalk_is_following_entity matches 1 run execute if score @s sulstalk_following_entity_forget matches 1.. run scoreboard players remove @s sulstalk_following_entity_forget 1
 
 ##Health stored in score is multiplied by 100 to account for decimals sneaking in, therefore 20 hp is 2000
-execute if score @s sulstalk_other_tick matches 1 positioned as @s as @e[type=!item,type=!experience_orb,tag=!sulstalk_spawned,tag=!sulstalk_hitbox,distance=..30] if data entity @s Health store result score @s sulstalk_followed_entity_health run data get entity @s Health 100
+execute if score @s sulstalk_quarter_tick matches 1 positioned as @s as @e[type=!item,type=!experience_orb,tag=!sulstalk_spawned,tag=!sulstalk_hitbox,distance=..30] if data entity @s Health store result score @s sulstalk_followed_entity_health run data get entity @s Health 100
 
 execute if score @s sulstalk_other_tick matches 1 positioned as @s as @e[distance=..20,type=!item,type=!experience_orb,tag=!sulstalk_spawned,tag=!sulstalk_hitbox] if score @s sulstalk_followed_entity_health = @s sulstalk_followed_entity_health unless predicate {condition:entity_scores,entity:this,scores:{sulstalk_followed_entity_id:{}}} store result score @s sulstalk_followed_entity_id run data get entity @s UUID[0]
 
@@ -72,7 +72,7 @@ execute unless score @s sulstalk_is_following_entity matches 1 run execute if sc
 execute unless score @s sulstalk_is_following_entity matches 1 run execute if score @s sulstalk_should_follow matches 1 if score @s sulstalk_follow_priority matches 5..6 positioned as @s store result score @s sulstalk_following_entity_id run data get entity @e[type=player,nbt={abilities:{invulnerable:0b}},sort=nearest,limit=1,distance=..20] UUID[0]
 execute if predicate {condition:entity_scores,entity:this,scores:{sulstalk_following_entity_id:{}}} store result entity @s data.following_entity_id int 1 run scoreboard players get @s sulstalk_following_entity_id
 
-execute if score @s sulstalk_other_tick matches 1 positioned as @s as @e[distance=..100] if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id run scoreboard players set @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_is_following_entity 1
+execute positioned as @s as @e[distance=..100] if score @s sulstalk_followed_entity_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_following_entity_id run scoreboard players set @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_is_following_entity 1
 execute unless score @s sulstalk_is_following_entity matches 1 run scoreboard players set @s sulstalk_should_follow -1
 execute if score @s sulstalk_following_entity_player_cooldown matches 21.. run scoreboard players remove @s sulstalk_following_entity_player_cooldown 1
 execute if score @s sulstalk_following_entity_player_cooldown matches 1..20 unless score @s sulstalk_is_following_entity matches 1 run scoreboard players remove @s sulstalk_following_entity_player_cooldown 1
