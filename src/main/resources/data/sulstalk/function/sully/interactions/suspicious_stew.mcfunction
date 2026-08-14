@@ -27,6 +27,7 @@ execute unless score @s sulstalk_stew_player_used = @s sulstalk_stew_player_used
 #   14: Haste | Weakness | 5 Minutes
 #   15: High Strength | Quarter Hearts | 5 Minutes
 #   16: Fire Resistance | Three-Quarters Hearts | 5 Minutes
+#   17: Resistance | 5 Parched | 3 Minutes
 ##
 
 execute if items entity @s weapon.* suspicious_stew[custom_name="Sully's Suspicious Stew",item_name="Sully's Suspicious Stew"] run scoreboard players set @s sulstalk_stew_player_holding 1
@@ -212,11 +213,11 @@ execute if score @s sulstalk_stew_type matches 13 unless data entity @s {active_
 execute if score @s sulstalk_stew_type matches 13 if score @s sulstalk_stew_timer matches 3600 positioned as @s run playsound minecraft:entity.elder_guardian.ambient ambient @s ~ ~ ~ 100 1 0
 #
 #Stew Type 14
-execute if score @s sulstalk_stew_type matches 14 unless score @s sulstalk_stew_timer matches 1.. run scoreboard players set @s sulstalk_stew_timer 6000
-execute if score @s sulstalk_stew_type matches 14 if score @s sulstalk_stew_timer matches 5900..6000 run title @s actionbar "Haste, at the cost of your strength. Temporary."
+execute if score @s sulstalk_stew_type matches 14 unless score @s sulstalk_stew_timer matches 1.. run scoreboard players set @s sulstalk_stew_timer 3600
+execute if score @s sulstalk_stew_type matches 14 if score @s sulstalk_stew_timer matches 3500..3600 run title @s actionbar "Haste, at the cost of your strength. Temporary."
 execute if score @s sulstalk_stew_type matches 14 unless data entity @s {active_effects:[{id:"minecraft:haste"}]} run effect give @s haste 180 3 false
 execute if score @s sulstalk_stew_type matches 14 unless data entity @s {active_effects:[{id:"minecraft:weakness"}]} run effect give @s weakness 180 0 false
-execute if score @s sulstalk_stew_type matches 14 if score @s sulstalk_stew_timer matches 6000 positioned as @s run playsound minecraft:entity.elder_guardian.ambient ambient @s ~ ~ ~ 100 1 0
+execute if score @s sulstalk_stew_type matches 14 if score @s sulstalk_stew_timer matches 3600 positioned as @s run playsound minecraft:entity.elder_guardian.ambient ambient @s ~ ~ ~ 100 1 0
 #
 #Stew Type 15
 execute if score @s sulstalk_stew_type matches 15 unless score @s sulstalk_stew_timer matches 1.. run scoreboard players set @s sulstalk_stew_timer 6000
@@ -231,6 +232,18 @@ execute if score @s sulstalk_stew_type matches 16 if score @s sulstalk_stew_time
 execute if score @s sulstalk_stew_type matches 16 unless data entity @s {active_effects:[{id:"minecraft:fire_resistance"}]} run effect give @s fire_resistance 300 255 false
 execute if score @s sulstalk_stew_type matches 16 run attribute @s max_health modifier add sulstalk:suspicious_stew_three_quarters_hearts -0.25 add_multiplied_total
 execute if score @s sulstalk_stew_type matches 16 if score @s sulstalk_stew_timer matches 6000 positioned as @s run playsound minecraft:entity.elder_guardian.ambient ambient @s ~ ~ ~ 100 1 0
+#
+#Stew Type 17
+execute if score @s sulstalk_stew_type matches 8 unless score @s sulstalk_stew_timer matches 1.. run scoreboard players set @s sulstalk_stew_timer 3600
+execute if score @s sulstalk_stew_type matches 8 if score @s sulstalk_stew_timer matches 3500..3600 run title @s actionbar "Skeletons inflicting weakness arrive. You are given resistance as defense."
+execute if score @s sulstalk_stew_type matches 8 unless data entity @s {active_effects:[{id:"minecraft:resistance"}]} run effect give @s resistance 180 2 false
+execute if score @s sulstalk_stew_type matches 8 if score @s sulstalk_stew_timer matches 3600 positioned as @s run summon parched ~ ~ ~ {equipment:{mainhand:{count:1,id:"minecraft:bow"}}}
+execute if score @s sulstalk_stew_type matches 8 if score @s sulstalk_stew_timer matches 3600 positioned as @s run summon parched ~ ~ ~ {equipment:{mainhand:{count:1,id:"minecraft:bow"}}}
+execute if score @s sulstalk_stew_type matches 8 if score @s sulstalk_stew_timer matches 3600 positioned as @s run summon parched ~ ~ ~ {equipment:{mainhand:{count:1,id:"minecraft:bow"}}}
+execute if score @s sulstalk_stew_type matches 8 if score @s sulstalk_stew_timer matches 3600 positioned as @s run summon parched ~ ~ ~ {equipment:{mainhand:{count:1,id:"minecraft:bow"}}}
+execute if score @s sulstalk_stew_type matches 8 if score @s sulstalk_stew_timer matches 3600 positioned as @s run summon parched ~ ~ ~ {equipment:{mainhand:{count:1,id:"minecraft:bow"}}}
+execute if score @s sulstalk_stew_type matches 8 if score @s sulstalk_stew_timer matches 3600 positioned as @s as @e[distance=..1,type=parched] run spreadplayers ~ ~ 2 5 false @s
+execute if score @s sulstalk_stew_type matches 8 if score @s sulstalk_stew_timer matches 3600 positioned as @s run playsound minecraft:entity.bogged.ambient hostile @s ~ ~ ~ 100 1 0
 #
 
 
