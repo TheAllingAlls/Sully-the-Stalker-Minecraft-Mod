@@ -3,6 +3,7 @@
     "values":[
         "#minecraft:fences",
         "#minecraft:fence_gates",
-        "#minecraft:wall_post_override"
+        "#minecraft:wall_post_override",
+        "#minecraft:walls"
     ]
 }

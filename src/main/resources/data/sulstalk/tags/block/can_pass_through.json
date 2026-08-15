@@ -9,6 +9,7 @@
         {"id":"#minecraft:chains"},
         {"id":"#minecraft:fence_gates"},
         {"id":"#minecraft:fences"},
+        {"id":"#minecraft:walls"},
         {"id":"#minecraft:trapdoors"},
         {"id":"#minecraft:doors"},
         {"id":"#minecraft:pressure_plates"},

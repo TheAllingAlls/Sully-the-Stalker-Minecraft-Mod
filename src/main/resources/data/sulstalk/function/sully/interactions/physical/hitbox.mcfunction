@@ -1,3 +1,4 @@
+scoreboard objectives add sulstalk_hitbox_age trigger ""
 scoreboard objectives add sulstalk_hitbox_id trigger ""
 scoreboard objectives add sulstalk_has_hitbox trigger ""
 scoreboard objectives add sulstalk_nearby_hitboxes trigger ""
@@ -21,6 +22,7 @@ scoreboard objectives add sulstalk_damaged_delay trigger ""
 scoreboard objectives add sulstalk_interaction_delay trigger ""
 scoreboard objectives add sulstalk_should_die trigger ""
 
+execute unless score @s sulstalk_hitbox_age = @s sulstalk_hitbox_age run scoreboard players set @s sulstalk_hitbox_age 0
 execute unless score @s sulstalk_has_hitbox matches 0..1 run scoreboard players set @s sulstalk_has_hitbox 0
 execute unless score @s sulstalk_hitbox_id = @s sulstalk_hitbox_id run scoreboard players set @s sulstalk_hitbox_id -1
 execute unless score @s sulstalk_nearby_hitboxes = @s sulstalk_nearby_hitboxes run scoreboard players set @s sulstalk_nearby_hitboxes -1
@@ -42,25 +44,26 @@ execute unless score @s sulstalk_damaged_delay matches -1..10 run scoreboard pla
 execute unless score @s sulstalk_interaction_delay matches -1.. run scoreboard players set @s sulstalk_interaction_delay -1
 execute unless score @s sulstalk_should_die matches -1..2 run scoreboard players set @s sulstalk_should_die -1
 
-execute positioned as @s rotated as @s unless entity @e[tag=sulstalk_hitbox,sort=nearest,distance=..2] unless score @s sulstalk_has_hitbox matches 1 run summon interaction ~ ~ ~ {Tags:["sulstalk_hitbox"],OnGround:0b}
-execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] unless score @s sulstalk_hitbox_id = @s sulstalk_hitbox_id store result score @s sulstalk_hitbox_id as @e[tag=sulstalk_spawned,distance=..0.1] unless score @s sulstalk_has_hitbox matches 1 run scoreboard players get @s sulstalk_spawned_number
-execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number run scoreboard players set @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_has_hitbox 1
-#execute positioned as @s if score @s sulstalk_has_hitbox matches 1 run execute store result score @s sulstalk_nearby_hitboxes run execute if entity @e[tag=sulstalk_hitbox,distance=..10]
-#execute positioned as @s if score @s sulstalk_has_hitbox matches 1 run execute if score @s sulstalk_nearby_hitboxes > @s sulstalk_nearby_similar_entities run kill @e[tag=sulstalk_hitbox,sort=nearest,limit=1,distance=..10]
-execute positioned as @s unless entity @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] run scoreboard players set @s sulstalk_has_hitbox 0
-execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number if data entity @s attack as @e[tag=sulstalk_spawned,distance=..0.1,limit=1] if score @s sulstalk_damaged_delay matches -1 run scoreboard players set @s sulstalk_has_attacker 1
-execute positioned as @s store result score @s sulstalk_attacker_id as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number if data entity @s attack on attacker run data get entity @s UUID[0]
+execute positioned as @s unless score @s sulstalk_has_hitbox matches 1 run summon interaction ~ ~ ~ {Tags:["sulstalk_hitbox"],OnGround:0b}
+execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest,distance=..2] unless score @s sulstalk_hitbox_id = @s sulstalk_hitbox_id store result score @s sulstalk_hitbox_id as @e[tag=sulstalk_spawned,distance=..0.1] unless score @s sulstalk_has_hitbox matches 1 run scoreboard players get @s sulstalk_spawned_number
+execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest,distance=..2] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number run scoreboard players add @s sulstalk_hitbox_age 1
+execute positioned as @s unless entity @e[tag=sulstalk_hitbox,sort=nearest,distance=..2] run scoreboard players set @s sulstalk_has_hitbox 0
+execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest,distance=..2] unless score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number run scoreboard players set @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_has_hitbox 0
+execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest,distance=..2] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number run scoreboard players set @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_has_hitbox 1
+execute positioned as @s as @e[tag=sulstalk_hitbox,sort=random,distance=..2,limit=1] positioned as @s if score @s sulstalk_hitbox_id = @e[tag=sulstalk_hitbox,sort=random,distance=..1,limit=1] sulstalk_hitbox_id if score @s sulstalk_hitbox_age < @e[tag=sulstalk_hitbox,sort=random,distance=..1,limit=1] sulstalk_hitbox_age run kill @s
+execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest,distance=..2] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number if data entity @s attack as @e[tag=sulstalk_spawned,distance=..0.1,limit=1] if score @s sulstalk_damaged_delay matches -1 run scoreboard players set @s sulstalk_has_attacker 1
+execute positioned as @s store result score @s sulstalk_attacker_id as @e[tag=sulstalk_hitbox,sort=nearest,distance=..2] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number if data entity @s attack on attacker run data get entity @s UUID[0]
 execute if predicate {condition:entity_scores,entity:this,scores:{sulstalk_attacker_id:{}}} store result entity @s data.attacker_id int 1 run scoreboard players get @s sulstalk_attacker_id
 execute unless predicate {condition:entity_scores,entity:this,scores:{sulstalk_attacker_id:{}}} run data modify entity @s data.attacker_id set value -1
-execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number if data entity @s attack on attacker unless score @s sulstalk_attacker_id = @s sulstalk_attacker_id store result score @s sulstalk_attacker_id run data get entity @s UUID[0]
-execute positioned as @s if score @s sulstalk_interaction_delay matches ..0 as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number run data merge entity @s {width:1.1f,height:3.05f}
+execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest,distance=..2] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number if data entity @s attack on attacker unless score @s sulstalk_attacker_id = @s sulstalk_attacker_id store result score @s sulstalk_attacker_id run data get entity @s UUID[0]
+execute positioned as @s if score @s sulstalk_interaction_delay matches ..0 as @e[tag=sulstalk_hitbox,sort=nearest,distance=..2] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number run data merge entity @s {width:1.1f,height:3.05f}
 execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number positioned ~ ~-1.75 ~ run tp ~ ~ ~
 
 ##Attempt to allow right-clicking entity
 
-execute positioned as @s if score @s sulstalk_interaction_delay matches 0 run execute as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number if data entity @s interaction run data merge entity @s {width:0.0f,height:0.0f}
-execute positioned as @s if score @s sulstalk_interaction_delay matches 0 run execute as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number if data entity @s interaction run scoreboard players set @e[tag=sulstalk_spawned,distance=..0.1,limit=1] sulstalk_interaction_delay -1
-execute positioned as @s unless score @s sulstalk_interaction_delay matches 0 run execute as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number if data entity @s interaction run data remove entity @s interaction
+execute positioned as @s if score @s sulstalk_interaction_delay matches 0 run execute as @e[tag=sulstalk_hitbox,sort=nearest,distance=..2] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number if data entity @s interaction run data merge entity @s {width:0.0f,height:0.0f}
+execute positioned as @s if score @s sulstalk_interaction_delay matches 0 run execute as @e[tag=sulstalk_hitbox,sort=nearest,distance=..2] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number if data entity @s interaction run scoreboard players set @e[tag=sulstalk_spawned,distance=..0.1,limit=1] sulstalk_interaction_delay -1
+execute positioned as @s unless score @s sulstalk_interaction_delay matches 0 run execute as @e[tag=sulstalk_hitbox,sort=nearest,distance=..2] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number if data entity @s interaction run data remove entity @s interaction
 
 execute if score @s sulstalk_interaction_delay matches -1 run scoreboard players set @s sulstalk_interaction_delay 4
 execute if score @s sulstalk_interaction_delay matches 1.. run scoreboard players remove @s sulstalk_interaction_delay 1
@@ -68,9 +71,9 @@ execute if score @s sulstalk_interaction_delay matches 1.. run scoreboard player
 
 execute if score @s sulstalk_damaged matches -1 run scoreboard players set @s sulstalk_damaged 0
 execute if score @s sulstalk_should_die matches -1 run scoreboard players set @s sulstalk_should_die 0
-execute positioned as @s if score @s sulstalk_damaged_delay matches -1 if score @s sulstalk_has_attacker matches 1 run execute as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10,limit=1] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number as @e[tag=sulstalk_spawned,distance=..0.1,limit=1] run scoreboard players set @s sulstalk_damaged 1
-execute positioned as @s if score @s sulstalk_has_attacker matches 1 store result score @s sulstalk_attack as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10,limit=1] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number on attacker run attribute @s minecraft:attack_damage get
-execute positioned as @s if score @s sulstalk_has_attacker matches 1 if score @s sulstalk_attack matches 2.. run execute as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10,limit=1] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number on attacker if data entity @s {abilities:{invulnerable:0b}} run item modify entity @s weapon.mainhand [{function:set_damage,damage:-0.01,add:true}]
+execute positioned as @s if score @s sulstalk_damaged_delay matches -1 if score @s sulstalk_has_attacker matches 1 run execute as @e[tag=sulstalk_hitbox,sort=nearest,distance=..2,limit=1] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number as @e[tag=sulstalk_spawned,distance=..0.1,limit=1] run scoreboard players set @s sulstalk_damaged 1
+execute positioned as @s if score @s sulstalk_has_attacker matches 1 store result score @s sulstalk_attack as @e[tag=sulstalk_hitbox,sort=nearest,distance=..2,limit=1] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number on attacker run attribute @s minecraft:attack_damage get
+execute positioned as @s if score @s sulstalk_has_attacker matches 1 if score @s sulstalk_attack matches 2.. run execute as @e[tag=sulstalk_hitbox,sort=nearest,distance=..2,limit=1] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number on attacker if data entity @s {abilities:{invulnerable:0b}} run item modify entity @s weapon.mainhand [{function:set_damage,damage:-0.01,add:true}]
 execute if score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged_delay matches -1 if score @s sulstalk_attack matches 1.. run scoreboard players operation @s sulstalk_health -= @s sulstalk_attack
 
 ##Projectile detection and damage
@@ -108,11 +111,11 @@ execute positioned as @s if score @s sulstalk_should_die matches 0 if score @s s
 execute positioned as @s if score @s sulstalk_should_die matches 0 if score @s sulstalk_damaged matches 1 run data remove entity @s item.components.minecraft:bundle_contents[-1]
 
 ##Mace functionality
-execute positioned as @s if score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged_delay matches -1 as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number on attacker run function sulstalk:sully/interactions/physical/hitbox_mace
+execute positioned as @s if score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged_delay matches -1 as @e[tag=sulstalk_hitbox,sort=nearest,distance=..2] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number on attacker run function sulstalk:sully/interactions/physical/hitbox_mace
 ####
 
-execute positioned as @s if score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged_delay matches -1 unless score @s sulstalk_is_following_entity matches 1 run execute as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number on attacker rotated as @s as @e[limit=1,distance=..0.1,tag=sulstalk_spawned] positioned ^ ^ ^5 positioned ~ ~3 ~ run tp ~ ~ ~
-execute positioned as @s if score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged_delay matches -1 if score @s sulstalk_is_following_entity matches 1 run execute as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number on attacker rotated as @s as @e[limit=1,distance=..0.1,tag=sulstalk_spawned] positioned ^ ^ ^2 positioned ~ ~1 ~ run tp ~ ~ ~
+execute positioned as @s if score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged_delay matches -1 unless score @s sulstalk_is_following_entity matches 1 run execute as @e[tag=sulstalk_hitbox,sort=nearest,distance=..2] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number on attacker rotated as @s as @e[limit=1,distance=..0.1,tag=sulstalk_spawned] positioned ^ ^ ^5 positioned ~ ~3 ~ run tp ~ ~ ~
+execute positioned as @s if score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged_delay matches -1 if score @s sulstalk_is_following_entity matches 1 run execute as @e[tag=sulstalk_hitbox,sort=nearest,distance=..2] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number on attacker rotated as @s as @e[limit=1,distance=..0.1,tag=sulstalk_spawned] positioned ^ ^ ^2 positioned ~ ~1 ~ run tp ~ ~ ~
 
 ##Related to sulstalk:sully/interactions/entity_to_entity/entity_logic
 execute positioned as @s if score @s sulstalk_damaged matches 1 run scoreboard players set @s sulstalk_follow_priority 6
@@ -165,7 +168,7 @@ execute if score @s sulstalk_health_resistance matches 1.. run scoreboard player
 execute if score @s sulstalk_damaged matches 0 if score @s sulstalk_damaged_delay matches 0.. run scoreboard players remove @s sulstalk_damaged_delay 1
 execute if score @s sulstalk_damaged matches 1 if score @s sulstalk_damaged_delay matches -1 run scoreboard players set @s sulstalk_damaged_delay 10
 execute if score @s sulstalk_damaged_delay matches 10 if score @s sulstalk_damaged matches 1 run scoreboard players set @s sulstalk_damaged 2
-execute positioned as @s unless score @s sulstalk_damaged_delay matches -1 run execute as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number run data remove entity @s attack
+execute positioned as @s unless score @s sulstalk_damaged_delay matches -1 run execute as @e[tag=sulstalk_hitbox,sort=nearest,distance=..2] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number run data remove entity @s attack
 
 execute if score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged matches 2 run data remove entity @s attack
 execute if score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged matches 2 run scoreboard players set @s sulstalk_has_attacker 0
@@ -179,7 +182,7 @@ execute if score @s sulstalk_should_die matches ..0 unless score @s sulstalk_dam
 execute positioned as @s as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number positioned ~ ~-1.75 ~ run tp ~ ~ ~
 
 execute if score @s sulstalk_health matches ..0 if score @s sulstalk_should_die matches ..0 run scoreboard players set @s sulstalk_should_die 1
-execute positioned as @s if score @s sulstalk_should_die matches 2 run execute as @e[tag=sulstalk_hitbox,sort=nearest,distance=..10] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number run kill @s
+execute positioned as @s if score @s sulstalk_should_die matches 2 run execute as @e[tag=sulstalk_hitbox,sort=nearest,distance=..2] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number run kill @s
 
 execute if score @s sulstalk_health matches ..0 if score @s sulstalk_should_die matches ..0 run scoreboard players set @s sulstalk_should_die 1
 execute positioned as @s if score @s sulstalk_should_die matches 1 run particle poof ~ ~ ~ 0 0 0 0 5 normal @a
