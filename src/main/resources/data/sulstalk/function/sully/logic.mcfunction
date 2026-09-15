@@ -32,6 +32,7 @@ execute unless score @s sulstalk_can_rotate_up matches -1..1 run scoreboard play
 #execute store result score @s sulstalk_position_y run data get entity @s Pos[1] 10000
 #execute store result score @s sulstalk_position_z run data get entity @s Pos[2] 10000
 
+execute if score @s sulstalk_travel_timer_enabled matches 2.. unless score @s sulstalk_travel_timer matches 0 run scoreboard players set @s sulstalk_travel_timer 0
 execute if score @s sulstalk_travel_timer_enabled matches 1 if score @s sulstalk_travel_timer matches -1 store result score @s sulstalk_travel_timer run random value 200..4200
 execute if score @s sulstalk_travel_timer_enabled matches 1 if score @s sulstalk_travel_timer matches 0.. run scoreboard players remove @s sulstalk_travel_timer 1
 #execute if score @s sulstalk_travel_timer_enabled matches 1 if score @s sulstalk_travel_timer matches 0..20 if score @s sulstalk_should_move matches 1 run scoreboard players set @s sulstalk_should_move 0
@@ -79,15 +80,12 @@ execute if score @s sulstalk_disable_griefing matches 1 if score @s sulstalk_tra
 
 
 execute if score @s sulstalk_is_following_entity matches 1 run scoreboard players set @s sulstalk_is_in_block 0
-execute if score @s sulstalk_is_following_entity matches 1 run scoreboard players set @s sulstalk_will_be_in_block 0
 #execute if score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_travel_timer_enabled matches 1 run scoreboard players set @s sulstalk_travel_timer_enabled 2
 #execute if score @s sulstalk_is_following_entity matches 0 if score @s sulstalk_travel_timer_enabled matches 2 run scoreboard players set @s sulstalk_travel_timer_enabled 1
 execute if score @s sulstalk_underwater matches 4 if score @s sulstalk_is_following_entity matches 1 run scoreboard players set @s sulstalk_following_entity_forget 0
 execute if score @s sulstalk_underwater matches 4 if score @s sulstalk_travel_timer_enabled matches 1 run scoreboard players set @s sulstalk_travel_timer_enabled 2
 execute if score @s sulstalk_travel_timer matches 0..100 if score @s sulstalk_is_in_block matches ..-1 run scoreboard players set @s sulstalk_is_in_block 1
 execute if score @s sulstalk_travel_timer matches 0..50 if score @s sulstalk_is_in_block matches 1 run scoreboard players set @s sulstalk_is_in_block 0
-execute if score @s sulstalk_travel_timer matches 0..100 if score @s sulstalk_will_be_in_block matches ..-1 run scoreboard players set @s sulstalk_will_be_in_block 1
-execute if score @s sulstalk_travel_timer matches 0..50 if score @s sulstalk_will_be_in_block matches 1 run scoreboard players set @s sulstalk_will_be_in_block 0
 execute if score @s sulstalk_underwater matches 1..2 if score @s sulstalk_is_in_block matches 1.. run scoreboard players set @s sulstalk_is_in_block -1
 execute if score @s sulstalk_underwater matches -2..-1 run scoreboard players set @s sulstalk_is_in_block 1
 execute if score @s sulstalk_disable_griefing matches 0 if score @s sulstalk_travel_timer matches 3900..4200 if score @s sulstalk_is_in_block matches -9999.. run scoreboard players set @s sulstalk_is_in_block -2
