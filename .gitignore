@@ -43,3 +43,4 @@ replay_*.log
 
 FORGE-1.20.1/
 reference/
+.token
