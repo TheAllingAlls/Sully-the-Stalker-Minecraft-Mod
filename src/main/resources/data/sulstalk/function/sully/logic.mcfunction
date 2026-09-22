@@ -109,8 +109,10 @@ execute if score @s sulstalk_is_in_block matches -2 at @s run tp ~0.0 ~-0.2 ~0.0
 
 execute if score @s sulstalk_should_move matches -1 run scoreboard players set @s sulstalk_should_move 1
 execute if score @s sulstalk_disable_griefing matches 1 run execute positioned as @s rotated as @s rotated ~ 0.0 unless block ^ ^ ^1 #sulstalk:can_pass_through unless block ^-0.1 ^ ^1 #sulstalk:can_pass_through unless block ^0.1 ^ ^1 #sulstalk:can_pass_through unless block ^ ^1 ^1 #sulstalk:can_pass_through run scoreboard players set @s sulstalk_should_move -1
-execute if score @s sulstalk_disable_griefing matches 1 run execute if score @s sulstalk_should_move matches -1 if predicate {condition:random_chance,chance:0.50} run rotate @s ~-45 ~
-execute if score @s sulstalk_disable_griefing matches 1 run execute if score @s sulstalk_should_move matches -1 if predicate {condition:random_chance,chance:0.50} run rotate @s ~45 ~
+execute if score @s sulstalk_disable_griefing matches 1 run execute if score @s sulstalk_should_move matches -1 if predicate {type:random_chance,chance:0.50} run rotate @s ~-45 ~
+execute if score @s sulstalk_disable_griefing matches 1 run execute if score @s sulstalk_should_move matches -1 if predicate {type:random_chance,chance:0.50} run rotate @s ~45 ~
+# execute if score @s sulstalk_disable_griefing matches 1 run execute if score @s sulstalk_should_move matches -1 if predicate {condition:random_chance,chance:0.50} run rotate @s ~-45 ~
+# execute if score @s sulstalk_disable_griefing matches 1 run execute if score @s sulstalk_should_move matches -1 if predicate {condition:random_chance,chance:0.50} run rotate @s ~45 ~
 
 execute unless score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_underwater_rotate matches 0 if score @s sulstalk_should_move matches 1 at @s run tp ^0.0 ^0.0 ^0.05
 execute unless score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_underwater_rotate matches 0 if score @s sulstalk_should_move matches 0 at @s run tp ^0.0 ^0.0 ^0.01
