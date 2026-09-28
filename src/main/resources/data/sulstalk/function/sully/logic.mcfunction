@@ -114,8 +114,8 @@ execute if score @s sulstalk_disable_griefing matches 1 run execute if score @s 
 # execute if score @s sulstalk_disable_griefing matches 1 run execute if score @s sulstalk_should_move matches -1 if predicate {condition:random_chance,chance:0.50} run rotate @s ~-45 ~
 # execute if score @s sulstalk_disable_griefing matches 1 run execute if score @s sulstalk_should_move matches -1 if predicate {condition:random_chance,chance:0.50} run rotate @s ~45 ~
 
-execute unless score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_underwater_rotate matches 0 if score @s sulstalk_should_move matches 1 at @s run tp ^0.0 ^0.0 ^0.05
-execute unless score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_underwater_rotate matches 0 if score @s sulstalk_should_move matches 0 at @s run tp ^0.0 ^0.0 ^0.01
+execute unless score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_underwater_rotate matches 0 unless score @s sulstalk_underwater matches 4 if score @s sulstalk_should_move matches 1 at @s run tp ^0.0 ^0.0 ^0.05
+execute unless score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_underwater_rotate matches 0 unless score @s sulstalk_underwater matches 4 if score @s sulstalk_should_move matches 0 at @s run tp ^0.0 ^0.0 ^0.01
 
 execute if score @s sulstalk_should_rotate matches 0 store result score @s sulstalk_should_rotate run random value -200..200
 execute if score @s sulstalk_should_rotate matches 0..49 store result score @s sulstalk_should_rotate run random value 0..200
