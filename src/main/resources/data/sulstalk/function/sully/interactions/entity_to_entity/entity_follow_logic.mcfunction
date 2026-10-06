@@ -43,7 +43,7 @@ execute if score @s sulstalk_is_angry matches 1 if score @s sulstalk_following_e
 execute if score @s sulstalk_is_angry matches 1 unless score @s sulstalk_special_ability_type matches 0.. store result score @s sulstalk_special_ability_type run random value 1..3
 execute if score @s sulstalk_is_angry matches 1 if score @s sulstalk_special_ability_type matches 0.. run execute at @s if dimension the_nether run scoreboard players set @s sulstalk_special_ability_type 1
 
-##Big Fireball
+##Big Fireball (Unfinished)
 execute rotated as @s run execute if score @s sulstalk_is_angry matches 1 if score @s sulstalk_special_ability_type matches 0 run function sulstalk:sully/interactions/entity_to_entity/big_fireball
 ####
 

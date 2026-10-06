@@ -1,5 +1,5 @@
 function sulstalk:sully/interactions/physical/hitbox
-function sulstalk:sully/interactions/entity_to_entity/entity_logic
+execute unless score @s sulstalk_underwater matches 4 run function sulstalk:sully/interactions/entity_to_entity/entity_logic
 function sulstalk:sully/interactions/entity_to_entity/reset_rotation
 
 # sulstalk:sully/interactions/suspicious_stew runs for players

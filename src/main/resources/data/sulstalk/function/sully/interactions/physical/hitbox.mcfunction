@@ -116,6 +116,8 @@ execute positioned as @s if score @s sulstalk_has_attacker matches 1 if score @s
 ####
 
 execute positioned as @s if score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged_delay matches -1 unless score @s sulstalk_is_following_entity matches 1 unless score @s sulstalk_underwater matches 4 run execute as @e[tag=sulstalk_hitbox,sort=nearest,distance=..2] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number on attacker rotated as @s as @e[limit=1,distance=..0.1,tag=sulstalk_spawned] positioned ^ ^ ^5 positioned ~ ~3 ~ run tp ~ ~ ~
+execute positioned as @s if score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged_delay matches -1 unless score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_underwater matches 4 run execute as @e[tag=sulstalk_hitbox,sort=nearest,distance=..2] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number on attacker rotated as @s as @e[limit=1,distance=..0.1,tag=sulstalk_spawned] positioned ^ ^ ^0.5 positioned ~ ~0 ~ run tp ~ ~ ~
+execute positioned as @s if score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged_delay matches -1 unless score @s sulstalk_is_following_entity matches 1 if score @s sulstalk_underwater matches 4 run execute as @e[tag=sulstalk_hitbox,sort=nearest,distance=..2] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number on attacker rotated as @s as @e[limit=1,distance=..0.1,tag=sulstalk_spawned] run rotate @s facing ^ ^ ^1
 execute positioned as @s if score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged_delay matches -1 if score @s sulstalk_is_following_entity matches 1 run execute as @e[tag=sulstalk_hitbox,sort=nearest,distance=..2] if score @s sulstalk_hitbox_id = @e[limit=1,distance=..0.1,tag=sulstalk_spawned] sulstalk_spawned_number on attacker rotated as @s as @e[limit=1,distance=..0.1,tag=sulstalk_spawned] positioned ^ ^ ^2 positioned ~ ~1 ~ run tp ~ ~ ~
 
 ##Related to sulstalk:sully/interactions/entity_to_entity/entity_logic
@@ -176,6 +178,7 @@ execute if score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged
 execute unless score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged matches 2 run scoreboard players set @s sulstalk_attacker_id -1
 execute unless score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged matches 2 run scoreboard players set @s sulstalk_attack 0
 execute if score @s sulstalk_damaged matches 2 if score @s sulstalk_has_projectile matches 1 run scoreboard players set @s sulstalk_has_projectile 0
+execute if score @s sulstal_damaged matches 2 if score @s sulstalk_underwater matches 4 run scoreboard players set @s sulstalk_underwater 3
 execute unless score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged matches 2 run scoreboard players set @s sulstalk_damaged 0
 
 execute if score @s sulstalk_should_die matches ..0 unless score @s sulstalk_damaged matches 1 run scoreboard players set @s sulstalk_can_pick_up_items 1

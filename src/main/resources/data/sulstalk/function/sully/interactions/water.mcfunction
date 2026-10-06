@@ -30,6 +30,8 @@ execute if score @s sulstalk_underwater matches 4 rotated as @s positioned as @s
 execute if score @s sulstalk_underwater matches 4 rotated as @s positioned as @s if score @s sulstalk_underwater_rotate matches 0 if block ^ ^ ^0.5 #sulstalk:water_trap[waterlogged=true] run tp ^ ^ ^0.06
 execute if score @s sulstalk_underwater matches 4 rotated as @s positioned as @s if score @s sulstalk_underwater_rotate matches 0 unless block ^ ^ ^0.5 #sulstalk:water_trap[waterlogged=true] positioned ~ ~-0.5 ~ if block ^ ^ ^0.5 #sulstalk:water_trap[waterlogged=true] run tp ^ ^ ^0.06
 execute if score @s sulstalk_underwater matches 4 rotated as @s positioned as @s if score @s sulstalk_underwater_rotate matches 0 unless block ^ ^ ^0.5 #sulstalk:water_trap[waterlogged=true] positioned ~ ~0.5 ~ if block ^ ^ ^0.5 #sulstalk:water_trap[waterlogged=true] run tp ^ ^ ^0.06
+execute if score @s sulstalk_underwater matches 4 rotated as @s positioned as @s unless block ~ ~ ~ #sulstalk:water_trap[waterlogged=true] if block ~ ~-1 ~ #sulstalk:water_trap[waterlogged=true] run tp ~ ~-0.5 ~
+execute if score @s sulstalk_underwater matches 4 rotated as @s positioned as @s unless block ~ ~ ~ #sulstalk:water_trap[waterlogged=true] if block ~ ~1 ~ #sulstalk:water_trap[waterlogged=true] run tp ~ ~0.5 ~
 execute if score @s sulstalk_underwater matches 4 rotated as @s positioned as @s if score @s sulstalk_underwater_rotate matches 3..4 if block ^ ^ ^-0.5 #sulstalk:water_trap[waterlogged=true] run tp ^ ^ ^-0.01
 
 execute if score @s sulstalk_underwater matches 4 run scoreboard players reset @s sulstalk_health

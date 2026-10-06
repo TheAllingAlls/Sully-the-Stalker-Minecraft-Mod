@@ -84,6 +84,7 @@ execute if score @s sulstalk_is_following_entity matches 1 run scoreboard player
 #execute if score @s sulstalk_is_following_entity matches 0 if score @s sulstalk_travel_timer_enabled matches 2 run scoreboard players set @s sulstalk_travel_timer_enabled 1
 execute if score @s sulstalk_underwater matches 4 if score @s sulstalk_is_following_entity matches 1 run scoreboard players set @s sulstalk_following_entity_forget 0
 execute if score @s sulstalk_underwater matches 4 if score @s sulstalk_travel_timer_enabled matches 1 run scoreboard players set @s sulstalk_travel_timer_enabled 2
+execute if score @s sulstalk_underwater matches 4 unless score @s sulstalk_is_in_block matches 0 run scoreboard players set @s sulstalk_is_in_block 0
 execute if score @s sulstalk_travel_timer matches 0..100 if score @s sulstalk_is_in_block matches ..-1 run scoreboard players set @s sulstalk_is_in_block 1
 execute if score @s sulstalk_travel_timer matches 0..50 if score @s sulstalk_is_in_block matches 1 run scoreboard players set @s sulstalk_is_in_block 0
 execute if score @s sulstalk_underwater matches 1..2 if score @s sulstalk_is_in_block matches 1.. run scoreboard players set @s sulstalk_is_in_block -1
@@ -96,6 +97,7 @@ execute if score @s sulstalk_travel_timer matches 3300..3600 unless score @s sul
 execute if score @s sulstalk_travel_timer matches 3300 if score @s sulstalk_is_in_block matches 0 run scoreboard players set @s sulstalk_travel_timer 0
 execute if score @s sulstalk_damaged matches 1 run scoreboard players set @s sulstalk_is_in_block 0
 execute if score @s sulstalk_should_die matches 1.. run scoreboard players set @s sulstalk_should_move 0
+
 
 execute if score @s sulstalk_is_in_block matches 1 at @s run tp ~0.0 ~0.05 ~0.0
 execute if score @s sulstalk_is_in_block matches 2..3 at @s run tp ~0.0 ~0.5 ~0.0
@@ -136,7 +138,8 @@ execute positioned as @s if score @s sulstalk_half_tick matches 1 store result s
 # execute positioned as @s rotated as @s if entity @e[tag=sulstalk_spawned,limit=1,distance=0.1..2] run spreadplayers ~ ~ 0 1 false @s
 execute positioned as @s rotated as @s if entity @e[tag=sulstalk_spawned,limit=1,distance=0.1..1] store result score @s sulstalk_should_rotate run random value -1..1
 
-execute if score @s sulstalk_half_tick matches 1 positioned as @s rotated as @s unless entity @e[type=player,distance=..50,limit=1] run execute facing entity @e[type=player,sort=random] eyes run rotate @s facing ^ ^ ^1
+execute if score @s sulstalk_half_tick matches 1 unless score @s sulstalk_underwater matches 4 positioned as @s rotated as @s unless entity @e[type=player,distance=..50,limit=1] run execute facing entity @e[type=player,sort=random] eyes run rotate @s facing ^ ^ ^1
+execute if score @s sulstalk_half_tick matches 1 unless score @s sulstalk_underwater matches 4 positioned as @s rotated as @s unless entity @e[type=player,distance=..50,limit=1] run execute facing entity @e[type=player,sort=random] eyes run tp ^ ^ ^1
 
 #execute store result entity @s Pos[0] double 0.0001 run scoreboard players get @s sulstalk_position_x
 #execute store result entity @s Pos[1] double 0.0001 run scoreboard players get @s sulstalk_position_y
