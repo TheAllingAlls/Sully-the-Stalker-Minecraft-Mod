@@ -25,3 +25,5 @@ NOT DONE YET!!!
 * <s>Sully should target entities from a distance more often (including players)</s>
 * Allow Sully to phase through walls using sulstalk_travel_timer
 * <s>Sully's anger meter should increase damage resistance and apply on taking damage</s>
+* Make Sully more aggressive but weaker and more forgetful in the End (Only check for players, check range is 50 blocks, but max anger meter is doubled and forget timer is limited to 200 ticks (10 seconds))
+* Sully hovers when far above the void in the End
