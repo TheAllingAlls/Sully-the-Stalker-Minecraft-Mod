@@ -4,6 +4,9 @@ A weird and creepy entity that roams en masse, stalking and defiling whatever it
 
 NOT DONE YET!!!
 
+![sully-angry-fireball](https://raw.githubusercontent.com/TheAllingAlls/Sully-the-Stalker-Minecraft-Mod/refs/heads/main/sully-angry-fireball.gif)
+![sully-spyglass](https://raw.githubusercontent.com/TheAllingAlls/Sully-the-Stalker-Minecraft-Mod/refs/heads/main/sully-spyglass.gif)
+
 ## TODO 
 ### (Made this after the right-click checks) (Priority is from top to bottom)
 

@@ -138,7 +138,7 @@ execute positioned as @s if score @s sulstalk_half_tick matches 1 store result s
 # execute positioned as @s rotated as @s if entity @e[tag=sulstalk_spawned,limit=1,distance=0.1..2] run spreadplayers ~ ~ 0 1 false @s
 execute positioned as @s rotated as @s if entity @e[tag=sulstalk_spawned,limit=1,distance=0.1..1] store result score @s sulstalk_should_rotate run random value -1..1
 
-execute if score @s sulstalk_half_tick matches 1 unless score @s sulstalk_underwater matches 4 positioned as @s rotated as @s unless entity @e[type=player,distance=..50,limit=1] run execute facing entity @e[type=player,sort=random] eyes run rotate @s facing ^ ^ ^1
+#execute if score @s sulstalk_half_tick matches 1 unless score @s sulstalk_underwater matches 4 positioned as @s rotated as @s unless entity @e[type=player,distance=..50,limit=1] run execute facing entity @e[type=player,sort=random] eyes run rotate @s facing ^ ^ ^1
 execute if score @s sulstalk_half_tick matches 1 unless score @s sulstalk_underwater matches 4 positioned as @s rotated as @s unless entity @e[type=player,distance=..50,limit=1] run execute facing entity @e[type=player,sort=random] eyes run tp ^ ^ ^1
 
 #execute store result entity @s Pos[0] double 0.0001 run scoreboard players get @s sulstalk_position_x
