@@ -7,7 +7,7 @@ NOT DONE YET!!!
 ![sully-angry-fireball](https://raw.githubusercontent.com/TheAllingAlls/Sully-the-Stalker-Minecraft-Mod/refs/heads/main/sully-angry-fireball.gif)
 ![sully-spyglass](https://raw.githubusercontent.com/TheAllingAlls/Sully-the-Stalker-Minecraft-Mod/refs/heads/main/sully-spyglass.gif)
 
-## TODO 
+## TODO - CROSSED OFF MEANS DONE
 ### (Made this after the right-click checks) (Priority is from top to bottom)
 
 * <s>Get mace to work</s>
@@ -30,3 +30,11 @@ NOT DONE YET!!!
 * <s>Sully's anger meter should increase damage resistance and apply on taking damage</s>
 * Make Sully more aggressive but weaker and more forgetful in the End (Only check for players, check range is 50 blocks, but max anger meter is doubled and forget timer is limited to 200 ticks (10 seconds))
 * Sully hovers when far above the void in the End
+* Sully has more niche interactions when roaming (probably won't do until post-release)
+  * Moving towards and destroying grass and flowers, kelp, etc. (only when griefing enabled)
+  * Stealing and refining ores it comes across (only when griefing enabled)
+  * Moving towards and destroying certain blocks like trees, cacti, etc. (only when griefing enabled)
+  * Spawning Zombies or Zombie Villagers when near a Village
+  * Auto-targetting Blazes with Snowballs when near them in the Nether
+  * VERY SMALL CHANCE for Sully to get near player, steal player's held item, and move away from the player's look direction
+* Sully needs to be more optimized regarding having a lot in one area
