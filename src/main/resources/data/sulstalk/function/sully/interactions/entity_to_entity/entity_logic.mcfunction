@@ -31,9 +31,9 @@ execute unless score @s sulstalk_special_ability_type matches -1..3 run scoreboa
 execute if score @s sulstalk_half_tick matches 1 unless score @s sulstalk_is_following_entity matches 1 run execute positioned as @s store result score @s sulstalk_nearby_entities run execute if entity @e[type=!item,type=!experience_orb,tag=!sulstalk_spawned,tag=!sulstalk_hitbox,tag=!sulstalk_storage,distance=..20,nbt={Invulnerable:0b}]
 # execute if score @s sulstalk_is_following_entity matches 1 run execute run scoreboard players set @s sulstalk_nearby_entities -1
 # execute if score @s sulstalk_is_following_entity matches 1 run execute run scoreboard players set @s sulstalk_should_follow 0
-# execute if score @s sulstalk_nearby_entities matches 10.. positioned as @s store result score @s sulstalk_nearby_entities run execute if entity @e[distance=0.5..10]
-# execute if score @s sulstalk_nearby_entities matches 5..9 positioned as @s store result score @s sulstalk_nearby_entities run execute if entity @e[distance=0.5..5]
-# execute if score @s sulstalk_nearby_entities matches 1..4 positioned as @s store result score @s sulstalk_nearby_entities run execute if entity @e[distance=0.5..2]
+# execute if score @s sulstalk_half_tick matches 1 if score @s sulstalk_nearby_entities matches 10.. positioned as @s store result score @s sulstalk_nearby_entities run execute if entity @e[distance=0.5..10]
+# execute if score @s sulstalk_half_tick matches 1 if score @s sulstalk_nearby_entities matches 5..9 positioned as @s store result score @s sulstalk_nearby_entities run execute if entity @e[distance=0.5..5]
+# execute if score @s sulstalk_half_tick matches 1 if score @s sulstalk_nearby_entities matches 1..4 positioned as @s store result score @s sulstalk_nearby_entities run execute if entity @e[distance=0.5..2]
 
 execute if score @s sulstalk_following_entity_forget matches ..-2 run scoreboard players set @s sulstalk_following_entity_forget 0
 execute if score @s sulstalk_following_entity_forget matches 0 run scoreboard players set @s sulstalk_is_following_entity 0

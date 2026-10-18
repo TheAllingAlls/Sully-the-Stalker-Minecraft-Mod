@@ -78,8 +78,8 @@ execute positioned as @s if score @s sulstalk_has_attacker matches 1 if score @s
 execute if score @s sulstalk_has_attacker matches 1 if score @s sulstalk_damaged_delay matches -1 if score @s sulstalk_attack matches 1.. run scoreboard players operation @s sulstalk_health -= @s sulstalk_attack
 
 ##Projectile detection and damage
-execute positioned as @s as @e[type=#minecraft:impact_projectiles,sort=nearest,distance=..4] unless score @s sulstalk_projectile_rotation_x = @s sulstalk_projectile_rotation_x store result score @s sulstalk_projectile_rotation_x on origin run data get entity @s Rotation[0] 10000
-execute positioned as @s as @e[type=#minecraft:impact_projectiles,sort=nearest,distance=..4] unless score @s sulstalk_projectile_rotation_y = @s sulstalk_projectile_rotation_y store result score @s sulstalk_projectile_rotation_y on origin run data get entity @s Rotation[1] 10000
+execute if score @s sulstalk_other_tick matches 1 positioned as @s as @e[type=#minecraft:impact_projectiles,sort=nearest,distance=..20] unless score @s sulstalk_projectile_rotation_x = @s sulstalk_projectile_rotation_x store result score @s sulstalk_projectile_rotation_x on origin run data get entity @s Rotation[0] 10000
+execute if score @s sulstalk_other_tick matches 1 positioned as @s as @e[type=#minecraft:impact_projectiles,sort=nearest,distance=..20] unless score @s sulstalk_projectile_rotation_y = @s sulstalk_projectile_rotation_y store result score @s sulstalk_projectile_rotation_y on origin run data get entity @s Rotation[1] 10000
 
 execute positioned as @s positioned ~ ~ ~ if score @s sulstalk_has_hitbox matches 1 run execute as @e[type=#minecraft:impact_projectiles,type=!firework_rocket,tag=!sulstalk_special_ability,sort=nearest,limit=1,distance=..1] unless data entity @s {Motion:[0.0d,0.0d,0.0d]} run tag @s add sulstalk_projectile
 execute positioned as @s positioned ~ ~1 ~ if score @s sulstalk_has_hitbox matches 1 run execute as @e[type=#minecraft:impact_projectiles,type=!firework_rocket,tag=!sulstalk_special_ability,sort=nearest,limit=1,distance=..1] unless data entity @s {Motion:[0.0d,0.0d,0.0d]} run tag @s add sulstalk_projectile

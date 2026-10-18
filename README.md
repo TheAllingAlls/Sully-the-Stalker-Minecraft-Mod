@@ -37,4 +37,5 @@ NOT DONE YET!!!
   * Spawning Zombies or Zombie Villagers when near a Village
   * Auto-targetting Blazes with Snowballs when near them in the Nether
   * VERY SMALL CHANCE for Sully to get near player, steal player's held item, and move away from the player's look direction
-* Sully needs to be more optimized regarding having a lot in one area
+* Sully needs to be more optimized regarding having a lot of them in one area
+* When Sully is damaged, knockback should be small teleports over multiple ticks instead of one big teleport
