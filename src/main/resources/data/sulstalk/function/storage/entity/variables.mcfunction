@@ -24,7 +24,7 @@ execute unless score @s sulstalk_quarter_tick = @s sulstalk_quarter_tick run sco
 execute unless score @s sulstalk_ticks_other = @s sulstalk_ticks_other run scoreboard players set @s sulstalk_ticks_other 5
 execute unless score @s sulstalk_other_tick = @s sulstalk_other_tick run scoreboard players set @s sulstalk_other_tick 0
 
-execute unless score @s sulstalk_spawn_max = @s sulstalk_spawn_max run scoreboard players set @s sulstalk_spawn_max 10
+execute unless score @s sulstalk_spawn_max = @s sulstalk_spawn_max run scoreboard players set @s sulstalk_spawn_max 5
 execute unless score @s sulstalk_spawn = @s sulstalk_spawn run scoreboard players set @s sulstalk_spawn 0
 execute unless score @s sulstalk_can_spawn = @s sulstalk_can_spawn run scoreboard players set @s sulstalk_can_spawn 1
 execute unless score @s sulstalk_disable_griefing = @s sulstalk_disable_griefing run scoreboard players set @s sulstalk_disable_griefing 0
