@@ -2,7 +2,7 @@
 
 A weird and creepy entity that roams en masse, stalking and defiling whatever it feels.
 
-NOT DONE YET!!!
+FULLY PLAYABLE BUT NOT FINISHED!!!
 
 ![sully-angry-fireball](https://raw.githubusercontent.com/TheAllingAlls/Sully-the-Stalker-Minecraft-Mod/refs/heads/main/sully-angry-fireball.gif)
 ![sully-spyglass](https://raw.githubusercontent.com/TheAllingAlls/Sully-the-Stalker-Minecraft-Mod/refs/heads/main/sully-spyglass.gif)
