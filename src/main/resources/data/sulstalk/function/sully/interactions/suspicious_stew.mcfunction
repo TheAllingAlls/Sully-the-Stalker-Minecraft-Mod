@@ -23,7 +23,7 @@ execute unless score @s sulstalk_stew_player_used = @s sulstalk_stew_player_used
 #   10: Nothing | Time is set to Night & Time Stops | 2 Days
 #   11: Resistance | 2 Illusioners | 3 Minutes
 #   12: Haste | Blindness | 3 Minutes
-#   12: Haste | Darkness | 3 Minutes
+#   13: Haste | Darkness | 3 Minutes
 #   14: Haste | Weakness | 5 Minutes
 #   15: High Strength | Quarter Hearts | 5 Minutes
 #   16: Fire Resistance | Three-Quarters Hearts | 5 Minutes
