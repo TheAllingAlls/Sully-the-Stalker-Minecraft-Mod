@@ -11,7 +11,7 @@
 		"sources": "https://github.com/TheAllingAlls/Sully-the-Stalker-Minecraft-Mod"
 	},
 	"license": "MIT",
-	"icon": "assets/sulstalk/icon.png",
+	"icon": "pack.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
